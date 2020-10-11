@@ -1,11 +1,12 @@
 <?php
     namespace Controllers;
 
-    class HomeController
+    class RegisterController
     {
         public function Index($message = "")
         {
-            require_once(VIEWS_PATH."main.php");
+            require_once(VIEWS_PATH."register.php");
         }        
     }
+
 ?>

@@ -9,7 +9,7 @@ class MainController{
     //     $this->DAO = new DAO();
     // }
 
-    public function ShowMainView(){
+    public function Index(){
         
         $url = API_MAIN_LINK."movie/now_playing?api_key=".API_KEY;
         
