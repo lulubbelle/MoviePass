@@ -14,13 +14,13 @@ define("API_MAIN_LINK","https://api.themoviedb.org/3/");
 define("IMG_LINK","https://image.tmdb.org/t/p/w185/");
 
 
-// define("LANGUAGE_ES","es");
-// define("DB_HOST", "localhost");
-// define("DB_NAME", "MoviePassdb");
-// define("DB_USER", "root");
-// define("DB_PASS", "");
+define("LANGUAGE_ES","es");
+define("DB_HOST", "26.177.180.157");
+define("DB_NAME", "MoviePassdb");
+define("DB_USER", "nacho");
+define("DB_PASS", "clave");
 
-// //MAIL INFO
+//MAIL INFO
 // define("MAIL_MP", "InfoMoviePass@gmail.com" );
 // define("MAIL_PASS", "MoviePassThe1");
 ?>
