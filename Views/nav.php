@@ -9,13 +9,13 @@
         <!-- Titulo con logo -->
         <a class="navbar-brand " href="<?= FRONT_ROOT ?>">
           <img src="<?= IMG_PATH ?>/logo.PNG" width="50" height="50">
-            MoviePass
+            <span class="navbarTitle">MoviePass</span>
         </a>
 
         <!-- Opciones NavBar -->
         <?php 
         if(isset($_SESSION['isAdmin'])){
-          echo '<ul class="navbar-nav mt-2 mt-lg-0">
+          echo '<ul class="navbar-nav mt-2 mt-lg-0 ml-auto mr-auto">
             <li class="nav-item">
               <a class="nav-link" href="';echo FRONT_ROOT. 'Movies"><i class="fas fa-film"></i>&nbspCartelera</a>
             </li>
@@ -25,7 +25,7 @@
           </ul>';
 
         } else {
-          echo '<ul class="navbar-nav mt-2 mt-lg-0">
+          echo '<ul class="navbar-nav mt-2 mt-lg-0 ml-auto mr-auto">
             <li class="nav-item">
               <a class="nav-link" href="';echo FRONT_ROOT. 'Movies/ShowDataBaseMovies"><i class="fas fa-film"></i>&nbspPeliculas</a>
             </li>
@@ -46,13 +46,11 @@
         <!--Opcion Perfil -->
         <?php 
 
-            if(isset($_SESSION['isLogged'])){  
+            if(isset($_SESSION['userId'])){  
 
               echo '<ul class="nav navbar-nav ml-auto">
-                    <img src="'; 
-              echo  $_SESSION['User']['Photo'].'" width="30" height="30" class="d-inline-block align-top">
                     <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">';echo $_SESSION['User']['UserName'] . '</a>
+                      <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">';echo $_SESSION['username'] . '</a>
                       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="';echo FRONT_ROOT. 'Profile"><i class="fas fa-user-alt"></i>&nbspMi Perfil</a>
                         <a class="dropdown-item" href="';echo FRONT_ROOT. 'Tickets"><i class="fas fa-ticket-alt"></i>&nbspMis Tickets</a>
