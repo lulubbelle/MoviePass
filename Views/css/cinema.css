@@ -1,0 +1,49 @@
+.cinema-view-title {
+    margin: 10% 0 0 10%;
+}
+
+.form-content {
+    margin: 10% 0 0 10%;
+    color: white;
+}
+
+.cinema-input, .cinema-input:focus, .cinema-input:active {
+    background-color: #242424; 
+    color: white;
+    outline: none;
+}
+
+.cinema-btn {
+    display: block;
+    width: 40%;
+    
+    background-color: #ECF0F1;
+    color: black;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 22px;
+    line-height: 30px;
+}
+
+.cinema-list {
+    margin: 5% 0 0 5%;;
+    width: 100%;
+}
+
+.cinema-item {
+    display: inline-grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 5%;
+}
+
+.cinema-item::before {
+    
+}
+
+.cinema-item  h3 {
+    color: #FFF;
+    margin:0;
+    padding: 0;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.4rem;
+    line-height: 12px;
+}
