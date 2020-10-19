@@ -1,0 +1,10 @@
+[
+    {
+        "Id": 1,
+        "descripcion": "admin"
+    },
+    {
+        "id": 2,
+        "mail": "user"
+    }
+]

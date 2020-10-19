@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "mail": "mail@mail.com",
+        "userName": "Test1",
+        "password": "$2y$10$dMvkCnqpbIzxIjTsOlDdbeUzD2wOKYFQLByGaQDgV78L2YbozyPCm",
+        "rolId": 1
+    },
+    {
+        "id": 2,
+        "mail": "mail2@mail.com",
+        "userName": "Test2",
+        "password": "$2y$10$Ys4YE6DQ7o0yMx111b1bse03VTISdwnb.JNFqBpJLIB5NZfcvFIWu",
+        "rolId": 2
+    },
+    {
+        "id": 3,
+        "mail": "mail@meil.com",
+        "userName": "Efra",
+        "password": "$2y$10$h3FbH6xa0xv\/7wuSSy0.Meoz8r\/9W7vKzVVIO7LSrQbFmFtVth2li",
+        "rolId": 2
+    }
+]

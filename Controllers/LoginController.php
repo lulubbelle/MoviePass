@@ -1,6 +1,8 @@
 <?php
     namespace Controllers;
 
+    use DAO\UserRepository as UserRepository;
+
     class LoginController
     {
         public function Index($message = "")
@@ -13,15 +15,29 @@
         {
             if($_POST){
                 $password = $_POST["password"];
-                $username = $_POST["username"];
+                $username = $_POST["email"];
 
-                $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-                echo "username = " . $username . "<br>";
-                echo "password = " . $password . "<br>";
-                echo "hashed pw = " . $passwordHash . "<br>";
+                $userRepo = new UserRepository();
+                $user = $userRepo->GetUserByMail($username);
 
-                echo "verify with asdasd = " . \password_verify("asdasd", $passwordHash) . "<br>";
+                if(empty($user) || !isset($user)){
+                    $errorLogin = "Los datos ingresados no son validos.";
+                    require_once(VIEWS_PATH."login.php");
+                }
+                $valid = \password_verify($password, $user->getPassword());
+
+                if($valid){
+                    \session_destroy();
+                    session_start();
+                    $_SESSION["userId"] = $user->getId();
+                    $_SESSION["username"] = $user->getUsername();
+                    require_once(VIEWS_PATH."main.php");
+                }else{
+                    $errorLogin = "Los datos ingresados no son validos.";
+                    require_once(VIEWS_PATH."login.php");
+                }
+                
             }
         }
 

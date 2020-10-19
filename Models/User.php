@@ -6,6 +6,7 @@ class User{
 
     private $id;
     private $mail;
+    private $userName;
     private $password;
     private $rolId;
   
@@ -53,6 +54,18 @@ class User{
     public function setRolId($rolId)
     {
         $this->rolId = $rolId;
+
+        return $this;
+    }
+
+    public function getUserName()
+    {
+        return $this->userName;
+    }
+
+    public function setUserName($userName)
+    {
+        $this->userName = $userName;
 
         return $this;
     }

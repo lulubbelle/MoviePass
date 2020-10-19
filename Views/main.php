@@ -1,4 +1,7 @@
-<?= require_once(VIEWS_PATH."nav.php"); ?>
+<?php 
+require_once(VIEWS_PATH."nav.php");
+?>
+
 <div class="container">
     <!-- Inicio Index -->
     <div id="box" class="row justify-content-center" style="background-color: #242424;">

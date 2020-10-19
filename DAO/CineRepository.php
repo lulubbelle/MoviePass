@@ -2,17 +2,15 @@
 
 namespace DAO;
 
-//TODO: Fix Interfaces using
-// use DAO\IUserRepository as IUserRepository;
-use Models\User as User;
+use Models\Cine as Cine;
 
-class UserRepository /*extends IUserRepository*/{
+class CineRepository{
 
     private $fileName = array();
     private $data = array();
 
     function __construct(){
-        $this->fileName = DATA_PATH."Users.json";
+        $this->fileName = DATA_PATH."Cines.json";
     }
 
     public function getFileName()
@@ -25,18 +23,18 @@ class UserRepository /*extends IUserRepository*/{
         return $this->data;
     }
 
-    public function Add(User $user){
+    public function Add(Cine $cine){
         $this->RetrieveData();
         
         foreach($this->data as $value){
-            if($user->getMail() == $value->getMail()){
-                return "Ya existe un usuario registrado con el email indicado.";
+            if($cine->getDireccion() == $value->getDireccion()){
+                return "Ya existe un cine en la direccion indicada.";
             }
         }
 
-        $user->setId($this->GetLastId() + 1);
+        $cine->setId($this->GetLastId() + 1);
 
-        array_push($this->data,$user);
+        array_push($this->data,$cine);
         $this->SaveData();  
     }
     
@@ -52,15 +50,6 @@ class UserRepository /*extends IUserRepository*/{
         return $max;
     }
 
-    public function GetUserByMail($mail){
-        $this->RetrieveData();
-        
-        foreach($this->data as $value){
-            if($value->getmail() === $mail){
-                return $value;
-            }
-        }
-    }
     private function RetrieveData(){
         $this->data = array();
         if(file_exists($this->fileName)){
@@ -69,14 +58,13 @@ class UserRepository /*extends IUserRepository*/{
             $arrayToDecode = ($fileContent) ? json_decode($fileContent, true) : array();
 
             foreach($arrayToDecode as $key => $value){
-                $user = new User();
-                $user->setId($value["id"]);
-                $user->setMail($value["mail"]);
-                $user->setUserName($value["userName"]);
-                $user->setPassword($value["password"]);
-                $user->setRolId($value["rolId"]);
-
-                array_push($this->data, $user);
+                $cine = new Cine();
+                $cine->setId($value["id"]);
+                $cine->setCapacidad($value["capacidad"]);
+                $cine->setNombre($value["nombre"]);
+                $cine->setValorEntrada($value["valorEntrada"]);
+                $cine->setDireccion($value["direccion"]);
+                array_push($this->data, $cine);
             }
         }
     }
@@ -84,12 +72,13 @@ class UserRepository /*extends IUserRepository*/{
     private function SaveData(){
         $arrayToEncode = array();
         
-        foreach($this->data as $user){
-            $values["id"] = $user->getId();
-            $values["mail"] = $user->getMail();
-            $values["userName"] = $user->getUserName();
-            $values["password"] = $user->getPassword();
-            $values["rolId"] = $user->getRolId();
+        foreach($this->data as $cine){
+            $values["id"] = $cine->getId();
+            $values["capacidad"] = $cine->getCapacidad();
+            $values["nombre"] = $cine->getNombre();
+            $values["valorEntrada"] = $cine->getValorEntrada();
+            $values["direccion"] = $cine->getDireccion();
+            
             array_push($arrayToEncode, $values);
         }
 
