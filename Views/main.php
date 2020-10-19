@@ -1,6 +1,4 @@
-<?php 
-require_once(VIEWS_PATH."nav.php");
-?>
+<?php require_once(VIEWS_PATH."nav.php"); ?>
 
 <div class="container">
     <!-- Inicio Index -->
