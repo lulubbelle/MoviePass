@@ -4,9 +4,8 @@ namespace Models;
 
 class UserRol{
 
-    private $userId;
+    private $Id;
     private $descripcion;
-    
     
     public function getDescripcion()
     {
@@ -20,14 +19,14 @@ class UserRol{
         return $this;
     }
 
-    public function getUserId()
+    public function getId()
     {
-        return $this->userId;
+        return $this->Id;
     }
 
-    public function setUserId($userId)
+    public function setId($Id)
     {
-        $this->userId = $userId;
+        $this->Id = $Id;
 
         return $this;
     }
