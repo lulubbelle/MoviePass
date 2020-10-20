@@ -1,6 +1,6 @@
 <?php require_once(VIEWS_PATH."nav.php"); ?>
 
-<link rel="stylesheet" href="<?= CSS_PATH ?>/cinema.css">
+<link rel="stylesheet" href="<?= CSS_PATH ?>/cinemaList.css">
 
 <div class="container">
     <div id="box" class="row justify-content-center" style="background-color: #242424;">
@@ -25,7 +25,7 @@
                 <div class="col-md-3">
                     <div class="form-content">
                         <div class="form-group">
-                            <button class="cinema-btn" type="submit">Buscar</button>
+                        <button class="btn btn-primary">Buscar</button>
                         </div>
                     </div>
                 </div>
@@ -69,7 +69,6 @@
                                 </div>
                             </div>
                             
-
                         </div>
                     </div>
 

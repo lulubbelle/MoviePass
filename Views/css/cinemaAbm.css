@@ -1,0 +1,36 @@
+.cinema-view-title {
+    margin: 10% 0 0 10%;
+}
+
+.cinema-content {
+    background-color: #242424;
+    margin-top: 4%;
+    width: 80%;
+}
+
+.form-content {
+    margin: 5% auto;
+    color: white;
+}
+
+.cinema-input, .cinema-input:focus, .cinema-input:active {
+    background-color: #242424; 
+    color: white;
+    outline: none;
+}
+
+.cinema-input-label {
+    color: white !important;
+}
+
+.cinema-btn {
+    display: block;
+    margin: 3% auto;
+    width: 40%;
+    border: none;
+    background-color: #ECF0F1;
+    color: black;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 22px;
+    line-height: 30px;
+}
