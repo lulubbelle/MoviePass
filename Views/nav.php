@@ -27,10 +27,10 @@
         } else {
           echo '<ul class="navbar-nav mt-2 mt-lg-0 ml-auto mr-auto">
             <li class="nav-item">
-              <a class="nav-link" href="';echo FRONT_ROOT. 'Movies/ShowDataBaseMovies"><i class="fas fa-film"></i>&nbspPeliculas</a>
+              <a class="nav-link" href="';echo FRONT_ROOT. 'Movies/ShowMovies"><i class="fas fa-film"></i>&nbspPeliculas</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="';echo FRONT_ROOT. 'Proximamente" tabindex="-1" aria-disabled="true"><i class="fas fa-id-card"></i>&nbspProximamente</a>
+              <a class="nav-link" href="';echo FRONT_ROOT. 'AddMovie" tabindex="-1" aria-disabled="true"><i class="fas fa-id-card"></i>&nbspAgregar Pelicula</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="';echo FRONT_ROOT. 'Cinema" tabindex="-1" aria-disabled="true"><i class="fas fa-id-card"></i>&nbspCines</a>
