@@ -39,14 +39,14 @@
                     <div class="form-content">
                         <div class="form-group">
                         <select name="genre" id="genre" class="form-control form-control-md cinema-input" placeholder="Genero">
-                        <?php 
-                            foreach($genres as $genre){
-                        ?>
-                                <option value="<?=$genre->getId()?>"><?=$genre->getName()?></option>
-                        <?php 
-                        }
-                        ?>
-                            </select>
+                            <?php 
+                                foreach($genres as $genre){
+                            ?>
+                                    <option value="<?=$genre->getId()?>"><?=$genre->getName()?></option>
+                            <?php 
+                            }
+                            ?>
+                        </select>
                         </div>
                     </div>
                 </div>
