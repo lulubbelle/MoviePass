@@ -61,6 +61,7 @@ class UserRepository /*extends IUserRepository*/{
             }
         }
     }
+
     private function RetrieveData(){
         $this->data = array();
         if(file_exists($this->fileName)){
@@ -96,8 +97,6 @@ class UserRepository /*extends IUserRepository*/{
         $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
         file_put_contents($this->fileName, $jsonContent);
     }
-
-
 
 }
 

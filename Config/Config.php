@@ -9,6 +9,7 @@ define("DATA_PATH", "Data/");
 define("CSS_PATH", FRONT_ROOT.VIEWS_PATH . "css/");
 define("JS_PATH", FRONT_ROOT.VIEWS_PATH . "js/");
 define("IMG_PATH", FRONT_ROOT.VIEWS_PATH . "img/");
+define("UTILS_PATH", "Utils/");
 define("API_KEY","601a788e05e35017d437dd9ad9c368c0");
 
 define("API_MAIN_LINK","https://api.themoviedb.org/3/");

@@ -1,4 +1,3 @@
-<?php session_destroy(); ?>
 <link rel="stylesheet" href="<?= CSS_PATH ?>/login.css">
 
 <main class="d-flex align-items-center justify-content-center height-100" >

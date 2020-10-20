@@ -19,5 +19,19 @@
         "userName": "Efra",
         "password": "$2y$10$h3FbH6xa0xv\/7wuSSy0.Meoz8r\/9W7vKzVVIO7LSrQbFmFtVth2li",
         "rolId": 2
+    },
+    {
+        "id": 4,
+        "mail": "mail@asd.com",
+        "userName": "asdasd",
+        "password": "$2y$10$w4VCM9iueSr.c6le0fhXUeRF9rdZOB65L5LtFJ\/1fu9\/xe0iGrIHe",
+        "rolId": 2
+    },
+    {
+        "id": 5,
+        "mail": "mail@mail.comm",
+        "userName": "werwer",
+        "password": "$2y$10$xC5r.DQKUObpLOBmvbAXEOXhC6se10HFSwJqRx9Wi38N682FoPC\/O",
+        "rolId": 2
     }
 ]

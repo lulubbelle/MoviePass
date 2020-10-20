@@ -19,5 +19,12 @@
         "nombre": "Nombre 1",
         "valorEntrada": "3458",
         "direccion": "Direccion 2"
+    },
+    {
+        "id": 4,
+        "capacidad": "22",
+        "nombre": "Nombre",
+        "valorEntrada": "300",
+        "direccion": "Adress"
     }
 ]

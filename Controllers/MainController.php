@@ -14,7 +14,8 @@ class MainController{
         $url = API_MAIN_LINK."movie/now_playing?api_key=".API_KEY;
         
         $data = file_get_contents($url);
-        
+        var_dump($data);
+        exit;
         include_once(VIEWS_PATH."main.php");
     }
 }

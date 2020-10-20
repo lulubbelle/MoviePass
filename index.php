@@ -17,8 +17,13 @@
 
 	//TODO: checkear sesion
 	require_once(VIEWS_PATH."header.php");
-
-	Router::Route(new Request());
-
+?>
+	<div>
+		<?php
+			Router::Route(new Request());
+		?>
+	</div>
+	
+<?php
 	require_once(VIEWS_PATH."footer.php");
 ?>

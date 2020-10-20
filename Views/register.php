@@ -19,6 +19,7 @@
                         <label class="login-input-label" for="email">Email</label>
                         <input type="text" name="email" class="form-control form-control-md login-input" placeholder="Email" required>
                     </div>
+                    
                     <div class="form-group">
                         <label class="login-input-label" for="username">Nombre de Usuario</label>
                         <input type="text" name="username" class="form-control form-control-md login-input" placeholder="Nombre de Usuario" required>
