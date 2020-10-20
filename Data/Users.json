@@ -33,5 +33,12 @@
         "userName": "werwer",
         "password": "$2y$10$xC5r.DQKUObpLOBmvbAXEOXhC6se10HFSwJqRx9Wi38N682FoPC\/O",
         "rolId": 2
+    },
+    {
+        "id": 6,
+        "mail": "nachote98@gmail.com",
+        "userName": "Nacho",
+        "password": "$2y$10$FtYMkfX2YmIHH.Y6QzrFW.7BtyujptW4yCQT2RzL\/I8pKHLEslBjy",
+        "rolId": 2
     }
 ]
