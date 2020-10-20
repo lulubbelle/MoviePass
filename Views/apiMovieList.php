@@ -6,6 +6,7 @@
     <div id="box" class="row justify-content-center" style="background-color: #242424;">
         <!-- Inicio Listado de Estrenos -->
         <div class="col-md-12">
+        <form action="<?= FRONT_ROOT ?>ApiMovie/MovieSearch" method="POST" class="cinema-form">
             <div class="row align-items-center">
                 <div class="col-md-3">
                     <h1 class="basic-font cinema-view-title">Agregar Peliculas</h1>                
@@ -14,10 +15,10 @@
                     <div class="form-content">
                         <div class="form-group">
                             <select name="city" id="citys" class="form-control form-control-md cinema-input" placeholder="Ciudad">
-                                <option value="volvo">Marpla</option>
-                                <option value="saab">Batan</option>
-                                <option value="mercedes">Miramar</option>
-                                <option value="audi">Villa Gessel</option>
+                                    <option value="Marpla">Marpla</option>
+                                    <option value="Batan">Batan</option>
+                                    <option value="Miramar">Miramar</option>
+                                    <option value="Villa Gessel">Villa Gessel</option>
                             </select>
                         </div>
                     </div>
@@ -38,10 +39,13 @@
                     <div class="form-content">
                         <div class="form-group">
                         <select name="genre" id="genre" class="form-control form-control-md cinema-input" placeholder="Genero">
-                                <option value="volvo">Comedia</option>
-                                <option value="saab">Romantica</option>
-                                <option value="mercedes">Terror</option>
-                                <option value="audi">Accion</option>
+                        <?php 
+                            foreach($genres as $genre){
+                        ?>
+                                <option value="<?=$genre->getId()?>"><?=$genre->getName()?></option>
+                        <?php 
+                        }
+                        ?>
                             </select>
                         </div>
                     </div>
@@ -49,12 +53,12 @@
                 <div class="col-md-3">
                     <div class="form-content">
                         <div class="form-group">
-                        <button id="searchMovie" class="btn btn-primary">Buscar</button>
+                        <button id="searchMovie" class="btn btn-primary" type="submit">Buscar</button>
                         </div>
                     </div>
                 </div>
-                
-            </div>
+            </div>  
+        </form>
             <div class="row">
                 <div class="col-md-12">
                 <!--Listado de Peliculas-->

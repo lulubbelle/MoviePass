@@ -40,5 +40,12 @@
         "userName": "Nacho",
         "password": "$2y$10$FtYMkfX2YmIHH.Y6QzrFW.7BtyujptW4yCQT2RzL\/I8pKHLEslBjy",
         "rolId": 2
+    },
+    {
+        "id": 7,
+        "mail": "mail3@mail.com",
+        "userName": "Efra",
+        "password": "$2y$10$jmY.llUz1sMKSVebbnXCmerJpNcjvETG2HOBI0hC0zVTfGDThHSb6",
+        "rolId": 2
     }
 ]

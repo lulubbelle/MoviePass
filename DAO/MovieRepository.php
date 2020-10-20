@@ -8,7 +8,7 @@ class MovieRepository{
 
     private $data;
 
-    public function getAllFromApi(){
+    public function GetAllFromApi(){
         $this->RetrieveDataFromApi();
         return $this->data;
     }
@@ -46,7 +46,31 @@ class MovieRepository{
         // private $clasificacion;
         // private $isPlaying;
     }
+    
+    public function GetAllByGenre($genreId){
+        $this->data = array();
 
+        $url = API_MAIN_LINK."movie/now_playing?api_key=".API_KEY;
+
+        $data = file_get_contents($url);
+
+        $array = array();
+        $decoded = json_decode($data, true);
+        foreach($decoded["results"] as $value){
+            if(array_search($genreId, $value["genre_ids"])){
+                $movie = new Movie();
+            
+                $movie->setIdApi($value["id"]);
+                $movie->setTitle($value["title"]);
+                $movie->setImgLink($value["poster_path"]);
+                $movie->setGenres($value["genre_ids"]);
+
+                array_push($this->data, $movie);
+            }
+            
+        }
+        return $this->data;
+    }
 }
 
 

@@ -32,6 +32,7 @@
                     session_start();
                     $_SESSION["userId"] = $user->getId();
                     $_SESSION["username"] = $user->getUsername();
+                    $_SESSION["esAdmin"] = $user->getRolId() == 1;
                     require_once(VIEWS_PATH."main.php");
                 }else{
                     $errorLogin = "Los datos ingresados no son validos.";

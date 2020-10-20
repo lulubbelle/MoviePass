@@ -6,29 +6,30 @@
     <div id="box" class="row justify-content-center" style="background-color: #242424;">
         <!-- Inicio Listado de Estrenos -->
         <div class="col-md-12">
+        <form action="<?= FRONT_ROOT ?>Cinema/CinemaSearch" method="POST" class="cinema-form">
             <div class="row align-items-center">
                 <div class="col-md-3">
                     <h1 class="basic-font cinema-view-title">Cines</h1>                
                 </div>
-                <div class="col-md-3">
-                    <div class="form-content">
-                        <div class="form-group">
-                            <select name="city" id="citys" class="form-control form-control-md cinema-input" placeholder="Ciudad">
-                                <option value="volvo">Marpla</option>
-                                <option value="saab">Batan</option>
-                                <option value="mercedes">Miramar</option>
-                                <option value="audi">Villa Gessel</option>
-                            </select>
+                    <div class="col-md-3">
+                        <div class="form-content">
+                            <div class="form-group">
+                                <select name="ciudad" id="ciudad" class="form-control form-control-md cinema-input" placeholder="Ciudad">
+                                    <option value="Marpla">Marpla</option>
+                                    <option value="Batan">Batan</option>
+                                    <option value="Miramar">Miramar</option>
+                                    <option value="Villa Gessel">Villa Gessel</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-content">
-                        <div class="form-group">
-                        <button class="btn btn-primary">Buscar</button>
+                    <div class="col-md-3">
+                        <div class="form-content">
+                            <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Buscar</button>
+                            </div>
                         </div>
                     </div>
-                </div>
                 <div class="col-md-3">
                     <div class="form-content">
                         <div class="form-group">
@@ -37,6 +38,7 @@
                     </div>
                 </div>
             </div>
+        </form>
             <?php 
             if(isset($deleteMsg)){
             ?>
@@ -65,6 +67,8 @@
                                     <h3><?= $key->getDireccion() ?></h3>
                                     <br/>
                                     <h3>Capacidad: <?= $key->getCapacidad() ?></h3>
+                                    <br/>
+                                    <h3>Ciudad: <?= $key->getCiudad() ?></h3>
                                 </div>
                                 <div class="column-2">
                                     <a type="button" class="btn btn-danger btn-abm-cinema" href="<?= FRONT_ROOT ?>Cinema/DeleteCinema?id=<?=$key->getId()?>">
@@ -83,7 +87,15 @@
                         <?php
                         }
                         ?>
-                            
+                            <?php 
+                                if(count($cines) == 0){
+                            ?>
+                            <div class="alert alert-danger">
+                                    No se encontraron resultados :(
+                            </div>
+                            <?php
+                                }
+                            ?>
                         </div>
                     </div>
 

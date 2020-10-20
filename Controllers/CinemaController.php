@@ -23,20 +23,36 @@
             require_once(VIEWS_PATH."cinemaAbm.php");
         }        
 
+        public function CinemaSearch(){
+            require_once(UTILS_PATH."CheckSession.php");
+            if($_POST){
+                $ciudad = $_POST["ciudad"];
+
+                $cineRepo = new CineRepository();
+
+                $cines = $cineRepo->GetByCiudad($ciudad);
+    
+                require_once(VIEWS_PATH."cinemaList.php");
+            }
+        }
+
         public function AddCine()
         {
+            require_once(UTILS_PATH."CheckSession.php");
             if($_POST)
             {
                 $capacidad = $_POST["capacidad"];
                 $nombre = $_POST["nombre"];
                 $valorEntrada = $_POST["valorEntrada"];
                 $direccion = $_POST["direccion"];
+                $ciudad = $_POST["ciudad"];
 
                 $cine = new Cine();
                 $cine->setCapacidad($capacidad);
                 $cine->setNombre($nombre);
                 $cine->setValorEntrada($valorEntrada);
                 $cine->setDireccion($direccion);
+                $cine->setCiudad($ciudad);
 
                 $cineRepo = new CineRepository();
 
@@ -47,14 +63,14 @@
                     include_once(VIEWS_PATH."cinemaAbm.php");
                 }else
                 {
-                    $successMsg = "Cine creado correctamente :)";
-                    include_once(VIEWS_PATH."cinemaAbm.php");
+                    $this->Index();
                 }
             
             }
         }
 
         public function DeleteCinema(){
+            require_once(UTILS_PATH."CheckSession.php");
             if($_GET){
                 $cineId = $_GET["id"];
                 
@@ -68,6 +84,7 @@
 
         
         public function UpdateCinemaShowView(){
+            require_once(UTILS_PATH."CheckSession.php");
             if($_GET){
                 $cineId = $_GET["id"];
                 
@@ -82,6 +99,7 @@
         
  
         public function UpdateCinema(){
+            require_once(UTILS_PATH."CheckSession.php");
             if($_POST){
 
                 $cineId = $_POST["id"];
@@ -89,6 +107,7 @@
                 $nombre = $_POST["nombre"];
                 $valorEntrada = $_POST["valorEntrada"];
                 $direccion = $_POST["direccion"];
+                $ciudad = $_POST["ciudad"];
 
                 $cine = new Cine();
                 $cine->setId($cineId);
@@ -96,7 +115,8 @@
                 $cine->setNombre($nombre);
                 $cine->setValorEntrada($valorEntrada);
                 $cine->setDireccion($direccion);
-                
+                $cine->setCiudad($ciudad);
+
                 $cineRepo = new CineRepository();
 
                 $updateMsg = $cineRepo->UpdateCinema($cineId, $cine);
