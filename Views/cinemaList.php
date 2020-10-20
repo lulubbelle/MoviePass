@@ -15,11 +15,13 @@
                         <div class="form-content">
                             <div class="form-group">
                                 <select name="ciudad" id="ciudad" class="form-control form-control-md cinema-input" placeholder="Ciudad">
-                                    <option value="Todos">Todos</option>
-                                    <option value="Marpla">Marpla</option>
-                                    <option value="Batan">Batan</option>
-                                    <option value="Miramar">Miramar</option>
-                                    <option value="Villa Gessel">Villa Gessel</option>
+                                    <?php 
+                                        foreach($cities as $city){
+                                    ?>
+                                            <option value="<?=$city->getName()?>"><?=$city->getName()?></option>
+                                    <?php 
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>

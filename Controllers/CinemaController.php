@@ -2,6 +2,7 @@
     namespace Controllers;
     
     use DAO\CineRepository as CineRepository;
+    use DAO\CityRepository as CityRepository;
     use Models\Cine as Cine;
 
     class CinemaController
@@ -11,8 +12,10 @@
             require_once(UTILS_PATH."CheckAdmin.php");
 
             $cineRepo = new CineRepository();
+            $cityRepo = new CityRepository();
 
             $cines = $cineRepo->getAll();
+            $cities = $cityRepo->getAll();
 
             require_once(VIEWS_PATH."cinemaList.php");
         }        
@@ -29,9 +32,11 @@
                 $ciudad = $_POST["ciudad"];
 
                 $cineRepo = new CineRepository();
+                $cityRepo = new CityRepository();
 
                 $cines = $cineRepo->GetByCiudad($ciudad);
-    
+                $cities = $cityRepo->getAll();
+                
                 require_once(VIEWS_PATH."cinemaList.php");
             }
         }
