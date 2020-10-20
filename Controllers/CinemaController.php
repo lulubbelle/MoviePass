@@ -8,7 +8,7 @@
     {
         public function Index($deleteMsg = "")
         {
-            require_once(UTILS_PATH."CheckSession.php");
+            require_once(UTILS_PATH."CheckAdmin.php");
 
             $cineRepo = new CineRepository();
 
@@ -19,12 +19,12 @@
 
         public function CinemaAddView($message = "")
         {
-            require_once(UTILS_PATH."CheckSession.php");
+            require_once(UTILS_PATH."CheckAdmin.php");
             require_once(VIEWS_PATH."cinemaAbm.php");
         }        
 
         public function CinemaSearch(){
-            require_once(UTILS_PATH."CheckSession.php");
+            require_once(UTILS_PATH."CheckAdmin.php");
             if($_POST){
                 $ciudad = $_POST["ciudad"];
 
@@ -38,7 +38,7 @@
 
         public function AddCine()
         {
-            require_once(UTILS_PATH."CheckSession.php");
+            require_once(UTILS_PATH."CheckAdmin.php");
             if($_POST)
             {
                 $capacidad = $_POST["capacidad"];
@@ -70,7 +70,7 @@
         }
 
         public function DeleteCinema(){
-            require_once(UTILS_PATH."CheckSession.php");
+            require_once(UTILS_PATH."CheckAdmin.php");
             if($_GET){
                 $cineId = $_GET["id"];
                 
@@ -84,7 +84,7 @@
 
         
         public function UpdateCinemaShowView(){
-            require_once(UTILS_PATH."CheckSession.php");
+            require_once(UTILS_PATH."CheckAdmin.php");
             if($_GET){
                 $cineId = $_GET["id"];
                 
@@ -99,7 +99,7 @@
         
  
         public function UpdateCinema(){
-            require_once(UTILS_PATH."CheckSession.php");
+            require_once(UTILS_PATH."CheckAdmin.php");
             if($_POST){
 
                 $cineId = $_POST["id"];

@@ -8,7 +8,7 @@
     {
         public function Index($message = "")
         {
-            require_once(UTILS_PATH."CheckSession.php");
+            require_once(UTILS_PATH."CheckAdmin.php");
             $movieRepo = new MovieRepository();
     
             $movieList = $movieRepo->GetAllFromApi();
@@ -21,7 +21,7 @@
         }           
 
         public function MovieSearch(){
-            require_once(UTILS_PATH."CheckSession.php");
+            require_once(UTILS_PATH."CheckAdmin.php");
             if($_POST){
                 $movieRepo = new MovieRepository();
     
