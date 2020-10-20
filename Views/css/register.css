@@ -44,3 +44,17 @@
     font-size: 30px;
     line-height: 36px;
 }
+
+.register-link-container {
+    display: block;
+    width: 80%;
+    margin: 5% auto;
+    text-align: center;
+}
+
+.register-link, .register-link:active, .register-link:hover {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    margin: 5% auto;
+}

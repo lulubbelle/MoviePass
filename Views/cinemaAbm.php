@@ -19,10 +19,10 @@
                     ?>
                     <form action="<?= FRONT_ROOT.$action ?> " method="POST" class="cinema-form">
                         <?php if(isset($$errorAbmCine)) {?>
-                            <strong style="color:red;"><?=$$errorAbmCine?></strong>
+                            <p class="alert alert-danger"><?=$$errorAbmCine?></p>
                         <?php }?>
                         <?php if(isset($successMsg)) {?>
-                            <strong style="color:green;"><?=$successMsg?></strong>
+                            <p class="alert alert-success"><?=$successMsg?></p>
                         <?php }?>
                         
                             <div class="form-content">
