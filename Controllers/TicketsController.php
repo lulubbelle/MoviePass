@@ -2,9 +2,9 @@
 
 namespace Controllers;
 
-class MoviesController{
+class TicketsController{
 
-    public function ShowMovies(){
+    public function Index(){
         include_once(VIEWS_PATH."workInProgress.php");
     }
 }
