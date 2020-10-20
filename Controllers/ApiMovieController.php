@@ -9,10 +9,11 @@
         {
             $repo = new MovieRepository();
     
-            $data = $repo->getAllFromApi();
+            $movieList = $repo->getAllFromApi();
     
             require_once(VIEWS_PATH."apiMovieList.php");
         }           
 
     }
-?>    namespace Controllers;
+?>
+

@@ -49,7 +49,7 @@
                 <div class="col-md-3">
                     <div class="form-content">
                         <div class="form-group">
-                        <button class="btn btn-primary">Buscar</button>
+                        <button id="searchMovie" class="btn btn-primary">Buscar</button>
                         </div>
                     </div>
                 </div>
@@ -58,36 +58,27 @@
             <div class="row">
                 <div class="col-md-12">
                 <!--Listado de Peliculas-->
-
+                <div class="row">
                     <?php foreach($movieList as $movies) { ?>   
                         <div class="col-md-3">
                             <div class="flip-card movieBoxes">
                                 <div class="flip-card-inner">
                                     <div class="flip-card-front">
-                                        <img src= "<?php echo $movies->getPhoto()?>" alt="Avatar" style="width:100%;height:100%;">
+                                        <img src= "https://image.tmdb.org/t/p/w500<?php echo $movies->getImgLink()?>" alt="Avatar" style="width:100%;height:100%;">
                                     </div>
                                     <div class="flip-card-back">
-                                        <h1> <?php echo $movies->getMovieName(); ?> </h1> 
+                                        <h1 class="titleMovie"> <?php echo $movies->getTitle(); ?> </h1> 
                                         <p><?php echo $movies->getReleaseDate(); ?></p> 
-                                        <p><a id="addMovie" href = "<?php echo FRONT_ROOT ?>Movies/AddMovieToDatabase?IdMovieIMDB=<?php echo $movies->getIdMovieIMDB(); ?>"><button id="add" class="button">Agregar</button></a></p>
-                                        <p><a id="editMovie" href = "#"></a><button id="edit" class="button">Editar</a></button></p>
-                                        <p><a id="removeMovie" href = "#"></a><button id="remove" class="button">Eliminar</a></button></p>
+                                        <a id="add" class="button" href = "<?php echo FRONT_ROOT ?>Movies/AddMovieToDatabase?IdMovieIMDB=<?php echo $movies->getIdApi(); ?>">Agregar</a>
+                                        <a id="edit" class="button" href = "#">Editar</a>
+                                        <a id="remove" class="button" href = "#">Eliminar</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     <?php } ?>
+                    </div>
                 <!--Termina Listado de Peliculas-->
-                <h1>Proximamente</h1>
-                <?php 
-                foreach($data as $key){
-                var_dump($key);
-                echo "<br>-----------<br>";
-                }
-
-
-
-                ?>
                 </div>
             </div>
         </div>

@@ -20,7 +20,7 @@
         public function CinemaAddView($message = "")
         {
             require_once(UTILS_PATH."CheckSession.php");
-            require_once(VIEWS_PATH."cineAbm.php");
+            require_once(VIEWS_PATH."cinemaAbm.php");
         }        
 
         public function AddCine()
@@ -43,13 +43,12 @@
                 $errorAbmCine = $cineRepo->Add($cine);
 
                 if(!empty($errorAbmCine))
-                {
-                    
-                    include_once(VIEWS_PATH."cineAbm.php");
+                {                    
+                    include_once(VIEWS_PATH."cinemaAbm.php");
                 }else
                 {
                     $successMsg = "Cine creado correctamente :)";
-                    include_once(VIEWS_PATH."cineAbm.php");
+                    include_once(VIEWS_PATH."cinemaAbm.php");
                 }
             
             }
