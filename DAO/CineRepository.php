@@ -86,7 +86,49 @@ class CineRepository{
         file_put_contents($this->fileName, $jsonContent);
     }
 
+    public function DeleteCinema($id){
+        $this->RetrieveData();
+        for($i = 0; $i < \count($this->data); $i++)
+        {
+            if($this->data[$i]->getId() == $id){
+                unset($this->data[$i]);
+                $ok = 1;
+            }
+        }
+        $this->SaveData();
+        if(isset($ok)){
+            return "Eliminado Correctamente";
+        }
+    }
 
+    public function UpdateCinema($id, $cinema){
+        $this->RetrieveData();
+        for($i = 0; $i < \count($this->data); $i++)
+        {
+            if($this->data[$i]->getId() == $id){
+                $this->data[$i] = $cinema;
+                $ok = 1;
+            }
+        }
+        $this->SaveData();
+        if(isset($ok)){
+            return "Modificado Correctamente";
+        }
+    }
+
+    public function GetById($id){
+        $this->RetrieveData();
+        for($i = 0; $i < \count($this->data); $i++)
+        {
+            if($this->data[$i]->getId() == $id){
+                return $this->data[$i];
+            }
+        }
+        $errorMsg = "No se encontro un cine con el id proporcionado.";
+        return $errorMsg;
+    }
+
+    
 
 }
 
