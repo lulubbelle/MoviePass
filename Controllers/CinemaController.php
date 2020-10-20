@@ -75,7 +75,7 @@
 
                 $cinema = $cineRepo->GetById($cineId);
                 
-                require_once(VIEWS_PATH."cineAbm.php");
+                require_once(VIEWS_PATH."cinemaAbm.php");
             }
         }
 
