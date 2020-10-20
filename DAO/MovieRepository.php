@@ -4,7 +4,7 @@ namespace DAO;
 
 use Models\Movie as Movie;
 
-class ProximamenteRepository{
+class MovieRepository{
 
     private $data;
 

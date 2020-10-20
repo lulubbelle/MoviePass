@@ -14,9 +14,12 @@
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <!-- Formulario Cines -->
-                    <form action="<?= FRONT_ROOT ?>CineAbm/AddCine" method="POST" class="cinema-form">
+                    <form action="<?= FRONT_ROOT ?>Cinema/AddCine" method="POST" class="cinema-form">
                         <?php if(isset($errorCineAbm)) {?>
                             <strong style="color:red;"><?=$errorCineAbm?></strong>
+                        <?php }?>
+                        <?php if(isset($successMsg)) {?>
+                            <strong style="color:green;"><?=$successMsg?></strong>
                         <?php }?>
                             <div class="form-content">
                                 <div class="form-group">

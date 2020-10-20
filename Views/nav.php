@@ -30,7 +30,7 @@
               <a class="nav-link" href="';echo FRONT_ROOT. 'Movies/ShowMovies"><i class="fas fa-film"></i>&nbspPeliculas</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="';echo FRONT_ROOT. 'AddMovie" tabindex="-1" aria-disabled="true"><i class="fas fa-id-card"></i>&nbspAgregar Pelicula</a>
+              <a class="nav-link" href="';echo FRONT_ROOT. 'ApiMovie" tabindex="-1" aria-disabled="true"><i class="fas fa-id-card"></i>&nbspAgregar Pelicula</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="';echo FRONT_ROOT. 'Cinema" tabindex="-1" aria-disabled="true"><i class="fas fa-id-card"></i>&nbspCines</a>

@@ -26,5 +26,12 @@
         "nombre": "Nombre",
         "valorEntrada": "300",
         "direccion": "Adress"
+    },
+    {
+        "id": 5,
+        "capacidad": "123",
+        "nombre": "Nombre Cine",
+        "valorEntrada": "20",
+        "direccion": "Direccion Random"
     }
 ]
