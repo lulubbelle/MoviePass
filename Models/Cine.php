@@ -9,6 +9,7 @@ class Cine{
     private $nombre;
     private $valorEntrada;
     private $direccion;
+    private $ciudad;
     
     public function getId()
     {
@@ -66,6 +67,18 @@ class Cine{
     public function setDireccion($direccion)
     {
         $this->direccion = $direccion;
+
+        return $this;
+    }
+
+    public function getCiudad()
+    {
+        return $this->ciudad;
+    }
+
+    public function setCiudad($ciudad)
+    {
+        $this->ciudad = $ciudad;
 
         return $this;
     }

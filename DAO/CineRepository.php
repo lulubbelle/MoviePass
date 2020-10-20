@@ -64,6 +64,8 @@ class CineRepository{
                 $cine->setNombre($value["nombre"]);
                 $cine->setValorEntrada($value["valorEntrada"]);
                 $cine->setDireccion($value["direccion"]);
+                $cine->setCiudad($value["ciudad"]);
+
                 array_push($this->data, $cine);
             }
         }
@@ -78,6 +80,7 @@ class CineRepository{
             $values["nombre"] = $cine->getNombre();
             $values["valorEntrada"] = $cine->getValorEntrada();
             $values["direccion"] = $cine->getDireccion();
+            $values["ciudad"] = $cine->getCiudad();
             
             array_push($arrayToEncode, $values);
         }
@@ -128,7 +131,29 @@ class CineRepository{
         return $errorMsg;
     }
 
+    public function GetByCiudad($ciudad){
+        $this->data = array();
+        if(file_exists($this->fileName)){
+
+            $fileContent = file_get_contents($this->fileName);
+            $arrayToDecode = ($fileContent) ? json_decode($fileContent, true) : array();
+
+            foreach($arrayToDecode as $key => $value){
+                if($value["ciudad"] == $ciudad){
+                    $cine = new Cine();
+                    $cine->setId($value["id"]);
+                    $cine->setCapacidad($value["capacidad"]);
+                    $cine->setNombre($value["nombre"]);
+                    $cine->setValorEntrada($value["valorEntrada"]);
+                    $cine->setDireccion($value["direccion"]);
+                    $cine->setCiudad($value["ciudad"]);
     
+                    array_push($this->data, $cine);
+                }
+            }
+        }
+        return $this->data;
+    }
 
 }
 

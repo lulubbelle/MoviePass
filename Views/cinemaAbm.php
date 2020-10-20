@@ -18,8 +18,8 @@
                         isset($cinema) ? $action = "Cinema/UpdateCinema" : $action = "Cinema/AddCine";
                     ?>
                     <form action="<?= FRONT_ROOT.$action ?> " method="POST" class="cinema-form">
-                        <?php if(isset($errorCineAbm)) {?>
-                            <strong style="color:red;"><?=$errorCineAbm?></strong>
+                        <?php if(isset($$errorAbmCine)) {?>
+                            <strong style="color:red;"><?=$$errorAbmCine?></strong>
                         <?php }?>
                         <?php if(isset($successMsg)) {?>
                             <strong style="color:green;"><?=$successMsg?></strong>
@@ -48,7 +48,17 @@
                                     <label class="cinema-input-label" for="direccion">Direccion</label>
                                     <input type="text" name="direccion" class="form-control form-control-md cinema-input" placeholder="Direccion" value="<?php if(isset($cinema)) {echo $cinema->getDireccion();}?>" required>
                                 </div>
-
+                                
+                                <div class="form-group">
+                                <label class="cinema-input-label" for="ciudad">Ciudad</label>
+                                    <select name="ciudad" id="ciudad" class="form-control form-control-md cinema-input" placeholder="Ciudad">
+                                    <option value="Marpla" <?php if(isset($cinema) && $cinema->getCiudad() == "Marpla") {echo "selected";}?> >Marpla</option>
+                                    <option value="Batan"  <?php if(isset($cinema) && $cinema->getCiudad() == "Batan") {echo "selected";}?>>Batan</option>
+                                    <option value="Miramar"  <?php if(isset($cinema) && $cinema->getCiudad() == "Miramar") {echo "selected";}?>>Miramar</option>
+                                    <option value="Villa Gessel"  <?php if(isset($cinema) && $cinema->getCiudad() == "Villa Gessel") {echo "selected";}?>>Villa Gessel</option>
+                                    </select>
+                                </div>
+                                
                             </div>
                         <button class="btn btn-block cinema-btn" type="submit"> <?php if(isset($cinema)) {echo "Actualizar Cine";} else { echo "Crear Cine";}?></button>
                     </form>
