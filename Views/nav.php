@@ -14,7 +14,7 @@
 
         <!-- Opciones NavBar -->
         <?php 
-        if(isset($_SESSION['esAdmin'])){
+        if(isset($_SESSION['esAdmin']) && $_SESSION["esAdmin"]){
           echo '<ul class="navbar-nav mt-2 mt-lg-0 ml-auto mr-auto">
                     <li class="nav-item">
                       <a class="nav-link" href="';echo FRONT_ROOT. 'Movies/ShowMovies">Cartelera</a>

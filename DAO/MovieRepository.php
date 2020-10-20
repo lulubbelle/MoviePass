@@ -57,7 +57,7 @@ class MovieRepository{
         $array = array();
         $decoded = json_decode($data, true);
         foreach($decoded["results"] as $value){
-            if(array_search($genreId, $value["genre_ids"])){
+            if(array_search($genreId, $value["genre_ids"]) || $genreId == 0){
                 $movie = new Movie();
             
                 $movie->setIdApi($value["id"]);

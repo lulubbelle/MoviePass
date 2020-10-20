@@ -11,7 +11,7 @@
                 <div class="col-md-3">
                     <h1 class="basic-font cinema-view-title">Agregar Peliculas</h1>                
                 </div>
-                <div class="col-md-2">
+                <!-- <div class="col-md-2">
                     <div class="form-content">
                         <div class="form-group">
                             <select name="city" id="citys" class="form-control form-control-md cinema-input" placeholder="Ciudad">
@@ -34,8 +34,8 @@
                             </select>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-2">
+                </div> -->
+                <div class="col-md-4">
                     <div class="form-content">
                         <div class="form-group">
                         <select name="genre" id="genre" class="form-control form-control-md cinema-input" placeholder="Genero">

@@ -15,6 +15,7 @@
                         <div class="form-content">
                             <div class="form-group">
                                 <select name="ciudad" id="ciudad" class="form-control form-control-md cinema-input" placeholder="Ciudad">
+                                    <option value="Todos">Todos</option>
                                     <option value="Marpla">Marpla</option>
                                     <option value="Batan">Batan</option>
                                     <option value="Miramar">Miramar</option>
@@ -40,10 +41,19 @@
             </div>
         </form>
             <?php 
-            if(isset($deleteMsg)){
+            if(!empty($deleteMsg)){
             ?>
                 <div class="row text-center">
-                    <strong style="color: green"><?= $deleteMsg ?></strong>
+                    <p class="alert alert-danger ml-5 mr-5"><?=$deleteMsg?></p>
+                </div>
+            <?php 
+            }
+            ?>
+            <?php 
+            if(!empty($successMsg)){
+            ?>
+                <div class="row text-center">
+                    <p class="alert alert-success ml-5 mr-5"><?=$successMsg?></p>
                 </div>
             <?php 
             }

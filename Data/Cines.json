@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "capacidad": "123",
+        "nombre": "Nombre",
+        "valorEntrada": "1234",
+        "direccion": "Direccion",
+        "ciudad": "Marpla"
+    },
+    {
+        "id": 2,
+        "capacidad": "123",
+        "nombre": "Nombre 2",
+        "valorEntrada": "546",
+        "direccion": "Dire 2",
+        "ciudad": "Miramar"
+    }
+]

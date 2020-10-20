@@ -139,7 +139,7 @@ class CineRepository{
             $arrayToDecode = ($fileContent) ? json_decode($fileContent, true) : array();
 
             foreach($arrayToDecode as $key => $value){
-                if($value["ciudad"] == $ciudad){
+                if($value["ciudad"] == $ciudad || $ciudad == "Todos"){
                     $cine = new Cine();
                     $cine->setId($value["id"]);
                     $cine->setCapacidad($value["capacidad"]);
