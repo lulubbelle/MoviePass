@@ -14,31 +14,31 @@
 
         <!-- Opciones NavBar -->
         <?php 
-        if(isset($_SESSION['isAdmin'])){
+        if(isset($_SESSION['esAdmin'])){
           echo '<ul class="navbar-nav mt-2 mt-lg-0 ml-auto mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="';echo FRONT_ROOT. 'Movies"><i class="fas fa-film"></i>&nbspCartelera</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="';echo FRONT_ROOT. 'Cinema" tabindex="-1" aria-disabled="true"><i class="fas fa-id-card"></i>&nbspCines</a>
-            </li>
-          </ul>';
+                    <li class="nav-item">
+                      <a class="nav-link" href="';echo FRONT_ROOT. 'Movies/ShowMovies">Cartelera</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="';echo FRONT_ROOT. 'ApiMovie" tabindex="-1" aria-disabled="true">Agregar Pelicula</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="';echo FRONT_ROOT. 'Cinema" tabindex="-1" aria-disabled="true">Cines</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="';echo FRONT_ROOT. 'Compras" tabindex="-1" aria-disabled="true">Compras</a>
+                    </li>
+                </ul>';
 
         } else {
           echo '<ul class="navbar-nav mt-2 mt-lg-0 ml-auto mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="';echo FRONT_ROOT. 'Movies/ShowMovies"><i class="fas fa-film"></i>&nbspPeliculas</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="';echo FRONT_ROOT. 'ApiMovie" tabindex="-1" aria-disabled="true"><i class="fas fa-id-card"></i>&nbspAgregar Pelicula</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="';echo FRONT_ROOT. 'Cinema" tabindex="-1" aria-disabled="true"><i class="fas fa-id-card"></i>&nbspCines</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="';echo FRONT_ROOT. 'Compras" tabindex="-1" aria-disabled="true"><i class="fas fa-id-card"></i>&nbspCompras</a>
-            </li>
-          </ul>';
+                    <li class="nav-item">
+                      <a class="nav-link" href="';echo FRONT_ROOT. 'Movies/ShowMovies">Cartelera</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="';echo FRONT_ROOT. 'Compras" tabindex="-1" aria-disabled="true">Compras</a>
+                    </li>
+                </ul>';
         }
         ?>
 
@@ -54,7 +54,7 @@
                       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="';echo FRONT_ROOT. 'Profile"><i class="fas fa-user-alt"></i>&nbspMi Perfil</a>
                         <a class="dropdown-item" href="';echo FRONT_ROOT. 'Tickets"><i class="fas fa-ticket-alt"></i>&nbspMis Tickets</a>
-                        <a class="dropdown-item" href="';echo FRONT_ROOT. 'Compras">><i class="fas fa-ticket-alt"></i>Compras Previas</a>
+                        <a class="dropdown-item" href="';echo FRONT_ROOT. 'Compras"><i class="fas fa-ticket-alt"></i>&nbspCompras Previas</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="';echo FRONT_ROOT. 'Login"><i class="fas fa-sign-out-alt"></i>&nbspCerrar Sesión</a>
                       </div>
