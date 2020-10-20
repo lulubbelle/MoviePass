@@ -11,7 +11,7 @@
         <form action="<?= FRONT_ROOT ?>Register/RegisterUser" method="POST" class="login-form">
                 <!-- Error en registro -->
                 <?php if(isset($registerErrors)) {?>
-                    <strong style="color:red;"><?=$registerErrors?></strong>
+                    <p class="alert alert-danger ml-5 mr-5"><?=$registerErrors?></p>
                 <?php }?>
 
                 <div class="form-content">
@@ -34,6 +34,9 @@
                     </div>
                 </div>
                 <button class="login-btn" type="submit">Registrarse</button>
+                <div class="register-link-container">
+                    <a class="register-link" href="<?= FRONT_ROOT ?>Login/Index">Iniciar Sesion</a>
+                </div> 
         </form>
     </div>
 </main>

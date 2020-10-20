@@ -74,8 +74,8 @@
                                         <h1 class="titleMovie"> <?php echo $movies->getTitle(); ?> </h1> 
                                         <p><?php echo $movies->getReleaseDate(); ?></p> 
                                         <a id="add" class="button" href = "<?php echo FRONT_ROOT ?>Movies/AddMovieToDatabase?IdMovieIMDB=<?php echo $movies->getIdApi(); ?>">Agregar</a>
-                                        <a id="edit" class="button" href = "#">Editar</a>
-                                        <a id="remove" class="button" href = "#">Eliminar</a>
+                                        <!-- <a id="edit" class="button" href = "#">Editar</a>
+                                        <a id="remove" class="button" href = "#">Eliminar</a> -->
                                     </div>
                                 </div>
                             </div>

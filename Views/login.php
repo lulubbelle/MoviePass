@@ -10,7 +10,7 @@
         
         <form action="<?= FRONT_ROOT ?>Login/CheckLogin" method="POST" class="login-form">
                 <?php if(isset($errorLogin)) {?>
-                    <strong style="color:red;"><?=$errorLogin?></strong>
+                    <p class="alert alert-danger ml-5 mr-5"><?=$errorLogin?></p>
                 <?php }?>
                 <div class="form-content">
                     <div class="form-group">
@@ -23,7 +23,9 @@
                     </div>
                 </div>
                 <button class="login-btn" type="submit">Iniciar Sesión</button>
-                <a href="<?= FRONT_ROOT ?>Register/Index" style="color: red;">Crear Cuenta</a>
+                <div class="login-link-container">
+                    <a class="login-link" href="<?= FRONT_ROOT ?>Register/Index">Crear Cuenta</a>
+                </div>                
         </form>
     </div>
 </main>

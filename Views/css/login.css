@@ -44,3 +44,17 @@
     font-size: 30px;
     line-height: 36px;
 }
+
+.login-link-container {
+    display: block;
+    width: 80%;
+    margin: 5% auto;
+    text-align: center;
+}
+
+.login-link, .login-link:active, .login-link:hover {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    margin: 5% auto;
+}
