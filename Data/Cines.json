@@ -1,37 +1,9 @@
 [
     {
-        "id": 1,
-        "capacidad": "2909",
-        "nombre": "Test 1",
-        "valorEntrada": "54000",
-        "direccion": "Dire 1"
-    },
-    {
-        "id": 2,
-        "capacidad": "200",
-        "nombre": "Test 2",
-        "valorEntrada": "700",
-        "direccion": "Dire 2"
-    },
-    {
-        "id": 3,
-        "capacidad": "230",
-        "nombre": "Nombre 1",
-        "valorEntrada": "3458",
-        "direccion": "Direccion 2"
-    },
-    {
-        "id": 4,
-        "capacidad": "22",
-        "nombre": "Nombre",
-        "valorEntrada": "300",
-        "direccion": "Adress"
-    },
-    {
-        "id": 5,
-        "capacidad": "123",
-        "nombre": "Nombre Cine",
-        "valorEntrada": "20",
-        "direccion": "Direccion Random"
+        "id": "7",
+        "capacidad": "12212",
+        "nombre": "nombre nuevo  2",
+        "valorEntrada": "2345345",
+        "direccion": "9854690835 jdfgsjg "
     }
 ]
