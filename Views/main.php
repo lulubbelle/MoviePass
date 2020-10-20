@@ -13,25 +13,13 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="<?= IMG_PATH ?>banner1.jpg" class="d-block w-100" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Malefica</h5>
-                            <p>Angelina Jolie interpreta a la hada de grandes cuernos, quien es traicionada por su gran amor y que actúa movida por el dolor.</p>
-                        </div>
+                        <img src="<?= IMG_PATH ?>banner1.jpg" class="d-block w-100" alt="..." width="920" height="480">                        
                     </div>
                     <div class="carousel-item">
-                        <img src="<?= IMG_PATH ?>banner2.jpg" class="d-block w-100" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Joker</h5>
-                            <p>La pasión de Arthur Fleck, un hombre ignorado por la sociedad, es hacer reír a la gente. Una serie de trágicos sucesos lo convertiran en un brillante criminal.</p>
-                        </div>
+                        <img src="<?= IMG_PATH ?>banner2.jpg" class="d-block w-100" alt="..." width="920" height="480">                        
                     </div>
                     <div class="carousel-item">
-                        <img src="<?= IMG_PATH ?>banner3.png" class="d-block w-100" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Avengers: EndGame</h5>
-                            <p>Los Vengadores restantes deben encontrar una manera de recuperar a sus aliados para un enfrentamiento épico con Thanos.</p>
-                        </div>
+                        <img src="<?= IMG_PATH ?>banner3.png" class="d-block w-100" alt="..." width="920" height="480">                       
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselMovies" role="button" data-slide="prev">
