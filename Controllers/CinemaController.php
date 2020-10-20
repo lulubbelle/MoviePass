@@ -6,7 +6,7 @@
 
     class CinemaController
     {
-        public function Index($deleteMsg = "")
+        public function Index($deleteMsg = "", $successMsg = "")
         {
             require_once(UTILS_PATH."CheckAdmin.php");
 
@@ -120,7 +120,7 @@
                 $cineRepo = new CineRepository();
 
                 $updateMsg = $cineRepo->UpdateCinema($cineId, $cine);
-                $this->Index($updateMsg);
+                $this->Index(null,$updateMsg);
             }
         }
 
