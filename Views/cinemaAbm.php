@@ -18,8 +18,8 @@
                         isset($cinema) ? $action = "Cinema/UpdateCinema" : $action = "Cinema/AddCine";
                     ?>
                     <form action="<?= FRONT_ROOT.$action ?> " method="POST" class="cinema-form">
-                        <?php if(isset($$errorAbmCine)) {?>
-                            <p class="alert alert-danger"><?=$$errorAbmCine?></p>
+                        <?php if(isset($errorAbmCine)) {?>
+                            <p class="alert alert-danger"><?=$errorAbmCine?></p>
                         <?php }?>
                         <?php if(isset($successMsg)) {?>
                             <p class="alert alert-success"><?=$successMsg?></p>
@@ -56,6 +56,7 @@
                                     <option value="Batan"  <?php if(isset($cinema) && $cinema->getCiudad() == "Batan") {echo "selected";}?>>Batan</option>
                                     <option value="Miramar"  <?php if(isset($cinema) && $cinema->getCiudad() == "Miramar") {echo "selected";}?>>Miramar</option>
                                     <option value="Villa Gessel"  <?php if(isset($cinema) && $cinema->getCiudad() == "Villa Gessel") {echo "selected";}?>>Villa Gessel</option>
+                                    <option value="Bahia Blanca"  <?php if(isset($cinema) && $cinema->getCiudad() == "Bahia Blanca") {echo "selected";}?>>Bahia Blanca</option>
                                     </select>
                                 </div>
                                 
