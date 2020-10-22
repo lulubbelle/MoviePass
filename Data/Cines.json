@@ -1,18 +1,26 @@
 [
     {
-        "id": 1,
+        "id": 3,
         "capacidad": "123",
-        "nombre": "Nombre",
-        "valorEntrada": "1234",
-        "direccion": "Direccion",
+        "nombre": "nombre",
+        "valorEntrada": "2354",
+        "direccion": "dire",
         "ciudad": "Marpla"
     },
     {
-        "id": 2,
-        "capacidad": "123",
-        "nombre": "Nombre 2",
-        "valorEntrada": "546",
-        "direccion": "Dire 2",
-        "ciudad": "Miramar"
+        "id": "4",
+        "capacidad": "200",
+        "nombre": "Cine",
+        "valorEntrada": "7000",
+        "direccion": "Dire",
+        "ciudad": "Marpla"
+    },
+    {
+        "id": 5,
+        "capacidad": "200",
+        "nombre": "Cine",
+        "valorEntrada": "200",
+        "direccion": "Dire 123",
+        "ciudad": "Villa Gessel"
     }
 ]

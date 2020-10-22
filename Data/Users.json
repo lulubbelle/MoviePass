@@ -12,5 +12,12 @@
         "userName": "User",
         "password": "$2y$10$Gz8U0LCynTk6vhn5koY.PuILRyFkxRka6BnTJReL.SUN3LDSdKq4u",
         "rolId": 1
+    },
+    {
+        "id": 3,
+        "mail": "mail2@mail.com",
+        "userName": "User",
+        "password": "$2y$10$x9eNfbQJ6KdhVlBWIaoM2uw52iuFcEw1VSlsLuEGYorHRhcMD.41C",
+        "rolId": 2
     }
 ]
