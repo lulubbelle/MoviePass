@@ -1,10 +1,35 @@
 [
     {
+<<<<<<< HEAD
         "id": "1",
         "capacidad": "200",
         "nombre": "CinemaCenter",
         "valorEntrada": "200",
         "direccion": "Jara 2350",
         "ciudad": "Marpla"
+=======
+        "id": 3,
+        "capacidad": "123",
+        "nombre": "nombre",
+        "valorEntrada": "2354",
+        "direccion": "dire",
+        "ciudad": "Marpla"
+    },
+    {
+        "id": "4",
+        "capacidad": "200",
+        "nombre": "Cine",
+        "valorEntrada": "7000",
+        "direccion": "Dire",
+        "ciudad": "Marpla"
+    },
+    {
+        "id": 5,
+        "capacidad": "200",
+        "nombre": "Cine",
+        "valorEntrada": "200",
+        "direccion": "Dire 123",
+        "ciudad": "Villa Gessel"
+>>>>>>> f7a33da3faeeb9079d01b5855f64bc611040cb79
     }
 ]

@@ -64,7 +64,6 @@
                 $cineRepo = new CineRepository();
 
                 $errorAbmCine = $cineRepo->Add($cine);
-
                 if(!empty($errorAbmCine))
                 {                    
                     include_once(VIEWS_PATH."cinemaAbm.php");
