@@ -1,18 +1,10 @@
 [
     {
-        "id": 1,
-        "capacidad": "123",
-        "nombre": "Nombre",
-        "valorEntrada": "1234",
-        "direccion": "Direccion",
+        "id": "1",
+        "capacidad": "200",
+        "nombre": "CinemaCenter",
+        "valorEntrada": "200",
+        "direccion": "Jara 2350",
         "ciudad": "Marpla"
-    },
-    {
-        "id": 2,
-        "capacidad": "123",
-        "nombre": "Nombre 2",
-        "valorEntrada": "546",
-        "direccion": "Dire 2",
-        "ciudad": "Miramar"
     }
 ]

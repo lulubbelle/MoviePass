@@ -4,13 +4,13 @@
         "mail": "nachote98@gmail.com",
         "userName": "nacho",
         "password": "$2y$10$R5fQt4OCyHOCHdq7t0ZqRObXn4ay5GjVRFm11z0or1VPiLQmPyKYO",
-        "rolId": 2
+        "rolId": 1
     },
     {
         "id": 2,
         "mail": "mail@mail.com",
         "userName": "User",
         "password": "$2y$10$Gz8U0LCynTk6vhn5koY.PuILRyFkxRka6BnTJReL.SUN3LDSdKq4u",
-        "rolId": 1
+        "rolId": 2
     }
 ]

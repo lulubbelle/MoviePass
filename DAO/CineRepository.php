@@ -155,6 +155,30 @@ class CineRepository{
         return $this->data;
     }
 
+    public function getAllRoomsByCinemaId($id){
+        $this->data = array();
+        if(file_exists($this->fileName)){
+
+            $fileContent = file_get_contents($this->fileName);
+            $arrayToDecode = ($fileContent) ? json_decode($fileContent, true) : array();
+
+            foreach($arrayToDecode as $key => $value){
+                if($value["ciudad"] == $ciudad || $ciudad == "Todos"){
+                    $room = new Room();
+                    $room->setId($value["id"]);
+                    $room->setCapacidad($value["capacidad"]);
+                    $room->setNombre($value["nombre"]);
+                    $room->setValorEntrada($value["valorEntrada"]);
+                    $room->setDireccion($value["direccion"]);
+                    $room->setCiudad($value["ciudad"]);
+    
+                    array_push($this->data, $cine);
+                }
+            }
+        }
+        return $this->data;
+    }
+
 }
 
 
