@@ -2,11 +2,10 @@
 
 namespace DAO;
 
-//TODO: Fix Interfaces using
-// use DAO\IUserRepository as IUserRepository;
+use Interfaces\IUserRepository as IUserRepository;
 use Models\User as User;
 
-class UserRepository /*extends IUserRepository*/{
+class UserRepository extends IUserRepository{
 
     private $fileName = array();
     private $data = array();
@@ -99,6 +98,5 @@ class UserRepository /*extends IUserRepository*/{
     }
 
 }
-
 
 ?>

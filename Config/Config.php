@@ -17,14 +17,12 @@ define("IMG_LINK","https://image.tmdb.org/t/p/w185/");
 
 
 define("LANGUAGE_ES","es");
-define("DB_HOST", "26.177.180.157");
-define("DB_NAME", "MoviePassdb");
-define("DB_USER", "nacho");
-define("DB_PASS", "clave");
+define("DB_HOST", "127.0.0.1");
+define("DB_NAME", "moviepassdb");
+//Se crea usuario con permisos especificos para la aplicación
+define("DB_USER", "aplication");
+define("DB_PASS", "aplication");
 
-//MAIL INFO
-// define("MAIL_MP", "InfoMoviePass@gmail.com" );
-// define("MAIL_PASS", "MoviePassThe1");
 ?>
 
 

@@ -1,13 +1,5 @@
 [
     {
-        "id": 3,
-        "capacidad": "123",
-        "nombre": "nombre",
-        "valorEntrada": "2354",
-        "direccion": "dire",
-        "ciudad": "Marpla"
-    },
-    {
         "id": "4",
         "capacidad": "200",
         "nombre": "Cine",
@@ -21,6 +13,14 @@
         "nombre": "Cine",
         "valorEntrada": "200",
         "direccion": "Dire 123",
+        "ciudad": "Villa Gessel"
+    },
+    {
+        "id": 6,
+        "capacidad": "123",
+        "nombre": "Nombre",
+        "valorEntrada": "200",
+        "direccion": "Direccion 1 1",
         "ciudad": "Villa Gessel"
     }
 ]

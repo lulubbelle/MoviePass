@@ -1,6 +1,6 @@
 <?php
 
-namespace DAO;
+namespace Interfaces;
 
 interface IUserRepository{
 

@@ -12,7 +12,8 @@
             $movieRepo = new MovieRepository();
     
             $movieList = $movieRepo->GetAllFromApi();
-            
+            var_dump($movieList);
+            exit;
             $genreRepo = new GenreRepository();
 
             $genres = $genreRepo->getAll();
