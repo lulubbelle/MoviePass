@@ -10,6 +10,7 @@ class cinemaPDO{
     {
         $this->Connection = null;
     }
+    
 
     public function create($cine){
         $sql = "INSERT INTO cinema(name_cinema, address) VALUES(:name_cinema, :address)";
