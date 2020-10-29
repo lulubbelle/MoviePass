@@ -12,6 +12,7 @@
             require_once(VIEWS_PATH."register.php");
         }        
 
+        //AGREGAR FILTER_SANITIZE_ STRING PARA QUE NO PUEDAN INYECTAR CODIGO
         public function RegisterUser(){
             if($_POST)
             {

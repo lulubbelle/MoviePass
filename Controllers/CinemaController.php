@@ -73,6 +73,11 @@
             }
         }
 
+        public function AddCineBD($name_cinema, $address)
+        {
+            $newCinema = new Cine(100, $name_cinema, $address);
+        }
+
         public function DeleteCinema(){
             require_once(UTILS_PATH."CheckAdmin.php");
             if($_GET){
