@@ -19,5 +19,12 @@
         "userName": "User",
         "password": "$2y$10$x9eNfbQJ6KdhVlBWIaoM2uw52iuFcEw1VSlsLuEGYorHRhcMD.41C",
         "rolId": 2
+    },
+    {
+        "id": 4,
+        "mail": "luli.icasatti@gmail.com",
+        "userName": "lulu",
+        "password": "$2y$10$U0edC4N5MbtgmYQJO3Qv2e3z8Xd27GQiBpoLe.AR0Jv\/O8mxBsjfu",
+        "rolId": 2
     }
 ]
