@@ -3,12 +3,13 @@
 
     use DAO\MovieRepository as MovieRepository;
     use DAO\GenreRepository as GenreRepository;
+    use Utils\Utils as Utils;
 
     class ApiMovieController
     {
         public function Index($message = "")
         {
-            require_once(UTILS_PATH."CheckAdmin.php");
+            Utils::CheckAdmin();
             $movieRepo = new MovieRepository();
     
             $movieList = $movieRepo->GetAllFromApi();
@@ -22,7 +23,7 @@
         }           
 
         public function MovieSearch(){
-            require_once(UTILS_PATH."CheckAdmin.php");
+            Utils::CheckAdmin();
             if($_POST){
                 $movieRepo = new MovieRepository();
     

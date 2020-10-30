@@ -18,45 +18,37 @@
                         isset($cinema) ? $action = "Cinema/UpdateCinema" : $action = "Cinema/AddCine";
                     ?>
                     <form action="<?= FRONT_ROOT.$action ?> " method="POST" class="cinema-form">
-                        <?php if(isset($errorAbmCine)) {?>
+                        <?php if(isset($errorAbmCine)&& !empty($errorAbmCine)) {?>
                             <p class="alert alert-danger"><?=$errorAbmCine?></p>
                         <?php }?>
-                        <?php if(isset($successMsg)) {?>
+                        <?php if(isset($successMsg) && !empty($successMsg)) {?>
                             <p class="alert alert-success"><?=$successMsg?></p>
                         <?php }?>
                         
                             <div class="form-content">
                                 <!-- Solo para vista de modificacion -->
                                 <div class="form-group" style="display:none;">
-                                    <input type="number" name="id" class="form-control form-control-md cinema-input" placeholder="Capacidad" value="<?php if(isset($cinema)) {echo $cinema->getId();} ?>">
+                                    <input type="number" name="id" class="form-control form-control-md cinema-input" placeholder="Id" value="<?php if(isset($cinema)) {echo $cinema->getId();} ?>">
                                 </div>
-                                <div class="form-group">
-                                    <label class="cinema-input-label" for="capacidad">Capacidad</label>
-                                    <input type="number" name="capacidad" class="form-control form-control-md cinema-input" placeholder="Capacidad" value="<?php if(isset($cinema)) {echo $cinema->getCapacidad();} ?>" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="cinema-input-label" for="valorEntrada">Valor Entrada</label>
-                                    <input type="number" name="valorEntrada" class="form-control form-control-md cinema-input" placeholder="Valor Entrada" value="<?php if(isset($cinema)) {echo $cinema->getValorEntrada();} ?>" required>
+                                
+                                <div class="form-group" style="display:none;">
+                                    <input type="number" name="active" class="form-control form-control-md cinema-input" placeholder="Active" value="<?php if(isset($cinema)) {echo $cinema->getActive();} ?>">
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label class="cinema-input-label" for="nombre">Nombre</label>
-                                    <input type="text" name="nombre" class="form-control form-control-md cinema-input" placeholder="Nombre" value="<?php if(isset($cinema)) {echo $cinema->getNombre();}?>" required>
+                                    <label class="cinema-input-label" for="name">Nombre</label>
+                                    <input type="text" name="name" class="form-control form-control-md cinema-input" placeholder="Nombre" value="<?php if(isset($cinema)) {echo $cinema->getName();}?>" required>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label class="cinema-input-label" for="direccion">Direccion</label>
-                                    <input type="text" name="direccion" class="form-control form-control-md cinema-input" placeholder="Direccion" value="<?php if(isset($cinema)) {echo $cinema->getDireccion();}?>" required>
+                                    <label class="cinema-input-label" for="address">Direccion</label>
+                                    <input type="text" name="address" class="form-control form-control-md cinema-input" placeholder="Direccion" value="<?php if(isset($cinema)) {echo $cinema->getAddress();}?>" required>
                                 </div>
                                 
                                 <div class="form-group">
-                                <label class="cinema-input-label" for="ciudad">Ciudad</label>
-                                    <select name="ciudad" id="ciudad" class="form-control form-control-md cinema-input" placeholder="Ciudad">
-                                    <option value="Marpla" <?php if(isset($cinema) && $cinema->getCiudad() == "Marpla") {echo "selected";}?> >Marpla</option>
-                                    <option value="Batan"  <?php if(isset($cinema) && $cinema->getCiudad() == "Batan") {echo "selected";}?>>Batan</option>
-                                    <option value="Miramar"  <?php if(isset($cinema) && $cinema->getCiudad() == "Miramar") {echo "selected";}?>>Miramar</option>
-                                    <option value="Villa Gessel"  <?php if(isset($cinema) && $cinema->getCiudad() == "Villa Gessel") {echo "selected";}?>>Villa Gessel</option>
-                                    <option value="Bahia Blanca"  <?php if(isset($cinema) && $cinema->getCiudad() == "Bahia Blanca") {echo "selected";}?>>Bahia Blanca</option>
+                                <label class="cinema-input-label" for="cityId">Ciudad</label>
+                                    <select name="cityId" id="ciudad" class="form-control form-control-md cinema-input" placeholder="Ciudad">
+                                    <option value="<?php if(isset($cinema)) {echo $cinema->getCityId();}else{ echo "1";}?>">Opc 1</option>
                                     </select>
                                 </div>
                                 

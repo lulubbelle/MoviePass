@@ -11,8 +11,6 @@
         "mail": "mail@mail.com",
         "userName": "User",
         "password": "$2y$10$Gz8U0LCynTk6vhn5koY.PuILRyFkxRka6BnTJReL.SUN3LDSdKq4u",
-<<<<<<< HEAD
-=======
         "rolId": 1
     },
     {
@@ -20,7 +18,6 @@
         "mail": "mail2@mail.com",
         "userName": "User",
         "password": "$2y$10$x9eNfbQJ6KdhVlBWIaoM2uw52iuFcEw1VSlsLuEGYorHRhcMD.41C",
->>>>>>> f7a33da3faeeb9079d01b5855f64bc611040cb79
         "rolId": 2
     },
     {

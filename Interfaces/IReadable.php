@@ -4,7 +4,7 @@ namespace Interfaces;
 
 interface IReadable{
     function GetAll();
-    function GetById();
+    function GetById($id);
 }
 
 ?>
