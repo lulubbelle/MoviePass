@@ -1,39 +1,41 @@
 <?php
     namespace Controllers;
     
-    use DAO\CineRepository as CineRepository;
+    use DAO\CinemaRepository as CinemaRepository;
     use DAO\CityRepository as CityRepository;
     use DAO\RoomRepository as RoomRepository;
-    use Models\Cine as Cine;
+    
+    use Models\Cinema as Cinema;
     use Models\Room as Room;
+    use Utils\Utils as Utils;
 
     class CinemaController
     {
         public function Index($deleteMsg = "", $successMsg = "")
         {
-            require_once(UTILS_PATH."CheckAdmin.php");
+            Utils::CheckAdmin();
 
-            $cineRepo = new CineRepository();
+            $cineRepo = new CinemaRepository();
             $cityRepo = new CityRepository();
 
-            $cines = $cineRepo->getAll();
+            $cinemas = $cineRepo->GetAll();
             $cities = $cityRepo->getAll();
 
             require_once(VIEWS_PATH."cinemaList.php");
         }        
 
-        public function CinemaAddView($message = "")
+        public function CinemaAddView($errorAbmCine = "", $successMsg = "")
         {
-            require_once(UTILS_PATH."CheckAdmin.php");
+            Utils::CheckAdmin();
             require_once(VIEWS_PATH."cinemaAbm.php");
         }     
 
         public function CinemaSearch(){
-            require_once(UTILS_PATH."CheckAdmin.php");
+            Utils::CheckAdmin();
             if($_POST){
                 $ciudad = $_POST["ciudad"];
 
-                $cineRepo = new CineRepository();
+                $cineRepo = new CinemaRepository();
                 $cityRepo = new CityRepository();
 
                 $cines = $cineRepo->GetByCiudad($ciudad);
@@ -45,28 +47,25 @@
 
         public function AddCine()
         {
-            require_once(UTILS_PATH."CheckAdmin.php");
+            Utils::CheckAdmin();
             if($_POST)
             {
-                $capacidad = $_POST["capacidad"];
-                $nombre = $_POST["nombre"];
-                $valorEntrada = $_POST["valorEntrada"];
-                $direccion = $_POST["direccion"];
-                $ciudad = $_POST["ciudad"];
+                $name = $_POST["name"];
+                $address = $_POST["address"];
+                $cityId = $_POST["cityId"];
 
-                $cine = new Cine();
-                $cine->setCapacidad($capacidad);
-                $cine->setNombre($nombre);
-                $cine->setValorEntrada($valorEntrada);
-                $cine->setDireccion($direccion);
-                $cine->setCiudad($ciudad);
+                $cinema = new Cinema();
+                $cinema->setName($name);
+                $cinema->setAddress($address);
+                $cinema->setCityId($cityId);
 
-                $cineRepo = new CineRepository();
+                $cineRepo = new CinemaRepository();
 
-                $errorAbmCine = $cineRepo->Add($cine);
-                if(!empty($errorAbmCine))
+                $errorAbmCine = $cineRepo->AddOne($cinema);
+
+                if(!empty($errorAbmCine) && $errorAbmCine != 1)
                 {                    
-                    include_once(VIEWS_PATH."cinemaAbm.php");
+                    $this->CinemaAddView($errorAbmCine);
                 }else
                 {
                     $this->Index();
@@ -76,11 +75,11 @@
         }
 
         public function DeleteCinema(){
-            require_once(UTILS_PATH."CheckAdmin.php");
+            Utils::CheckAdmin();
             if($_GET){
                 $cineId = $_GET["id"];
                 
-                $cineRepo = new CineRepository();
+                $cineRepo = new CinemaRepository();
 
                 $deleteMsg = $cineRepo->DeleteCinema($cineId);
 
@@ -90,11 +89,11 @@
 
         
         public function UpdateCinemaShowView(){
-            require_once(UTILS_PATH."CheckAdmin.php");
+            Utils::CheckAdmin();
             if($_GET){
                 $cineId = $_GET["id"];
                 
-                $cineRepo = new CineRepository();
+                $cineRepo = new CinemaRepository();
 
                 $cinema = $cineRepo->GetById($cineId);
                 
@@ -105,34 +104,32 @@
         
  
         public function UpdateCinema(){
-            require_once(UTILS_PATH."CheckAdmin.php");
+            Utils::CheckAdmin();
             if($_POST){
 
-                $cineId = $_POST["id"];
-                $capacidad = $_POST["capacidad"];
-                $nombre = $_POST["nombre"];
-                $valorEntrada = $_POST["valorEntrada"];
-                $direccion = $_POST["direccion"];
-                $ciudad = $_POST["ciudad"];
+                $cinemaId = $_POST["id"];
+                $active = $_POST["active"];
+                $nombre = $_POST["name"];
+                $direccion = $_POST["address"];
+                $cityId = $_POST["cityId"];
 
-                $cine = new Cine();
-                $cine->setId($cineId);
-                $cine->setCapacidad($capacidad);
-                $cine->setNombre($nombre);
-                $cine->setValorEntrada($valorEntrada);
-                $cine->setDireccion($direccion);
-                $cine->setCiudad($ciudad);
+                $cinema = new Cinema();
+                $cinema->setId($cinemaId);
+                $cinema->setName($nombre);
+                $cinema->setAddress($direccion);
+                $cinema->setCityId($cityId);
+                $cinema->setActive($active);
+                
+                $cineRepo = new CinemaRepository();
 
-                $cineRepo = new CineRepository();
-
-                $updateMsg = $cineRepo->UpdateCinema($cineId, $cine);
+                $updateMsg = $cineRepo->Update($cinema);
                 $this->Index(null,$updateMsg);
             }
         }
 
         public function RoomListShowView($message = "")
         {
-            require_once(UTILS_PATH."CheckAdmin.php");
+            Utils::CheckAdmin();
             if($_GET){
                 $cineId = $_GET["cineId"];
                 
@@ -146,7 +143,7 @@
 
         public function RoomAddView($message = "")
         {
-            require_once(UTILS_PATH."CheckAdmin.php");
+            Utils::CheckAdmin();
 
             if($_GET){
                 $cineId = $_GET["cineId"];
@@ -157,7 +154,7 @@
 
         public function AddRoom()
         {
-            require_once(UTILS_PATH."CheckAdmin.php");
+            Utils::CheckAdmin();
 
             if($_POST)
             {
@@ -186,7 +183,7 @@
         }
 
         public function UpdateRoomShowView(){
-            require_once(UTILS_PATH."CheckAdmin.php");
+            Utils::CheckAdmin();
             if($_GET){
                 $roomId = $_GET["id"];
                 
@@ -199,7 +196,7 @@
         }
 
         public function UpdateRoom(){
-            require_once(UTILS_PATH."CheckAdmin.php");
+            Utils::CheckAdmin();
             if($_POST){
 
                 $id = $_POST["id"];
@@ -221,7 +218,7 @@
         }
 
         public function DeleteRoom(){
-            require_once(UTILS_PATH."CheckAdmin.php");
+            Utils::CheckAdmin();
             if($_GET){
                 $id = $_GET["id"];
                 

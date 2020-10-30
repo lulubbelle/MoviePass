@@ -17,7 +17,6 @@
                 $password = $_POST["password"];
                 $username = $_POST["email"];
 
-
                 $userRepo = new UserRepository();
                 $user = $userRepo->GetUserByMail($username);
 

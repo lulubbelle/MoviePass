@@ -3,14 +3,45 @@
 namespace DAO;
 
 use Models\Movie as Movie;
+use DAO\Connection as Connection;
+use \Exception as Exception;
+use Interfaces\IMovieRepository as IMovieRepository;
 
-class MovieRepository{
+class MovieRepository implements IMovieRepository{
 
+    private $connection;
+    private $tableName = "MOVIE";
+    
     private $data;
 
     public function GetAllFromApi(){
         $this->RetrieveDataFromApi();
         return $this->data;
+    }
+
+    public function GetAllFromDb(){
+        $ret = array();
+        $query = "SELECT * FROM " . $this->tableName;
+        $this->connection = Connection::GetInstance();
+        $queryResult = $this->connection->Execute($query);
+
+        //TODO: Reemplazar con mapper
+        foreach ($queryResult as $row)
+        {
+            $movie = new Movie();
+            $movie->setId($row["ID"]);
+            $movie->setIdApi($row["ID_API"]);
+            $movie->setTitle($row["TITLE"]);
+            $movie->setImgLink($row["IMG_PATH"]);
+            $movie->setDescripcion($row["DESCRIPTION"]);
+            $movie->setReleaseDate($row["RELEASE_DATE"]);
+            $movie->setDirector($row["DIRECTOR"]);
+            $movie->setCountry($row["COUNTRY_ID"]);
+
+            array_push($ret, $movie);
+        }
+
+        return $ret;
     }
 
     private function RetrieveDataFromApi(){
@@ -33,18 +64,6 @@ class MovieRepository{
 
             array_push($this->data, $movie);
         }
-
-        // private $id;
-        // private $idApi;
-        // private $title;
-        // private $imgLink;
-        // private $genres;
-        // private $descripcion;
-        // private $releaseDate;
-        // private $director;
-        // private $country;
-        // private $clasificacion;
-        // private $isPlaying;
     }
     
     public function GetAllByGenre($genreId){
@@ -71,6 +90,10 @@ class MovieRepository{
         }
         return $this->data;
     }
+
+    function GetAll(){ return; }
+    function GetById(){ return; }
+
 }
 
 
