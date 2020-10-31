@@ -12,9 +12,6 @@ class CinemaRepository implements ICinemaRepository{
     private $connection;
     private $tableName = " CINEMA ";
 
-    function __construct(){
-        $this->fileName = DATA_PATH."Cines.json";
-    }
 
     function GetAll()
     {
@@ -73,7 +70,7 @@ class CinemaRepository implements ICinemaRepository{
 
     public function DeleteCinema($id){
         $sql = "UPDATE CINEMA SET ACTIVE = 0 WHERE ID = :ID";
-        $parameters['ID'] = $Id;
+        $parameters['ID'] = $id;
         try
         {
             $this->connection = Connection::getInstance();
@@ -109,7 +106,7 @@ class CinemaRepository implements ICinemaRepository{
         }
     }
 
-    public function GetByCiudad($cityId){
+    public function GetByCity($cityId){
         try
         {
             $ret = array();
@@ -117,9 +114,9 @@ class CinemaRepository implements ICinemaRepository{
             
             $this->connection = Connection::GetInstance();
             $queryResult = $this->connection->Execute($query);
-
+          
             $ret = Cinema::mapData($queryResult);
-
+        
             return $ret;
         }catch(Exception $ex){
             throw $ex;

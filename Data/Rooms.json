@@ -4,5 +4,11 @@
         "cinemaId": "1",
         "name": "Sala CinemaCenter 1",
         "capacity": "300"
+    },
+    {
+        "id": 2,
+        "cinemaId": "7",
+        "name": "Luc\u00eda Icasatti",
+        "capacity": "20"
     }
 ]

@@ -19,7 +19,7 @@
             $cityRepo = new CityRepository();
 
             $cinemas = $cineRepo->GetAll();
-            $cities = $cityRepo->getAll();
+            $cities = $cityRepo->GetAll();
 
             require_once(VIEWS_PATH."cinemaList.php");
         }        
@@ -27,18 +27,29 @@
         public function CinemaAddView($errorAbmCine = "", $successMsg = "")
         {
             Utils::CheckAdmin();
+
+            $cityRepository = new CityRepository();
+            $cities = $cityRepository->GetAll();
+            
+            //TODO: quitar el TODOS del ABM de agregar Cine
             require_once(VIEWS_PATH."cinemaAbm.php");
         }     
 
         public function CinemaSearch(){
             Utils::CheckAdmin();
             if($_POST){
-                $ciudad = $_POST["ciudad"];
+                $ciudad = $_POST["city"];
 
                 $cineRepo = new CinemaRepository();
                 $cityRepo = new CityRepository();
-
-                $cines = $cineRepo->GetByCiudad($ciudad);
+                //TODO: 
+                if($ciudad == 7)
+                {
+                    $cinemas = $cineRepo->GetAll($ciudad);
+                } else {
+                    $cinemas = $cineRepo->GetByCity($ciudad);
+                }
+                
                 $cities = $cityRepo->getAll();
                 
                 require_once(VIEWS_PATH."cinemaList.php");

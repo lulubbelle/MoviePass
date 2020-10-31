@@ -14,11 +14,11 @@
                     <div class="col-md-3">
                         <div class="form-content">
                             <div class="form-group">
-                                <select name="ciudad" id="ciudad" class="form-control form-control-md cinema-input" placeholder="Ciudad">
+                                <select name="city" id="ciudad" class="form-control form-control-md cinema-input" placeholder="Ciudad">
                                     <?php
                                     foreach ($cities as $city) {
                                     ?>
-                                        <option value="<?= $city->getName() ?>"><?= $city->getName() ?></option>
+                                        <option value="<?= $city->getId() ?>"><?= $city->getName() ?></option>
                                     <?php
                                     }
                                     ?>

@@ -48,7 +48,14 @@
                                 <div class="form-group">
                                 <label class="cinema-input-label" for="cityId">Ciudad</label>
                                     <select name="cityId" id="ciudad" class="form-control form-control-md cinema-input" placeholder="Ciudad">
-                                    <option value="<?php if(isset($cinema)) {echo $cinema->getCityId();}else{ echo "1";}?>">Opc 1</option>
+                                    <?php
+                                    foreach ($cities as $city) {
+                                    ?>
+                                        <option value="<?= $city->getId() ?>"><?= $city->getName() ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                    
                                     </select>
                                 </div>
                                 

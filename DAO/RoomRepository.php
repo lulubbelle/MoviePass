@@ -3,151 +3,137 @@
 namespace DAO;
 
 use Models\Room as Room;
+use DAO\Connection as Connection;
+use \Exception as Exception;
+use Interfaces\ICinemaRepository as ICinemaRepository;
 
 class RoomRepository{
 
-    private $fileName = array();
-    private $data = array();
+    private $connection;
+    private $tableName = " ROOM ";
 
-    function __construct(){
-        $this->fileName = DATA_PATH."Rooms.json";
-    }
 
-    public function getFileName()
+    function GetAll()
     {
-        return $this->fileName;
+        try
+        {
+            $ret = array();
+            $query = "SELECT * FROM " . $this->tableName . " WHERE ACTIVE = 1";
+            $this->connection = Connection::GetInstance();
+            $queryResult = $this->connection->Execute($query);
+            
+            $ret = Room::mapData($queryResult);
+
+            return $ret;
+        }catch(Exception $ex){
+            throw $ex;
+        }
     }
 
-    public function getAll(){
-        $this->RetrieveData();
-        return $this->data;
+    function GetById($id)
+    {
+        try
+        {
+            $ret = array();
+            $query = "SELECT * FROM " . $this->tableName . " WHERE ID = " . $id . ";";
+            $this->connection = Connection::GetInstance();
+            $queryResult = $this->connection->Execute($query);
+
+            $ret = Room::mapData($queryResult);
+
+            return $ret[0];
+        }catch(Exception $ex){
+            throw $ex;
+        }
     }
+    
 
     public function Add(Room $room){
-        $this->RetrieveData();
+        try {
+        $query= "INSERT INTO ROOM (id, cineId, name, capacity) VALUES(:id,:cineId, :name, :capacity)";
+
+        $parameters['id']=$room->getId();
+        $parameters['cineId']=$room->getCinemaId();
+        $parameters['name'] =$room->getName();
+        $parameters['capacity'] =$room->getCapacity();
         
-        foreach($this->data as $value){
-            if($room->getName() == $value->getName()){
-                return "Ya existe una sala con el nombre indicado.";
-            }
-        }
-
-        $room->setId($this->GetLastId() + 1);
-
-        array_push($this->data,$room);
-        $this->SaveData();  
-    }
-    
-    public function GetLastId(){
-        $this->RetrieveData();
-        
-        $max = 0;
-        foreach($this->data as $value){
-            if($value->getId() > $max){
-                $max = $value->getId();
-            }
-        }
-        return $max;
-    }
-
-    private function RetrieveData(){
-        $this->data = array();
-        if(file_exists($this->fileName)){
-
-            $fileContent = file_get_contents($this->fileName);
-            $arrayToDecode = ($fileContent) ? json_decode($fileContent, true) : array();
-
-            foreach($arrayToDecode as $key => $value){
-                $room = new Room();
-                $room->setId($value["id"]);
-                $room->setCinemaId($value["cinemaId"]);
-                $room->setName($value["name"]);
-                $room->setCapacity($value["capacity"]);
-
-                array_push($this->data, $room);
-            }
+            $this->connection = Connection::getInstance();
+            return $this->connection->ExecuteNonQuery($query, $parameters);
+        } catch(Exception $ex){
+            throw $ex;
+            //TODO: VALIDAR QUE NO HAYA UNA room CON EL MISMO name
+            /*$errorMsg = $ex->getMessage();
+            if(stripos($errorMsg, "CINEMA_UNIQUE_IX1") != false ){
+                return "Ya existe una room con ese name";
+            }else
+                return "Ha ocurrido un error :( " . $errorMsg;*/
         }
     }
 
-    private function SaveData(){
-        $arrayToEncode = array();
-        
-        foreach($this->data as $room){
-            $values["id"] = $room->getId();
-            $values["cinemaId"] = $room->getCinemaId();
-            $values["name"] = $room->getName();
-            $values["capacity"] = $room->getCapacity();
+
+
+    public function DeleteRoom($cineId){
+
+        $sql = "UPDATE ROOM SET active=0 WHERE name= :name AND cineId = :cineId";
+        $parameters['name'] = $name;
+        $parameters['cineId'] = $cineId;
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $this->connection->ExecuteNonQuery($sql, $parameters);
+            return "Eliminado correctamente";
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
             
-            array_push($arrayToEncode, $values);
         }
-
-        $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
-        file_put_contents($this->fileName, $jsonContent);
     }
 
-    public function DeleteRoom($id){
-        $this->RetrieveData();
-        for($i = 0; $i < \count($this->data); $i++)
+
+    public function UpdateRoom($name,$capacity){
+
+        try 
         {
-            if($this->data[$i]->getId() == $id){
-                unset($this->data[$i]);
-                $ok = 1;
-            }
-        }
-        $this->SaveData();
-        if(isset($ok)){
-            return "Eliminada Correctamente";
-        }
-    }
 
-    public function UpdateRoom($id, $room){
-        $this->RetrieveData();
-        for($i = 0; $i < \count($this->data); $i++)
-        {
-            if($this->data[$i]->getId() == $id){
-                $this->data[$i] = $room;
-                $ok = 1;
-            }
-        }
-        $this->SaveData();
-        if(isset($ok)){
-            return "Modificada Correctamente";
-        }
-    }
-
-    public function GetById($id){
-        $this->RetrieveData();
-        for($i = 0; $i < \count($this->data); $i++)
-        {
-            if($this->data[$i]->getId() == $id){
-                return $this->data[$i];
-            }
-        }
-        $errorMsg = "No se encontro una sala con el id proporcionado.";
-        return $errorMsg;
-    }
-
-    public function getAllRoomsByCinemaId($id){
-        $this->data = array();
-        if(file_exists($this->fileName)){
-
-            $fileContent = file_get_contents($this->fileName);
-            $arrayToDecode = ($fileContent) ? json_decode($fileContent, true) : array();
-
-            foreach($arrayToDecode as $key => $value){
-                if($value["cinemaId"] == $id){
-                    $room = new Room();
-                    $room->setId($value["id"]);
-                    $room->setCinemaId($value["cinemaId"]);
-                    $room->setName($value["name"]);
-                    $room->setCapacity($value["capacity"]);
+        $query = "UPDATE ROOM SET name = :name, capacity = :capacity, active = :active,  WHERE id = :id";
+        $parameters['name'] = $name;
+        $parameters['capacity'] = $capacity;
+        $parameters['active'] = $active;
     
-                    array_push($this->data, $room);
-                }
-            }
+          $this->connection = Connection::getInstance();
+          $this->connection->ExecuteNonQuery($query, $parameters);
+
+          return "Registro modificado correctamente";
         }
-        return $this->data;
+
+      catch(Exception $e)
+      {
+        return "Ha ocurrido un error :( " . $e->getMessage();
+      }
+
     }
+
+
+
+
+    public function getAllRoomsByCinemaId($id) {
+    
+        try
+            {
+                $ret = array();
+                $query = "SELECT * FROM " . $this->tableName . " WHERE cineId = " . $id . ";";
+                $this->connection = Connection::GetInstance();
+                $queryResult = $this->connection->Execute($query);
+    
+                $ret = Room::mapData($queryResult);
+    
+                return $ret;
+            }catch(Exception $ex){
+                throw $ex;
+            }
+
+        }
 
 }
 

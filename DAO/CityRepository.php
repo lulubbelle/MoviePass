@@ -3,43 +3,49 @@
 namespace DAO;
 
 use Models\City as City;
+use DAO\Connection as Connection;
+use \Exception as Exception;
+use Interfaces\ICinemaRepository as ICinemaRepository;
 
 class CityRepository{
 
-    private $fileName = array();
-    private $data = array();
+    private $connection;
+    private $tableName = " CITY ";
 
-    function __construct(){
-        $this->fileName = DATA_PATH."Cities.json";
-    }
-
-    public function getFileName()
+    function GetAll()
     {
-        return $this->fileName;
-    }
+        try
+        {
+            $ret = array();
+            $query = "SELECT * FROM " . $this->tableName . "WHERE ACTIVE = 1" . ";";
+            $this->connection = Connection::GetInstance();
+            $queryResult = $this->connection->Execute($query);
+            
+            $ret = City::mapData($queryResult);
 
-    public function getAll(){
-        $this->RetrieveData();
-        return $this->data;
-    }
-
-    private function RetrieveData(){
-        $this->data = array();
-        if(file_exists($this->fileName)){
-
-            $fileContent = file_get_contents($this->fileName);
-            $arrayToDecode = ($fileContent) ? json_decode($fileContent, true) : array();
-
-            foreach($arrayToDecode as $key => $value){
-                $city = new City();
-                $city->setId($value["id"]);
-                $city->setName($value["name"]);
-
-                array_push($this->data, $city);
-            }
+            return $ret;
+        }catch(Exception $ex){
+            throw $ex;
         }
     }
+
+
+    function GetById($id)
+    {
+        try
+        {
+            $ret = array();
+            $query = "SELECT * FROM " . $this->tableName . " WHERE ID = " . $id . ";";
+            $this->connection = Connection::GetInstance();
+            $queryResult = $this->connection->Execute($query);
+
+            $ret = City::mapData($queryResult);
+
+            return $ret[0];
+        }catch(Exception $ex){
+            throw $ex;
+        }
+    }
+
 }
-
-
 ?>
