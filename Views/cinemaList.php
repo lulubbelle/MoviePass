@@ -77,7 +77,7 @@
                                             <br />
                                             <h3><?= $key->getAddress() ?></h3>
                                             <br />
-                                            <h3>Ciudad: <?= $key->getCityId() ?></h3>
+                                            <h3>Ciudad: <?= $key->getCityDescription() ?></h3>
                                         </div>
                                         <div class="column-2">
                                             <a type="button" class="btn btn-success btn-abm-cinema" href="<?= FRONT_ROOT ?>Cinema/RoomListShowView?cineId=<?= $key->getId() ?>">

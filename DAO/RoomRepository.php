@@ -50,17 +50,18 @@ class RoomRepository{
 
     public function Add(Room $room){
         try {
-        $query= "INSERT INTO ROOM (id, cineId, name, capacity) VALUES(:id,:cineId, :name, :capacity)";
+        $query= "INSERT INTO ROOM (id, cineId, name, capacity) VALUES(:id, :cineId, :name, :capacity)";
 
         $parameters['id']=$room->getId();
         $parameters['cineId']=$room->getCinemaId();
         $parameters['name'] =$room->getName();
         $parameters['capacity'] =$room->getCapacity();
         
-            $this->connection = Connection::getInstance();
-            return $this->connection->ExecuteNonQuery($query, $parameters);
+        $this->connection = Connection::getInstance();
+        $this->connection->ExecuteNonQuery($query, $parameters);
+
         } catch(Exception $ex){
-            throw $ex;
+            return "Ha ocurrido un error " . $ex->getMessage();
             //TODO: VALIDAR QUE NO HAYA UNA room CON EL MISMO name
             /*$errorMsg = $ex->getMessage();
             if(stripos($errorMsg, "CINEMA_UNIQUE_IX1") != false ){
@@ -113,18 +114,15 @@ class RoomRepository{
 
     }
 
-
-
-
     public function getAllRoomsByCinemaId($id) {
     
         try
             {
                 $ret = array();
-                $query = "SELECT * FROM " . $this->tableName . " WHERE cineId = " . $id . ";";
+                $query = "SELECT * FROM " . $this->tableName . " WHERE cineId = " . $id . " AND ACTIVE = 1;";
                 $this->connection = Connection::GetInstance();
                 $queryResult = $this->connection->Execute($query);
-    
+
                 $ret = Room::mapData($queryResult);
     
                 return $ret;

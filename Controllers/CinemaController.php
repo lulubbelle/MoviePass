@@ -19,6 +19,9 @@
             $cityRepo = new CityRepository();
 
             $cinemas = $cineRepo->GetAll();
+
+            
+
             $cities = $cityRepo->GetAll();
 
             require_once(VIEWS_PATH."cinemaList.php");
@@ -42,7 +45,8 @@
 
                 $cineRepo = new CinemaRepository();
                 $cityRepo = new CityRepository();
-                //TODO: 
+                
+                //TODO: Fix hardcoding
                 if($ciudad == 7)
                 {
                     $cinemas = $cineRepo->GetAll($ciudad);
@@ -108,6 +112,9 @@
 
                 $cinema = $cineRepo->GetById($cineId);
                 
+                $cityRepo = new CityRepository();
+                $cities = $cityRepo->getAll();
+
                 require_once(VIEWS_PATH."cinemaAbm.php");
             }
         }
@@ -138,11 +145,15 @@
             }
         }
 
-        public function RoomListShowView($message = "")
+        public function RoomListShowView($cinemaId, $message = "")
         {
             Utils::CheckAdmin();
-            if($_GET){
-                $cineId = $_GET["cineId"];
+
+            $parameterCall = (isset($cinemaId) && !empty($cinemaId));
+
+            if($_GET || $parameterCall){
+
+                $cineId = $parameterCall ? $cinemaId : $_GET["cineId"];
                 
                 $roomRepo = new RoomRepository();
 
@@ -187,7 +198,7 @@
                     include_once(VIEWS_PATH."roomAbm.php");
                 }else
                 {
-                    $this->Index();
+                    $this->RoomListShowView($cinemaId);
                 }
             
             }
@@ -225,7 +236,9 @@
 
                 $updateMsg = $roomRepo->UpdateRoom($room);
                 
-                $this->Index(null,$updateMsg);
+                $room = $roomRepo->GetById($id);
+
+                $this->RoomListShowView($room->getCinemaId(), $updateMsg);
             }
         }
 
@@ -235,10 +248,10 @@
                 $id = $_GET["id"];
                 
                 $roomRepo = new RoomRepository();
-
+                $room = $roomRepo->GetById($id);
                 $deleteMsg = $roomRepo->DeleteRoom($id);
 
-                $this->Index($deleteMsg);
+                $this->RoomListShowView($room->getCinemaId(), $deleteMsg);
             }
         }
 

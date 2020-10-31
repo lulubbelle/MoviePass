@@ -6,6 +6,7 @@ use Models\Cinema as Cinema;
 use DAO\Connection as Connection;
 use \Exception as Exception;
 use Interfaces\ICinemaRepository as ICinemaRepository;
+use DAO\CityRepository as CityRepository;
 
 class CinemaRepository implements ICinemaRepository{
 
@@ -23,7 +24,13 @@ class CinemaRepository implements ICinemaRepository{
             $queryResult = $this->connection->Execute($query);
             
             $ret = Cinema::mapData($queryResult);
+            $CityRepo = new CityRepository();
 
+            foreach($ret as $key){
+                $city = $CityRepo->GetById($key->getCityId());
+
+                $key->setCityDescription($city->getName());
+            }
             return $ret;
         }catch(Exception $ex){
             throw $ex;
@@ -116,7 +123,14 @@ class CinemaRepository implements ICinemaRepository{
             $queryResult = $this->connection->Execute($query);
           
             $ret = Cinema::mapData($queryResult);
-        
+            
+            $CityRepo = new CityRepository();
+
+            foreach($ret as $key){
+                $city = $CityRepo->GetById($key->getCityId());
+
+                $key->setCityDescription($city->getName());
+            }
             return $ret;
         }catch(Exception $ex){
             throw $ex;
