@@ -10,6 +10,9 @@ class Cinema{
     private $cityId;
     private $active;
     
+    //Not Mapped
+    private $cityDescription;
+    
     public function getId()
     {
         return $this->id;
@@ -94,6 +97,17 @@ class Cinema{
             return array();
     }
 
+    public function getCityDescription()
+    {
+        return $this->cityDescription;
+    }
+
+    public function setCityDescription($cityDescription)
+    {
+        $this->cityDescription = $cityDescription;
+
+        return $this;
+    }
 }
 
 ?>

@@ -51,7 +51,7 @@
                                     <?php
                                     foreach ($cities as $city) {
                                     ?>
-                                        <option value="<?= $city->getId() ?>"><?= $city->getName() ?></option>
+                                        <option value="<?= $city->getId() ?>" <?php (isset($cinema) && $cinema->getCityId() == $city->getId()) ? " selected" : "" ?>><?= $city->getName() ?></option>
                                     <?php
                                     }
                                     ?>

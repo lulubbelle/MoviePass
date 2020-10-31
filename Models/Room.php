@@ -76,23 +76,25 @@ class Room {
    
         
         $resp = array_map(function($p){
-
+            
             $room = new Room();
             $room->setId($p['id']);
+            $room->setCinemaId($p['cineId']);
             $room->setName($p['name']);
+            $room->setCapacity($p['capacity']);
             $room->setActive($p['active']);
             
             return $room;
         }, $value);
-    
+        
         if($resp != null){
             //return count($resp) > 1 ? $resp : $resp[0];
             return $resp;
         }
         else
-            return array();
+        return array();
     }
-
+    
 }
 
 ?>
