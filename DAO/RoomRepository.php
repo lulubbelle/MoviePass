@@ -72,11 +72,11 @@ class RoomRepository{
 
 
 
-    public function DeleteRoom($cineId){
+    public function DeleteRoom($id){
 
-        $sql = "UPDATE ROOM SET active=0 WHERE name= :name AND cineId = :cineId";
-        $parameters['name'] = $name;
-        $parameters['cineId'] = $cineId;
+        $sql = "UPDATE ROOM SET active=0 WHERE id = :id";
+       
+        $parameters['id'] = $id;
         try
         {
             $this->connection = Connection::getInstance();
@@ -91,15 +91,15 @@ class RoomRepository{
     }
 
 
-    public function UpdateRoom($name,$capacity){
+    public function UpdateRoom($room){
 
         try 
         {
 
-        $query = "UPDATE ROOM SET name = :name, capacity = :capacity, active = :active,  WHERE id = :id";
-        $parameters['name'] = $name;
-        $parameters['capacity'] = $capacity;
-        $parameters['active'] = $active;
+        $query = "UPDATE ROOM SET name = :name, capacity = :capacity WHERE id = :id AND active = 1";
+        $parameters['name'] = $room->getName();
+        $parameters['capacity'] = $room->getCapacity();
+        $parameters['id'] = $room->getId();
     
           $this->connection = Connection::getInstance();
           $this->connection->ExecuteNonQuery($query, $parameters);

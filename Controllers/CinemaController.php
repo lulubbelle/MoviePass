@@ -219,11 +219,12 @@
                 $room->setId($id); 
                 $room->setCinemaId($cinemaId);        
                 $room->setName($name);
-                $room->setcapacity($capacity);
+                $room->setCapacity($capacity);
 
                 $roomRepo = new RoomRepository();
 
-                $updateMsg = $roomRepo->UpdateRoom($id, $room);
+                $updateMsg = $roomRepo->UpdateRoom($room);
+                
                 $this->Index(null,$updateMsg);
             }
         }
