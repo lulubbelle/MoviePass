@@ -95,7 +95,6 @@ class RoomRepository{
 
         try 
         {
-
         $query = "UPDATE ROOM SET name = :name, capacity = :capacity WHERE id = :id AND active = 1";
         $parameters['name'] = $room->getName();
         $parameters['capacity'] = $room->getCapacity();
