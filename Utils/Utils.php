@@ -31,7 +31,7 @@ class Utils{
         return $clean_name;
     }
 
-    public static function ClearString($data){
+    public static function CleanInput($data){
         $data = htmlspecialchars($data);
         $data = trim($data);
         $data = stripcslashes($data); #Limpia las barras invertidas anti xss
@@ -48,6 +48,10 @@ class Utils{
     public static function GenerateAntiCsrfToken(){
         $tok = md5(uniqid(rand(), TRUE));
         return $tok;
+    }
+
+    public static function ValidatePositiveNumber($number){
+        return $number > 0;
     }
 
 }

@@ -56,7 +56,7 @@
                         <a class="dropdown-item" href="';echo FRONT_ROOT. 'Tickets"><i class="fas fa-ticket-alt"></i>&nbspMis Tickets</a>
                         <a class="dropdown-item" href="';echo FRONT_ROOT. 'Compras"><i class="fas fa-ticket-alt"></i>&nbspCompras Previas</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="';echo FRONT_ROOT. 'Login"><i class="fas fa-sign-out-alt"></i>&nbspCerrar Sesión</a>
+                        <a class="dropdown-item" href="';echo FRONT_ROOT. 'Login/CloseSession"><i class="fas fa-sign-out-alt"></i>&nbspCerrar Sesión</a>
                       </div>
                     </li>                     
                   </ul>';   

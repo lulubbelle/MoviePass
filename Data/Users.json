@@ -26,5 +26,12 @@
         "userName": "lulu",
         "password": "$2y$10$U0edC4N5MbtgmYQJO3Qv2e3z8Xd27GQiBpoLe.AR0Jv\/O8mxBsjfu",
         "rolId": 2
+    },
+    {
+        "id": 5,
+        "mail": "mail34@mail.com",
+        "userName": "&lt;script&gt; alert('xss') &lt;\/alert&gt;",
+        "password": "$2y$10$v\/mUM9dNfyZCURphEP68I.ahiBsiiXtAyCDVHs1WKrjTYW4b.l3ES",
+        "rolId": 2
     }
 ]

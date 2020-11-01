@@ -3,6 +3,7 @@
 
     use DAO\UserRepository as UserRepository;
     use Models\User as User;
+    use Utils\Utils as Utils;
 
     class RegisterController
     {
@@ -15,11 +16,11 @@
         public function RegisterUser(){
             if($_POST)
             {
-                $mail = $_POST["email"];
-                $userName = $_POST["username"];
-                $password = $_POST["password"];
-                $confirmpassword = $_POST["confirmpassword"];
-                
+                $mail = Utils::CleanInput($_POST["email"]);
+                $userName = Utils::CleanInput($_POST["username"]);
+                $password = Utils::CleanInput($_POST["password"]);
+                $confirmpassword = Utils::CleanInput($_POST["confirmpassword"]);
+
                 if($password !== $confirmpassword)
                 {
                     $registerErrors = "Las contraseñas no coinciden";

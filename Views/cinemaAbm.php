@@ -37,12 +37,12 @@
                                 
                                 <div class="form-group">
                                     <label class="cinema-input-label" for="name">Nombre</label>
-                                    <input type="text" name="name" class="form-control form-control-md cinema-input" placeholder="Nombre" value="<?php if(isset($cinema)) {echo $cinema->getName();}?>" required>
+                                    <input type="text" name="name" class="form-control form-control-md cinema-input" maxlength="<?= MAX_LENGTH_255 ?>" placeholder="Nombre" value="<?php if(isset($cinema)) {echo $cinema->getName();}?>" required>
                                 </div>
                                 
                                 <div class="form-group">
                                     <label class="cinema-input-label" for="address">Direccion</label>
-                                    <input type="text" name="address" class="form-control form-control-md cinema-input" placeholder="Direccion" value="<?php if(isset($cinema)) {echo $cinema->getAddress();}?>" required>
+                                    <input type="text" name="address" class="form-control form-control-md cinema-input" maxlength="<?= MAX_LENGTH_255 ?>" placeholder="Direccion" value="<?php if(isset($cinema)) {echo $cinema->getAddress();}?>" required>
                                 </div>
                                 
                                 <div class="form-group">
@@ -50,8 +50,13 @@
                                     <select name="cityId" id="ciudad" class="form-control form-control-md cinema-input" placeholder="Ciudad">
                                     <?php
                                     foreach ($cities as $city) {
+                                        //Selecciona la opcion que coincide con la ciudad del cine
+                                        $selected = (isset($cinema) && $cinema->getCityId() == $city->getId()) ? " selected" : "";
                                     ?>
-                                        <option value="<?= $city->getId() ?>" <?php (isset($cinema) && $cinema->getCityId() == $city->getId()) ? " selected" : "" ?>><?= $city->getName() ?></option>
+                                        <option value="<?= $city->getId() ?>" 
+                                        <?= $selected ?>>
+                                            <?= $city->getName() ?>
+                                        </option>
                                     <?php
                                     }
                                     ?>
