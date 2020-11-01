@@ -23,6 +23,15 @@ define("DB_NAME", "moviepassdb");
 define("DB_USER", "aplication");
 define("DB_PASS", "aplication");
 
+
+//Custom validations on inputs
+define("MAX_LENGTH_255", "255");
+define("MIN_PRICE_ROOM", "200");
+define("MAX_PRICE_ROOM", "1500");
+
+define("MIN_CAPACITY_ROOM", "10");
+define("MAX_CAPACITY_ROOM", "200");
+
 ?>
 
 

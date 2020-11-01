@@ -12,7 +12,6 @@ class RoomRepository{
     private $connection;
     private $tableName = " ROOM ";
 
-
     function GetAll()
     {
         try
@@ -50,12 +49,13 @@ class RoomRepository{
 
     public function Add(Room $room){
         try {
-        $query= "INSERT INTO ROOM (id, cineId, name, capacity) VALUES(:id, :cineId, :name, :capacity)";
+        $query= "INSERT INTO ROOM (id, cineId, name, capacity, price) VALUES(:id, :cineId, :name, :capacity, :price)";
 
-        $parameters['id']=$room->getId();
-        $parameters['cineId']=$room->getCinemaId();
-        $parameters['name'] =$room->getName();
-        $parameters['capacity'] =$room->getCapacity();
+        $parameters['id'] = $room->getId();
+        $parameters['cineId'] = $room->getCinemaId();
+        $parameters['name'] = $room->getName();
+        $parameters['capacity'] = $room->getCapacity();
+        $parameters['price'] = $room->getPrice();
         
         $this->connection = Connection::getInstance();
         $this->connection->ExecuteNonQuery($query, $parameters);
@@ -84,7 +84,7 @@ class RoomRepository{
             $this->connection->ExecuteNonQuery($sql, $parameters);
             return "Eliminado correctamente";
         }
-        catch(PDOException $e)
+        catch(Exception $e)
         {
             echo $e;
             
@@ -96,10 +96,11 @@ class RoomRepository{
 
         try 
         {
-        $query = "UPDATE ROOM SET name = :name, capacity = :capacity WHERE id = :id AND active = 1";
+        $query = "UPDATE ROOM SET name = :name, capacity = :capacity, PRICE = :price WHERE id = :id AND active = 1";
         $parameters['name'] = $room->getName();
         $parameters['capacity'] = $room->getCapacity();
         $parameters['id'] = $room->getId();
+        $parameters['price'] = $room->getPrice();
     
           $this->connection = Connection::getInstance();
           $this->connection->ExecuteNonQuery($query, $parameters);
@@ -115,22 +116,20 @@ class RoomRepository{
     }
 
     public function getAllRoomsByCinemaId($id) {
-    
         try
-            {
-                $ret = array();
-                $query = "SELECT * FROM " . $this->tableName . " WHERE cineId = " . $id . " AND ACTIVE = 1;";
-                $this->connection = Connection::GetInstance();
-                $queryResult = $this->connection->Execute($query);
+        {
+            $ret = array();
+            $query = "SELECT * FROM " . $this->tableName . " WHERE cineId = " . $id . " AND ACTIVE = 1;";
+            $this->connection = Connection::GetInstance();
+            $queryResult = $this->connection->Execute($query);
 
-                $ret = Room::mapData($queryResult);
-    
-                return $ret;
-            }catch(Exception $ex){
-                throw $ex;
-            }
+            $ret = Room::mapData($queryResult);
 
+            return $ret;
+        }catch(Exception $ex){
+            throw $ex;
         }
+    }
 
 }
 

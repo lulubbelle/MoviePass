@@ -32,11 +32,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="cinema-input-label" for="name">Nombre</label>
-                                    <input type="text" name="name" class="form-control form-control-md cinema-input" placeholder="Nombre" value="<?php if(isset($room)) {echo $room->getName();}?>" required>
+                                    <input type="text" name="name" class="form-control form-control-md cinema-input" placeholder="Nombre" maxlength="<?= MAX_LENGTH_255 ?>" value="<?php if(isset($room)) {echo $room->getName();}?>" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="cinema-input-label" for="capacity">Capacidad</label>
-                                    <input type="number" name="capacity" class="form-control form-control-md cinema-input" placeholder="Capacidad" value="<?php if(isset($room)) {echo $room->getCapacity();} ?>" required>
+                                    <input type="number" name="capacity" class="form-control form-control-md cinema-input" placeholder="Capacidad" min="<?= MIN_CAPACITY_ROOM ?>" max="<?= MAX_CAPACITY_ROOM ?>" value="<?php if(isset($room)) {echo $room->getCapacity();} ?>" required>
+                                </div>    
+                                <div class="form-group">
+                                    <label class="cinema-input-label" for="price">Precio</label>
+                                    <input type="number" name="price" class="form-control form-control-md cinema-input" min="<?= MIN_PRICE_ROOM ?>" max="<?= MAX_PRICE_ROOM ?>" placeholder="Precio" value="<?php if(isset($room)) {echo $room->getPrice();} ?>" required>
                                 </div>    
                                 <div class="form-group" style="display:none;">
                                     <input type="number" name="cinemaId" class="form-control form-control-md cinema-input" placeholder="cinemaId" value="<?php if(isset($room)) {echo $room->getCinemaId();}else { echo $cineId; } ?>">

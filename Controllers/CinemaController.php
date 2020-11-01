@@ -65,9 +65,9 @@
             Utils::CheckAdmin();
             if($_POST)
             {
-                $name = $_POST["name"];
-                $address = $_POST["address"];
-                $cityId = $_POST["cityId"];
+                $name = Utils::CleanInput($_POST["name"]);
+                $address = Utils::CleanInput($_POST["address"]);
+                $cityId = Utils::CleanInput($_POST["cityId"]);
 
                 $cinema = new Cinema();
                 $cinema->setName($name);
@@ -125,11 +125,11 @@
             Utils::CheckAdmin();
             if($_POST){
 
-                $cinemaId = $_POST["id"];
-                $active = $_POST["active"];
-                $nombre = $_POST["name"];
-                $direccion = $_POST["address"];
-                $cityId = $_POST["cityId"];
+                $cinemaId = Utils::CleanInput($_POST["id"]);
+                $active = Utils::CleanInput($_POST["active"]);
+                $nombre = Utils::CleanInput($_POST["name"]);
+                $direccion = Utils::CleanInput($_POST["address"]);
+                $cityId = Utils::CleanInput($_POST["cityId"]);
 
                 $cinema = new Cinema();
                 $cinema->setId($cinemaId);
@@ -180,14 +180,16 @@
 
             if($_POST)
             {
-                $cinemaId = $_POST["cinemaId"];
-                $name = $_POST["name"];
-                $capacity = $_POST["capacity"];
+                $cinemaId = Utils::CleanInput($_POST["cinemaId"]);
+                $name = Utils::CleanInput($_POST["name"]);
+                $capacity = Utils::CleanInput($_POST["capacity"]);
+                $price = Utils::CleanInput($_POST["price"]);
 
                 $room = new Room();
                 $room->setCinemaId($cinemaId);            
                 $room->setName($name);
                 $room->setCapacity($capacity);
+                $room->setPrice($price);
 
                 $roomRepo = new RoomRepository();
 
@@ -221,16 +223,18 @@
             Utils::CheckAdmin();
             if($_POST){
 
-                $id = $_POST["id"];
-                $capacity = $_POST["capacity"];
-                $name = $_POST["name"];
-                $cinemaId = $_POST["cinemaId"];
+                $id = Utils::CleanInput($_POST["id"]);
+                $capacity = Utils::CleanInput($_POST["capacity"]);
+                $name = Utils::CleanInput($_POST["name"]);
+                $price = Utils::CleanInput($_POST["price"]);
+                $cinemaId = Utils::CleanInput($_POST["cinemaId"]);
 
                 $room = new Room();
                 $room->setId($id); 
                 $room->setCinemaId($cinemaId);        
                 $room->setName($name);
                 $room->setCapacity($capacity);
+                $room->setPrice($price);
 
                 $roomRepo = new RoomRepository();
 

@@ -51,6 +51,8 @@
                                     <h3>Nombre: <?= $key->getName() ?></h3>
                                     <br/>
                                     <h3>Capacidad: <?= $key->getCapacity() ?></h3>
+                                    <br/>
+                                    <h3>Precio: $<?= $key->getPrice() ?></h3>
                                 </div>
                                 <div class="column-2">
                                     <a type="button" class="btn btn-danger btn-abm-cinema" href="<?= FRONT_ROOT ?>Cinema/DeleteRoom?id=<?=$key->getId()?>">

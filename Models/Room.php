@@ -8,6 +8,7 @@ class Room {
     private $cinemaId;
     private $name;
     private $capacity;
+    private $price;
     private $active;
 
     public function getId()
@@ -58,6 +59,18 @@ class Room {
         return $this;
     }
 
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
     public function getActive()
     {
         return $this->active;
@@ -74,7 +87,6 @@ class Room {
 
         $value = is_array($value) ? $value : [];
    
-        
         $resp = array_map(function($p){
             
             $room = new Room();
@@ -83,10 +95,11 @@ class Room {
             $room->setName($p['name']);
             $room->setCapacity($p['capacity']);
             $room->setActive($p['active']);
+            $room->setPrice($p['PRICE']);
             
             return $room;
         }, $value);
-        
+
         if($resp != null){
             //return count($resp) > 1 ? $resp : $resp[0];
             return $resp;

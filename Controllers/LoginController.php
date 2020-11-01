@@ -2,6 +2,7 @@
     namespace Controllers;
 
     use DAO\UserRepository as UserRepository;
+    use Utils\Utils as Utils;
 
     class LoginController
     {
@@ -14,8 +15,8 @@
         public function CheckLogin()
         {
             if($_POST){
-                $password = $_POST["password"];
-                $username = $_POST["email"];
+                $password = Utils::CleanInput($_POST["password"]);
+                $username = Utils::CleanInput($_POST["email"]);
 
                 $userRepo = new UserRepository();
                 $user = $userRepo->GetUserByMail($username);
@@ -39,6 +40,11 @@
                 }
                 
             }
+        }
+
+        public function CloseSession(){
+            \session_destroy();
+            $this->Index();
         }
 
     }
