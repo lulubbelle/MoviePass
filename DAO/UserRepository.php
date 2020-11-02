@@ -4,98 +4,136 @@ namespace DAO;
 
 //use Interfaces\IUserRepository as IUserRepository;
 use Models\User as User;
+use DAO\Connection as Connection;
+use \Exception as Exception;
 
 //class UserRepository extends IUserRepository{
 class UserRepository {
-    private $fileName = array();
-    private $data = array();
 
-    function __construct(){
-        $this->fileName = DATA_PATH."Users.json";
-    }
+    private $connection;
+    private $tableName = " user ";
 
-    public function getFileName()
+    public function __construct()
     {
-        return $this->fileName;
+        $this->connection = null;
     }
 
-    public function getAll(){
-        $this->RetrieveData();
-        return $this->data;
-    }
-
-    public function Add(User $user){
-        $this->RetrieveData();
-        
-        foreach($this->data as $value){
-            if($user->getMail() == $value->getMail()){
-                return "Ya existe un usuario registrado con el email indicado.";
-            }
+    public function Add($user)
+    {
+    	try {
+		$query = "INSERT INTO USER (id, mail, username, password, rolId) VALUES (:id, :mail, :username, :password, :rolId)";
+        $parameters['id'] = $user->getId();
+        $parameters['mail'] = $user->getMail();
+        $parameters['username'] = $user->getUserName();
+        $parameters['password'] = $user->getPassword();
+        $parameters['rolId'] = $user->getRolId();
+       
+		
+            $this->connection = Connection::getInstance();
+            $this->connection->ExecuteNonQuery($query, $parameters);
+            return "Usuario creado con éxito!";
         }
+        catch(Exception $e) {
+            return "Ha ocurrido un error :( " . $e->getMessage();
+        }
+	}
 
-        $user->setId($this->GetLastId() + 1);
+    public function GetAll()
+    {
+        try
+        {
+        $query = "SELECT * FROM " . $this->tableName;
+        $this->connection = Connection::GetInstance();
+        $queryResult = $this->connection->Execute($query);
 
-        array_push($this->data,$user);
-        $this->SaveData();  
+        $ret = User::mapData($queryResult);
+        return $ret;
+        }
+        catch(Exception $e)
+        {
+			throw $e;
+		}
+
+    }
+
+    public function GetUserByMail($mail)
+    {
+        try
+        {
+        
+        $query = "SELECT * FROM " . $this->tableName . " WHERE mail = :mail;";
+        $parameters['mail'] = $mail;
+        
+        $this->connection = Connection::GetInstance();
+        $resultSet = $this->connection->Execute($query, $parameters);
+        
+        $ret = User::mapData($resultSet);
+        
+        return $ret[0];
+        
+        }
+        catch(Exception $e)
+        {
+            echo '<script>';
+            echo 'console.log("Error en base de datos. Archivo: UserRepository.php")';
+            echo '</script>';
+        }
+    }
+
+    public function GetById($id)
+    {
+        try
+        {
+            $ret = array();
+            $query = "SELECT * FROM " . $this->tableName . " WHERE ID = " . $id . ";";
+            $this->connection = Connection::GetInstance();
+            $queryResult = $this->connection->Execute($query);
+
+            $ret = User::mapData($queryResult);
+            return $ret[0];
+        }catch(Exception $e){
+            throw $e;
+            echo '<script>';
+            echo 'console.log("Error en base de datos. Archivo: userdao.php")';
+            echo '</script>';
+        }
+    }
+
+
+    public function Update($id,$password)
+    {
+    try
+      {
+      $query = "UPDATE USER SET password = :password  WHERE id = :id";
+      $parameters['id'] = $id;
+      $parameters['password'] = $password;
+      
+        $this->connection = Connection::getInstance();
+        $this->connection->ExecuteNonQuery($query, $parameters);
+        return "Registro modificado correctamente";
+      }
+      catch(Exception $e)
+      {
+        return "Ha ocurrido un error :( " . $e->getMessage();
+      }
     }
     
-    public function GetLastId(){
-        $this->RetrieveData();
+
+    public function Delete($mail)
+    {
+        try
+        {
+        $query = "DELETE FROM USER WHERE mail = :mail";
+        $parameters['mail'] = $mail;
         
-        $max = 0;
-        foreach($this->data as $value){
-            if($value->getId() > $max){
-                $max = $value->getId();
-            }
+            $this->connection = Connection::getInstance();
+            return $this->connection->ExecuteNonQuery($query, $parameters);
         }
-        return $max;
-    }
-
-    public function GetUserByMail($mail){
-        $this->RetrieveData();
-        
-        foreach($this->data as $value){
-            if($value->getmail() === $mail){
-                return $value;
-            }
+        catch(Exception $e)
+        {
+            echo $e;
         }
-    }
-
-    private function RetrieveData(){
-        $this->data = array();
-        if(file_exists($this->fileName)){
-
-            $fileContent = file_get_contents($this->fileName);
-            $arrayToDecode = ($fileContent) ? json_decode($fileContent, true) : array();
-
-            foreach($arrayToDecode as $key => $value){
-                $user = new User();
-                $user->setId($value["id"]);
-                $user->setMail($value["mail"]);
-                $user->setUserName($value["userName"]);
-                $user->setPassword($value["password"]);
-                $user->setRolId($value["rolId"]);
-
-                array_push($this->data, $user);
-            }
-        }
-    }
-
-    private function SaveData(){
-        $arrayToEncode = array();
-        
-        foreach($this->data as $user){
-            $values["id"] = $user->getId();
-            $values["mail"] = $user->getMail();
-            $values["userName"] = $user->getUserName();
-            $values["password"] = $user->getPassword();
-            $values["rolId"] = $user->getRolId();
-            array_push($arrayToEncode, $values);
-        }
-
-        $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
-        file_put_contents($this->fileName, $jsonContent);
-    }
+   }
 
 }
 

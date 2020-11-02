@@ -34,7 +34,8 @@ class RoomRepository{
         try
         {
             $ret = array();
-            $query = "SELECT * FROM " . $this->tableName . " WHERE ID = " . $id . ";";
+            $query = "SELECT * FROM " . $this->tableName . " WHERE ID = :id ;";
+            $parameters['id'] = $id;
             $this->connection = Connection::GetInstance();
             $queryResult = $this->connection->Execute($query);
 
