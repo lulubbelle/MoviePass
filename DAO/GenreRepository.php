@@ -5,38 +5,28 @@ namespace DAO;
 use Models\Genre as Genre;
 
 class GenreRepository{
+    private $connection;
+    private $tableName = " GENRE ";
 
-    private $fileName = array();
-    private $data = array();
-
-    function __construct(){
-        $this->fileName = DATA_PATH."Genres.json";
-    }
-
-    public function getFileName()
+    public function __construct()
     {
-        return $this->fileName;
+        $this->connection = null;
     }
 
-    public function getAll(){
-        $this->RetrieveData();
-        return $this->data;
-    }
+    function GetAll()
+    {
+        try
+        {
+            $ret = array();
+            $query = "SELECT * FROM " . $this->tableName;
+            $this->connection = Connection::GetInstance();
+            $queryResult = $this->connection->Execute($query);
+            
+            $ret = Genre::mapData($queryResult);
 
-    private function RetrieveData(){
-        $this->data = array();
-        if(file_exists($this->fileName)){
-
-            $fileContent = file_get_contents($this->fileName);
-            $arrayToDecode = ($fileContent) ? json_decode($fileContent, true) : array();
-
-            foreach($arrayToDecode as $key => $value){
-                $genre = new Genre();
-                $genre->setId($value["id"]);
-                $genre->setName($value["name"]);
-
-                array_push($this->data, $genre);
-            }
+            return $ret;
+        }catch(Exception $ex){
+            throw $ex;
         }
     }
 }
