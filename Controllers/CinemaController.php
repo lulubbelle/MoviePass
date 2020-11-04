@@ -156,9 +156,11 @@
                 $cineId = $parameterCall ? $cinemaId : $_GET["cineId"];
                 
                 $roomRepo = new RoomRepository();
+                $cineRepo = new CinemaRepository();
 
                 $rooms = $roomRepo->getAllRoomsByCinemaId($cineId);
-                
+                $cinema = $cineRepo->GetById($cineId);
+
                 require_once(VIEWS_PATH."roomList.php");
             }
         }  

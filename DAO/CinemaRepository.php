@@ -43,6 +43,7 @@ class CinemaRepository implements ICinemaRepository{
         {
             $ret = array();
             $query = "SELECT * FROM " . $this->tableName . " WHERE ID = " . $id . ";";
+            
             $this->connection = Connection::GetInstance();
             $queryResult = $this->connection->Execute($query);
 

@@ -1,37 +1,9 @@
 [
     {
         "id": 1,
-        "mail": "nachote98@gmail.com",
-        "userName": "nacho",
-        "password": "$2y$10$R5fQt4OCyHOCHdq7t0ZqRObXn4ay5GjVRFm11z0or1VPiLQmPyKYO",
-        "rolId": 1
-    },
-    {
-        "id": 2,
         "mail": "mail@mail.com",
-        "userName": "User",
-        "password": "$2y$10$Gz8U0LCynTk6vhn5koY.PuILRyFkxRka6BnTJReL.SUN3LDSdKq4u",
-        "rolId": 1
-    },
-    {
-        "id": 3,
-        "mail": "mail2@mail.com",
-        "userName": "User",
-        "password": "$2y$10$x9eNfbQJ6KdhVlBWIaoM2uw52iuFcEw1VSlsLuEGYorHRhcMD.41C",
-        "rolId": 2
-    },
-    {
-        "id": 4,
-        "mail": "luli.icasatti@gmail.com",
-        "userName": "lulu",
-        "password": "$2y$10$U0edC4N5MbtgmYQJO3Qv2e3z8Xd27GQiBpoLe.AR0Jv\/O8mxBsjfu",
-        "rolId": 2
-    },
-    {
-        "id": 5,
-        "mail": "mail34@mail.com",
-        "userName": "&lt;script&gt; alert('xss') &lt;\/alert&gt;",
-        "password": "$2y$10$v\/mUM9dNfyZCURphEP68I.ahiBsiiXtAyCDVHs1WKrjTYW4b.l3ES",
+        "userName": "UserAdmin",
+        "password": "$2y$10$\/CgkGBRtqeJUAh27hX6Ysu5YdjNkXjxZfcutIVoStw2LBnEFzWz02",
         "rolId": 2
     }
 ]
