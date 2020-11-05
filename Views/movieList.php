@@ -39,16 +39,16 @@
                 <div class="col-md-12">
                 <!--Listado de Peliculas-->
                 <div class="row">
-                    <?php foreach($movieList as $movies) { ?>   
+                    <?php foreach($movieList as $movie) { ?>   
                         <div class="col-md-3">
                             <div class="flip-card movieBoxes">
                                 <div class="flip-card-inner">
                                     <div class="flip-card-front">
-                                        <img src= "https://image.tmdb.org/t/p/w500<?php echo $movies->getImgLink()?>" alt="Avatar" style="width:100%;height:100%;">
+                                        <img src= "https://image.tmdb.org/t/p/w500<?php echo $movie->getImgLink()?>" alt="Avatar" style="width:100%;height:100%;">
                                     </div>
                                     <div class="flip-card-back">
-                                        <h1 class="titleMovie"> <?php echo $movies->getTitle(); ?> </h1> 
-                                        <a id="add" class="button" href = "<?php echo FRONT_ROOT ?>Movies/AddMovieToDatabase?IdMovieIMDB=<?php echo $movies->getIdApi(); ?>">Agregar</a>
+                                        <h1 class="titleMovie"> <?php echo $movie->getTitle(); ?> </h1> 
+                                        <a id="add" class="button" href = "<?php echo FRONT_ROOT ?>Movies/ShowAddShowView?movieId=<?php echo $movie->getId(); ?>">Agregar</a>
                                         <!-- <a id="edit" class="button" href = "#">Editar</a>
                                         <a id="remove" class="button" href = "#">Eliminar</a> -->
                                     </div>
