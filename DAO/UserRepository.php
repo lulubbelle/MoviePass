@@ -33,8 +33,12 @@ class UserRepository {
             $this->connection->ExecuteNonQuery($query, $parameters);
             return "Usuario creado con éxito!";
         }
-        catch(Exception $e) {
-            return "Ha ocurrido un error :( " . $e->getMessage();
+        catch(Exception $ex) {
+            $errorMsg = $ex->getMessage();
+            if(stripos($errorMsg, USER_UNIQUE_MAIL_IX) != false ){
+                return "Ya existe un usuario creado con el mail indicado.";
+            }else
+                return "Ha ocurrido un error :( " . $errorMsg;
         }
 	}
 
@@ -66,17 +70,15 @@ class UserRepository {
         
         $this->connection = Connection::GetInstance();
         $resultSet = $this->connection->Execute($query, $parameters);
-        
+
         $ret = User::mapData($resultSet);
         
-        return $ret[0];
+        return count($ret) > 0 ? $ret[0] : null;
         
         }
         catch(Exception $e)
         {
-            echo '<script>';
-            echo 'console.log("Error en base de datos. Archivo: UserRepository.php")';
-            echo '</script>';
+            return "Ha ocurrido un error :( " . $e->getMessage();
         }
     }
 
@@ -92,10 +94,7 @@ class UserRepository {
             $ret = User::mapData($queryResult);
             return $ret[0];
         }catch(Exception $e){
-            throw $e;
-            echo '<script>';
-            echo 'console.log("Error en base de datos. Archivo: userdao.php")';
-            echo '</script>';
+            return "Ha ocurrido un error :( " . $e->getMessage();
         }
     }
 

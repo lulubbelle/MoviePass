@@ -1,9 +1,0 @@
-[
-    {
-        "id": 1,
-        "mail": "mail@mail.com",
-        "userName": "UserAdmin",
-        "password": "$2y$10$\/CgkGBRtqeJUAh27hX6Ysu5YdjNkXjxZfcutIVoStw2LBnEFzWz02",
-        "rolId": 2
-    }
-]

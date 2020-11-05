@@ -9,12 +9,6 @@ class Movie{
     private $title;
     private $imgLink;
     private $genres;
-    private $descripcion;
-    private $releaseDate;
-    private $director;
-    private $country;
-    private $clasificacion;
-    private $isPlaying;
 
     public function getId()
     {
@@ -76,79 +70,31 @@ class Movie{
         return $this;
     }
 
-    public function getDescripcion()
-    {
-        return $this->descripcion;
+    
+    public static function mapData($value) {
+
+        $value = is_array($value) ? $value : [];
+   
+        $resp = array_map(function($p){
+            
+            $movie = new Movie();
+            $movie->setId($p["ID"]);
+            $movie->setIdApi($p["API_ID"]);
+            $movie->setTitle($p["TITLE"]);
+            $movie->setImgLink($p["POSTER_PATH"]);
+    
+            
+            return $movie;
+        }, $value);
+
+        if($resp != null){
+            //return count($resp) > 1 ? $resp : $resp[0];
+            return $resp;
+        }
+        else
+        return array();
     }
 
-    public function setDescripcion($descripcion)
-    {
-        $this->descripcion = $descripcion;
-
-        return $this;
-    }
-
-    public function getReleaseDate()
-    {
-        return $this->releaseDate;
-    }
-
-
-    public function setReleaseDate($releaseDate)
-    {
-        $this->releaseDate = $releaseDate;
-
-        return $this;
-    }
-
-
-    public function getDirector()
-    {
-        return $this->director;
-    }
-
-    public function setDirector($director)
-    {
-        $this->director = $director;
-
-        return $this;
-    }
-
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-    public function setCountry($country)
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    public function getClasificacion()
-    {
-        return $this->clasificacion;
-    }
-
-    public function setClasificacion($clasificacion)
-    {
-        $this->clasificacion = $clasificacion;
-
-        return $this;
-    }
-
-    public function getIsPlaying()
-    {
-        return $this->isPlaying;
-    }
-
-    public function setIsPlaying($isPlaying)
-    {
-        $this->isPlaying = $isPlaying;
-
-        return $this;
-    }
 }
 
 ?>

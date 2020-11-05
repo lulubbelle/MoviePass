@@ -6,35 +6,11 @@
     <div id="box" class="row justify-content-center" style="background-color: #242424;">
         <!-- Inicio Listado de Estrenos -->
         <div class="col-md-12">
-        <form action="<?= FRONT_ROOT ?>ApiMovie/MovieSearch" method="POST" class="cinema-form">
+        <form action="<?= FRONT_ROOT ?>Movie/MovieSearch" method="POST" class="cinema-form">
             <div class="row align-items-center">
                 <div class="col-md-3">
                     <h1 class="basic-font cinema-view-title">Agregar Peliculas</h1>                
                 </div>
-                <!-- <div class="col-md-2">
-                    <div class="form-content">
-                        <div class="form-group">
-                            <select name="city" id="citys" class="form-control form-control-md cinema-input" placeholder="Ciudad">
-                                    <option value="Marpla">Marpla</option>
-                                    <option value="Batan">Batan</option>
-                                    <option value="Miramar">Miramar</option>
-                                    <option value="Villa Gessel">Villa Gessel</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-content">
-                        <div class="form-group">
-                        <select name="cinema" id="cinema" class="form-control form-control-md cinema-input" placeholder="Cine">
-                                <option value="volvo">Ambassador</option>
-                                <option value="saab">Los Gallegos</option>
-                                <option value="mercedes">Aldrey</option>
-                                <option value="audi">Cines del Paseo</option>
-                            </select>
-                        </div>
-                    </div>
-                </div> -->
                 <div class="col-md-4">
                     <div class="form-content">
                         <div class="form-group">
@@ -72,7 +48,6 @@
                                     </div>
                                     <div class="flip-card-back">
                                         <h1 class="titleMovie"> <?php echo $movies->getTitle(); ?> </h1> 
-                                        <p><?php echo $movies->getReleaseDate(); ?></p> 
                                         <a id="add" class="button" href = "<?php echo FRONT_ROOT ?>Movies/AddMovieToDatabase?IdMovieIMDB=<?php echo $movies->getIdApi(); ?>">Agregar</a>
                                         <!-- <a id="edit" class="button" href = "#">Editar</a>
                                         <a id="remove" class="button" href = "#">Eliminar</a> -->
