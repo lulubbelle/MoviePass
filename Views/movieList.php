@@ -48,7 +48,7 @@
                                     </div>
                                     <div class="flip-card-back">
                                         <h1 class="titleMovie"> <?php echo $movie->getTitle(); ?> </h1> 
-                                        <a id="add" class="button" href = "<?php echo FRONT_ROOT ?>Movies/ShowAddShowView?movieId=<?php echo $movie->getId(); ?>">Agregar</a>
+                                        <a id="add" class="button" href = "<?php echo FRONT_ROOT ?>Show/ShowAddShowView?movieId=<?php echo $movie->getId(); ?>">Agregar</a>
                                         <!-- <a id="edit" class="button" href = "#">Editar</a>
                                         <a id="remove" class="button" href = "#">Eliminar</a> -->
                                     </div>

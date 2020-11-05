@@ -7,13 +7,18 @@ use Utils\Utils as Utils;
 class ShowController{
 
     public function Index(){
-        include_once(VIEWS_PATH."workInProgress.php");
+
+        if($_GET){
+
+        }
+
+        include_once(VIEWS_PATH."addShow.php");
     }
 
     public function ShowAddShowView(){
-        
+
         if($_GET){
-            $movieId = Utils::CleanInput($_GET['movieId']);
+
         }
 
         include_once(VIEWS_PATH."addShow.php");
