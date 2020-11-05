@@ -9,45 +9,74 @@ use \Exception as Exception;
 
 class MovieRepository{
 
+    //BBDD
     private $connection;
-    private $tableName = "MOVIE";
+    private $tableName = " MOVIE ";
     
+    //Api
     private $data;
 
+    function GetAll()
+    {
+        try
+        {
+            $ret = array();
+            $query = "SELECT * FROM " . $this->tableName . " WHERE ACTIVE = 1";
+            $this->connection = Connection::GetInstance();
+            $queryResult = $this->connection->Execute($query);
+            
+            $ret = Movie::mapData($queryResult);
+
+            return $ret;
+        }catch(Exception $ex){
+            throw $ex;
+        }
+    }
+
+    function GetById($id)
+    {
+        try
+        {
+            $ret = array();
+            $query = "SELECT * FROM " . $this->tableName . " WHERE ID = :id ;";
+            $parameters['id'] = $id;
+            $this->connection = Connection::GetInstance();
+            $queryResult = $this->connection->Execute($query);
+
+            $ret = Movie::mapData($queryResult);
+
+            return $ret[0];
+        }catch(Exception $ex){
+            throw $ex;
+        }
+    }
+
+    function GetByApiId($id)
+    {
+        try
+        {
+            $ret = array();
+            $query = "SELECT * FROM " . $this->tableName . " WHERE API_ID = :id ;";
+            $parameters['id'] = $id;
+            $this->connection = Connection::GetInstance();
+            $queryResult = $this->connection->Execute($query, $parameters);
+
+            $ret = Movie::mapData($queryResult);
+
+            return $ret[0];
+        }catch(Exception $ex){
+            throw $ex;
+        }
+    }
     public function GetAllFromApi(){
         $this->RetrieveDataFromApi();
         return $this->data;
     }
 
-    public function GetAllFromDb(){
-        $ret = array();
-        $query = "SELECT * FROM " . $this->tableName;
-        $this->connection = Connection::GetInstance();
-        $queryResult = $this->connection->Execute($query);
-
-        //TODO: Reemplazar con mapper
-        foreach ($queryResult as $row)
-        {
-            $movie = new Movie();
-            $movie->setId($row["ID"]);
-            $movie->setIdApi($row["ID_API"]);
-            $movie->setTitle($row["TITLE"]);
-            $movie->setImgLink($row["IMG_PATH"]);
-            $movie->setDescripcion($row["DESCRIPTION"]);
-            $movie->setReleaseDate($row["RELEASE_DATE"]);
-            $movie->setDirector($row["DIRECTOR"]);
-            $movie->setCountry($row["COUNTRY_ID"]);
-
-            array_push($ret, $movie);
-        }
-
-        return $ret;
-    }
-
     private function RetrieveDataFromApi(){
         $this->data = array();
 
-        $url = API_MAIN_LINK."movie/now_playing?api_key=".API_KEY;
+        $url = API_MAIN_LINK.API_NOW_PLAYING.API_KEY;
 
         $data = file_get_contents($url);
 
@@ -60,16 +89,42 @@ class MovieRepository{
             $movie->setTitle($value["title"]);
             $movie->setImgLink($value["poster_path"]);
             $movie->setGenres($value["genre_ids"]);
-            // $movie->setDescripcion($value["poster_path"]);
 
             array_push($this->data, $movie);
         }
+        
+        //Utilicé este metodo para hacer el insert en la BBDD para no hacerlo a mano
+        //Lo dejo comentado por las dudas que se necesite hacer lo mismo en un futuro
+
+        // foreach($this->data as $movie){
+            
+        //     $query= "INSERT INTO " . $this->tableName . " (TITLE, POSTER_PATH, API_ID) VALUES(:title, :poster_path, :api_id)";
+
+        //     $parameters['title'] = $movie->getTitle();
+        //     $parameters['poster_path'] = $movie->getImgLink();
+        //     $parameters['api_id'] = $movie->getIdApi();
+            
+        //     $this->connection = Connection::getInstance();
+        //     $this->connection->ExecuteNonQuery($query, $parameters);
+            
+        //     $movieBBDD = $this->GetByApiId($movie->getIdApi());
+            
+        //     foreach($movie->getGenres() as $value){
+        //         $genreQuery = "INSERT INTO MOVIE_GENRE (MOVIE_ID, GENRE_ID) VALUES(:movieId, :genreId)";
+        //         $genreParameters['movieId'] = $movieBBDD->getId();
+        //         $genreParameters['genreId'] = $value;
+                
+        //         $this->connection = Connection::getInstance();
+        //         $this->connection->ExecuteNonQuery($genreQuery, $genreParameters);
+                
+        //     }
+        // }
     }
     
-    public function GetAllByGenre($genreId){
+    public function GetAllByGenreFromApi($genreId){
         $this->data = array();
 
-        $url = API_MAIN_LINK."movie/now_playing?api_key=".API_KEY;
+        $url = API_MAIN_LINK.API_NOW_PLAYING.API_KEY;
 
         $data = file_get_contents($url);
 
@@ -90,6 +145,31 @@ class MovieRepository{
         }
         return $this->data;
     }
+
+    public function GetAllByGenre($genreId){
+
+        if($genreId == 0) { return $this->GetAll(); }
+
+        try
+        {
+            $ret = array();
+            $query = "SELECT * FROM MOVIE MO" . 
+                        " INNER JOIN MOVIE_GENRE MG ON MG.MOVIE_ID = MO.ID" . 
+                        " WHERE MG.GENRE_ID = :genreId";
+            $parameters['genreId'] = $genreId;
+
+            $this->connection = Connection::GetInstance();
+            $queryResult = $this->connection->Execute($query, $parameters);
+            
+            $ret = Movie::mapData($queryResult);
+
+            return $ret;
+        }catch(Exception $ex){
+            throw $ex;
+        }
+    }
+
+
 }
 
 

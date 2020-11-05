@@ -50,7 +50,7 @@ class RoomRepository{
 
     public function Add(Room $room){
         try {
-        $query= "INSERT INTO ROOM (id, cineId, name, capacity, price) VALUES(:id, :cineId, :name, :capacity, :price)";
+        $query= "INSERT INTO " . $this->tableName . " (id, cineId, name, capacity, price) VALUES(:id, :cineId, :name, :capacity, :price)";
 
         $parameters['id'] = $room->getId();
         $parameters['cineId'] = $room->getCinemaId();

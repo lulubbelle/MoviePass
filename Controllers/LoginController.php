@@ -24,6 +24,7 @@
                 if(empty($user) || !isset($user)){
                     $errorLogin = "Los datos ingresados no son validos.";
                     require_once(VIEWS_PATH."login.php");
+                    exit;
                 }
                 $valid = \password_verify($password, $user->getPassword());
 
