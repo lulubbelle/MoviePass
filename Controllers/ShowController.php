@@ -20,7 +20,7 @@ class ShowController{
     public function ShowAddShowView(){
 
         if($_GET){
-            $movieId = Utils::CleanInput($_GET['movieId']);
+            $movieId = Utils::CleanInput($_GET['movieId']);    
             
             $movieRepo = new MovieRepository();
             $movie = $movieRepo->GetById($movieId);
@@ -35,6 +35,7 @@ class ShowController{
 
     public function TestAjax(){
         $param = $_REQUEST["req"];
+        re
     }
 
 
