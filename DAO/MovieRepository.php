@@ -41,7 +41,7 @@ class MovieRepository{
             $query = "SELECT * FROM " . $this->tableName . " WHERE ID = :id ;";
             $parameters['id'] = $id;
             $this->connection = Connection::GetInstance();
-            $queryResult = $this->connection->Execute($query);
+            $queryResult = $this->connection->Execute($query, $parameters);
 
             $ret = Movie::mapData($queryResult);
 
@@ -68,6 +68,7 @@ class MovieRepository{
             throw $ex;
         }
     }
+    
     public function GetAllFromApi(){
         $this->RetrieveDataFromApi();
         return $this->data;

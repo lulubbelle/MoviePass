@@ -8,7 +8,8 @@
         <div class="col-md-12">
             <div class="row align-items-center">
                 <div class="col-md-3">
-                    <h1 class="basic-font cinema-view-title">Agregar Funcion</h1>                
+                    <h1 class="basic-font cinema-view-title">Agregar Funcion</h1>       
+                    <a href="#" onclick="testAjax('<?= FRONT_ROOT?>Show/TestAjax')">MNBNMN</a>         
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -51,26 +52,14 @@
                                 </div>
                                 <!-- Cines -->
                                 <div class="form-group">
-                                    <label class="cinema-input-label" for="cityId">Ciudad</label>
+                                    <label class="cinema-input-label" for="cityId">Cine</label>
                                     <select name="cityId" id="ciudad" class="form-control form-control-md cinema-input" placeholder="Ciudad">
-                                    <?php
-                                    foreach ($cities as $city) {
-                                        //Selecciona la opcion que coincide con la ciudad del cine
-                                        $selected = (isset($cinema) && $cinema->getCityId() == $city->getId()) ? " selected" : "";
-                                    ?>
-                                        <option value="<?= $city->getId() ?>" 
-                                        <?= $selected ?>>
-                                            <?= $city->getName() ?>
-                                        </option>
-                                    <?php
-                                    }
-                                    ?>
                                     
                                     </select>
                                 </div>
                                 <!-- Salas -->
                                 <div class="form-group">
-                                    <label class="cinema-input-label" for="cityId">Ciudad</label>
+                                    <label class="cinema-input-label" for="cityId">Sala</label>
                                     <select name="cityId" id="ciudad" class="form-control form-control-md cinema-input" placeholder="Ciudad">
                                     <?php
                                     foreach ($cities as $city) {
@@ -109,3 +98,5 @@
         </div>
     </div>
 </div>
+
+<script src="<?= JS_PATH ?>/addShow.js" ></script>
