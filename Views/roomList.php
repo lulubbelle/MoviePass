@@ -11,8 +11,8 @@
                     <h1 class="basic-font cinema-view-title">Cine</h1>                
                 </div>
             </div>
-            <div class="row" style="margin: 3% 3% 0% 3%; border-bottom: 2px solid gray; padding-bottom: 3%;">
-                <div class="col-md-10" style="color:white; font-size: 1.4rem; font-family: 'Bebas Neue', cursive;">
+            <div class="row cinema-header-row">
+                <div class="col-md-10 cinema-header">
         <!--<div class="row cinema-header-row">
                 <div class="col-md-10 cinema-header"> -->
                     Cine: <?= $cinema->getName()?>

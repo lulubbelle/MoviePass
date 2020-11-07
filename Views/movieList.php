@@ -20,7 +20,7 @@
                             ?>
                                     <option value="<?=$genre->getId()?>"><?=$genre->getName()?></option>
                             <?php 
-                            }
+                                }
                             ?>
                         </select>
                         </div>
