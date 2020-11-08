@@ -4,7 +4,7 @@ namespace Controllers;
 use DAO\UserRepository as UserRepository;
 use DAO\UserProfileRepository as UserProfileRepository;
 use Models\User as User;
-use Utils as Utils;
+use Utils\Utils as Utils;
 use Controllers\HomeController as HomeController;
 
 
@@ -35,14 +35,18 @@ class ProfileController{
 
     public function UpdateUser(){
         if ($_POST){
-            $user_name = $_POST['user_name'];
-            $first_name = $_POST['first_name'];
-            $last_name = $_POST['last_name'];
-            $dni = $_POST['dni'];
-            $id = $_POST['user_id'];
+
+            $user_name = Utils::CleanInput($_POST['user_name']);
+            $first_name = Utils::CleanInput($_POST['first_name']);
+            $last_name = Utils::CleanInput($_POST['last_name']);
+            $dni = Utils::CleanInput($_POST['dni']);
+            $id = Utils::CleanInput($_POST['user_id']);
+            $upId = Utils::CleanInput($_POST['user_profile_id']);
             
             $this->userRepository->updateUserName($id, $user_name);
-            $this->userProfileRepository->updateProfileUser($id, $first_name, $last_name, $dni);
+
+            $userProfileRepo = new UserProfileRepository();
+            $userProfileRepo->updateProfileUser($id, $first_name, $last_name, $dni, $upId);
            
             $_SESSION['username'] = $user_name;
             $this->Index();

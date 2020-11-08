@@ -9,12 +9,10 @@ class Movie{
     private $title;
     private $imgLink;
     private $genres;
-    private $descripcion;
-    private $releaseDate;
-    private $director;
-    private $country;
-    private $clasificacion;
-    private $isPlaying;
+    private $description;
+    private $duration;
+    private $budget;
+
 
     public function getId()
     {
@@ -76,79 +74,70 @@ class Movie{
         return $this;
     }
 
-    public function getDescripcion()
+    public function getDescription()
     {
-        return $this->descripcion;
+        return $this->description;
     }
 
-    public function setDescripcion($descripcion)
+    public function setDescription($description)
     {
-        $this->descripcion = $descripcion;
+        $this->description = $description;
 
         return $this;
     }
 
-    public function getReleaseDate()
+    public function getDuration()
     {
-        return $this->releaseDate;
+        return $this->duration;
     }
 
-
-    public function setReleaseDate($releaseDate)
+    public function setDuration($duration)
     {
-        $this->releaseDate = $releaseDate;
+        $this->duration = $duration;
 
         return $this;
     }
 
-
-    public function getDirector()
+    public function getBudget()
     {
-        return $this->director;
+        return $this->budget;
     }
 
-    public function setDirector($director)
+    public function setBudget($budget)
     {
-        $this->director = $director;
+        $this->budget = $budget;
 
         return $this;
     }
 
-    public function getCountry()
-    {
-        return $this->country;
+    
+    public static function mapData($value) {
+
+        $value = is_array($value) ? $value : [];
+   
+        $resp = array_map(function($p){
+            
+            $movie = new Movie();
+            $movie->setId($p["ID"]);
+            $movie->setIdApi($p["API_ID"]);
+            $movie->setTitle($p["TITLE"]);
+            $movie->setImgLink($p["POSTER_PATH"]);
+            $movie->setDescription($p["DESCRIPTION"]);
+            $movie->setDuration($p["DURATION"]);
+            $movie->setBudget($p["BUDGET"]);
+    
+            
+            return $movie;
+        }, $value);
+
+        if($resp != null){
+            //return count($resp) > 1 ? $resp : $resp[0];
+            return $resp;
+        }
+        else
+        return array();
     }
 
-    public function setCountry($country)
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    public function getClasificacion()
-    {
-        return $this->clasificacion;
-    }
-
-    public function setClasificacion($clasificacion)
-    {
-        $this->clasificacion = $clasificacion;
-
-        return $this;
-    }
-
-    public function getIsPlaying()
-    {
-        return $this->isPlaying;
-    }
-
-    public function setIsPlaying($isPlaying)
-    {
-        $this->isPlaying = $isPlaying;
-
-        return $this;
-    }
 }
 
 ?>

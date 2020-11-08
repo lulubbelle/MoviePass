@@ -43,6 +43,7 @@ class CinemaRepository implements ICinemaRepository{
         {
             $ret = array();
             $query = "SELECT * FROM " . $this->tableName . " WHERE ID = " . $id . ";";
+            
             $this->connection = Connection::GetInstance();
             $queryResult = $this->connection->Execute($query);
 
@@ -68,7 +69,7 @@ class CinemaRepository implements ICinemaRepository{
             return $this->connection->ExecuteNonQuery($query, $parameters);
         }catch(Exception $ex){
             $errorMsg = $ex->getMessage();
-            if(stripos($errorMsg, "CINEMA_UNIQUE_IX1") != false ){
+            if(stripos($errorMsg, CINEMA_UNIQUE_ADDRESS_IX) != false ){
                 return "Ya existe un cine en la misma dirección";
             }else
                 return "Ha ocurrido un error :( " . $errorMsg;
@@ -117,7 +118,7 @@ class CinemaRepository implements ICinemaRepository{
         try
         {
             $ret = array();
-            $query = "SELECT * FROM " . $this->tableName . " WHERE CITY_ID = " . $cityId . ";";
+            $query = "SELECT * FROM " . $this->tableName . " WHERE CITY_ID = " . $cityId . " AND ACTIVE = 1;";
             
             $this->connection = Connection::GetInstance();
             $queryResult = $this->connection->Execute($query);

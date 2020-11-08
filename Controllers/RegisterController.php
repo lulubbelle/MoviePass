@@ -32,11 +32,19 @@
                     require_once(VIEWS_PATH."Register.php");
                 }
 
-
+                $userRepo = new UserRepository();
+                // $user = $userRepo->GetUserByMail($mail);
+                
+                // if(empty($user) || !isset($user)){
+                //     $errorLogin = "Ya existe un usuario registrado con el mail indicado.";
+                //     require_once(VIEWS_PATH."Register.php");
+                //     exit;
+                // }
+                
                 //Hasheamos la password
                 $password =  password_hash($_POST["password"], PASSWORD_DEFAULT);
 
-                $userRepo = new UserRepository();
+                
                 $user = new User();
                 $user->setMail($mail);
                 $user->setUserName($userName);

@@ -20,7 +20,7 @@
                       <a class="nav-link" href="';echo FRONT_ROOT. 'Movies/ShowMovies">Cartelera</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="';echo FRONT_ROOT. 'ApiMovie" tabindex="-1" aria-disabled="true">Agregar Pelicula</a>
+                      <a class="nav-link" href="';echo FRONT_ROOT. 'Movie" tabindex="-1" aria-disabled="true">Agregar Pelicula</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="';echo FRONT_ROOT. 'Cinema" tabindex="-1" aria-disabled="true">Cines</a>
