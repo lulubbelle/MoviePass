@@ -85,13 +85,20 @@ class MovieRepository{
         $decoded = json_decode($data, true);
         foreach($decoded["results"] as $value){
             $movie = new Movie();
-            
+
             $movie->setIdApi($value["id"]);
             $movie->setTitle($value["title"]);
             $movie->setImgLink($value["poster_path"]);
             $movie->setGenres($value["genre_ids"]);
             $movie->setDescription($value["overview"]);
 
+            $url = "http://api.themoviedb.org/3/movie/". $value["id"] . "?api_key=601a788e05e35017d437dd9ad9c368c0";
+            $details = file_get_contents($url);
+            $detailsDecoded = json_decode($details, true);
+
+            $movie->setDuration($detailsDecoded["runtime"]);
+            $movie->setBudget($detailsDecoded["budget"]);
+            
             array_push($this->data, $movie);
         }
         
@@ -100,13 +107,15 @@ class MovieRepository{
 
         // foreach($this->data as $movie){
             
-        //     $query= "INSERT INTO " . $this->tableName . " (TITLE, POSTER_PATH, API_ID, DESCRIPTION) VALUES(:title, :poster_path, :api_id, :description)";
+        //     $query= "INSERT INTO " . $this->tableName . " (TITLE, POSTER_PATH, API_ID, DESCRIPTION, DURATION, BUDGET) VALUES(:title, :poster_path, :api_id, :description, :duration, :budget)";
 
         //     $parameters['title'] = $movie->getTitle();
         //     $parameters['poster_path'] = $movie->getImgLink();
         //     $parameters['api_id'] = $movie->getIdApi();
         //     $parameters['description'] = $movie->getDescription();
-            
+        //     $parameters['duration'] = $movie->getDuration();
+        //     $parameters['budget'] = $movie->getBudget();
+
         //     $this->connection = Connection::getInstance();
         //     $this->connection->ExecuteNonQuery($query, $parameters);
             

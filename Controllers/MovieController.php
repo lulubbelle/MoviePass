@@ -9,10 +9,7 @@ use Utils\Utils as Utils;
 class MovieController{
 
     public function ShowMovies(){
-        // $movieRepo = new MovieRepository();
-        // $movies = $movieRepo->GetAllFromDb();
-        // var_dump($movies);
-        // exit;
+
         include_once(VIEWS_PATH."workInProgress.php");
     }
     
@@ -30,8 +27,7 @@ class MovieController{
         $genreRepo = new GenreRepository();
 
         $genres = $genreRepo->getAll();
-        // var_dump($movieList);
-        // exit;
+
         require_once(VIEWS_PATH."movieList.php");
     }           
 
