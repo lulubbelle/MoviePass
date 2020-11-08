@@ -33,12 +33,6 @@ class ShowController{
         }
     }
 
-    public function TestAjax(){
-        $param = $_REQUEST["req"];
-        re
-    }
-
-
 }
 
 ?>
