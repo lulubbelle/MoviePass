@@ -9,13 +9,16 @@
         src="https://randomuser.me/api/portraits/women/79.jpg"
         alt="user"
     />
-    <h3>Bienvenido <?php echo $user->getUserName() ?></h3>
-    <h3>Email: <?php echo $user->getMail() ?></h3>
-    <h3>Usuario: <?php echo $user->getUserName() ?></h3>
-    <h3>nombre: <?php echo $profile->getFirstName() ?></h3>
-    <h3>Apellido: <?php echo $profile->getLastName() ?></h3>
-    <h3>DNI: <?php echo $profile->getDNI() ?></h3>
-
+    <?php if(isset($user)) {?>
+        <h3>Bienvenido <?php echo $user->getUserName() ?></h3>
+        <h3>Email: <?php echo $user->getMail() ?></h3>
+        <h3>Usuario: <?php echo $user->getUserName() ?></h3>
+        <?php if(isset($profile)) {?>
+        <h3>nombre: <?php echo $profile->getFirstName() ?></h3>
+        <h3>Apellido: <?php echo $profile->getLastName() ?></h3>
+        <h3>DNI: <?php echo $profile->getDNI() ?></h3>
+        <?php }
+        }?>
   
     <a href="<?php echo FRONT_ROOT ?>Profile/UpdateUserShowView" class="btn btn-success"><i class="fas fa-save"></i>&nbspModificar Datos</a>
     </div>
