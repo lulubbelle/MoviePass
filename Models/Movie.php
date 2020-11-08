@@ -122,6 +122,7 @@ class Movie{
             $movie->setIdApi($p["API_ID"]);
             $movie->setTitle($p["TITLE"]);
             $movie->setImgLink($p["POSTER_PATH"]);
+            $movie->setDescription($p["DESCRIPTION"]);
             $movie->setDuration($p["DURATION"]);
             $movie->setBudget($p["BUDGET"]);
     

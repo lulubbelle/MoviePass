@@ -118,7 +118,7 @@ class CinemaRepository implements ICinemaRepository{
         try
         {
             $ret = array();
-            $query = "SELECT * FROM " . $this->tableName . " WHERE CITY_ID = " . $cityId . ";";
+            $query = "SELECT * FROM " . $this->tableName . " WHERE CITY_ID = " . $cityId . " AND ACTIVE = 1;";
             
             $this->connection = Connection::GetInstance();
             $queryResult = $this->connection->Execute($query);

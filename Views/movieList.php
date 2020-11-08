@@ -44,7 +44,7 @@
                             <div class="flip-card movieBoxes">
                                 <div class="flip-card-inner">
                                     <div class="flip-card-front">
-                                        <img src= "https://image.tmdb.org/t/p/w500<?php echo $movie->getImgLink()?>" alt="Avatar" style="width:100%;height:100%;">
+                                        <img src= "<?= IMG_LINK_W500 . $movie->getImgLink()?>" alt="Avatar" style="width:100%;height:100%;">
                                     </div>
                                     <div class="flip-card-back">
                                         <h1 class="titleMovie"> <?php echo $movie->getTitle(); ?> </h1> 

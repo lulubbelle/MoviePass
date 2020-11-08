@@ -21,7 +21,7 @@ class MovieController{
     {
         Utils::CheckAdmin();
         $movieRepo = new MovieRepository();
-
+        $movieList = $movieRepo->GetAllFromApi();
         $movieList = $movieRepo->GetAll();
 
         $genreRepo = new GenreRepository();

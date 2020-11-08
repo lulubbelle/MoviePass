@@ -57,38 +57,34 @@ class UserProfileRepository {
     }
 
 
-    public function updateProfileUser($id, $firstName, $lastName, $dni) {
+    public function updateProfileUser($id, $firstName, $lastName, $dni, $upId) {
 
-    try
+        try
         {
-        $query = "UPDATE user_profile SET first_name=:first_name, last_name=:last_name, dni=:dni WHERE user_id=:id";
-        $parameters['id'] = $id;
-        $parameters['first_name'] = $firstName;
-        $parameters['last_name'] = $lastName;
-        $parameters['dni'] = $dni;
-      
-       
-        $this->connection = Connection::GetInstance();
-        $this->connection->ExecuteNonQuery($query, $parameters);
-        return "Registro modificado correctamente";
+            $query = "UPDATE user_profile SET first_name = :first_name, last_name = :last_name, dni = :dni WHERE id = :upId";
+
+            $parameters['upId'] = $upId;
+            $parameters['first_name'] = $firstName;
+            $parameters['last_name'] = $lastName;
+            $parameters['dni'] = $dni;
+            
+            $this->connection = Connection::GetInstance();
+            $this->connection->ExecuteNonQuery($query, $parameters);
+
+            return "Registro modificado correctamente";
         }
         catch(Exception $e)
         {
             return "Ha ocurrido un error :( " . $e->getMessage();
         }
-      
     }
 
-
-   
-
-
     public function getUserById($id){
-
         try
         {
             $ret = array();
-            $query = "SELECT up.user_id, up.first_name, up.last_name, up.dni, u.mail, u.userName, u.password, u.rolId FROM " . $this->tableName . " as up join " . $this->userTable . " as u on (up.user_id = u.id) WHERE  user_id = " . $id . ";";
+            $query = "SELECT up.id, up.user_id, up.first_name, up.last_name, up.dni, u.mail, u.userName, u.password, u.rolId FROM " . $this->tableName . " as up join " . $this->userTable . " as u on (up.user_id = u.id) WHERE  user_id = " . $id . ";";
+            
             $this->connection = Connection::GetInstance();
             $queryResult = $this->connection->Execute($query);
 
@@ -97,12 +93,8 @@ class UserProfileRepository {
             
             return $ret[0];
         }catch(Exception $e){
-            throw $e;
-            echo '<script>';
-            echo 'console.log("Error en base de datos. Archivo: userdao.php")';
-            echo '</script>';
+            return "Ha ocurrido un error :( " . $e->getMessage();
         }
-
     }
     
 
