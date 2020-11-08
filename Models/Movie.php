@@ -9,6 +9,7 @@ class Movie{
     private $title;
     private $imgLink;
     private $genres;
+    private $description;
 
     public function getId()
     {
@@ -70,6 +71,17 @@ class Movie{
         return $this;
     }
 
+    public function getDescription()
+    {
+        return $this->description;
+    }
+ 
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
     
     public static function mapData($value) {
 
@@ -82,7 +94,7 @@ class Movie{
             $movie->setIdApi($p["API_ID"]);
             $movie->setTitle($p["TITLE"]);
             $movie->setImgLink($p["POSTER_PATH"]);
-    
+            $movie->setDescription($p["DESCRIPTION"]);
             
             return $movie;
         }, $value);

@@ -15,6 +15,7 @@ define("API_NOW_PLAYING","movie/now_playing");
 
 define("API_MAIN_LINK","https://api.themoviedb.org/3/");
 define("IMG_LINK","https://image.tmdb.org/t/p/w185/");
+define("IMG_LINK_W500","https://image.tmdb.org/t/p/w500");
 
 
 define("LANGUAGE_ES","es");

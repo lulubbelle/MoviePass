@@ -9,18 +9,35 @@
             <div class="row align-items-center">
                 <div class="col-md-3">
                     <h1 class="basic-font cinema-view-title">Agregar Funcion</h1>       
-                    <a href="#" onclick="testAjax('<?= FRONT_ROOT?>Show/TestAjax')">MNBNMN</a>         
+                </div>
+            </div>
+            <div class="row movie-header-row">
+                <div class="col-md-10 movie-header">
+        <!--<div class="row cinema-header-row">
+                <div class="col-md-10 cinema-header"> -->
+                    Pelicula: <?= $movie->getTitle()?>
+                    <br>
+                    Descripción: <?= $movie->getDescription()?>
+                    
+                </div>
+                <div class="col-md-2">
+                    <div class="form-content">
+                        <div class="form-group">
+                            <img src= "<?= IMG_LINK_W500 . $movie->getImgLink()?>" alt="Avatar" style="width:100%;height:100%;">
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <!-- Formulario Funciones -->
-                    <?php $action;
-                        isset($cinema) ? $action = "Cinema/UpdateCinema" : $action = "Cinema/AddCine";
+                    <?php $action = "Show/AddShow";
+                        // isset($cinema) ? $action = "Cinema/UpdateCinema" : $action = "Cinema/AddCine";
+
                     ?>
                     <form action="<?= FRONT_ROOT.$action ?> " method="POST" class="cinema-form">
-                        <?php if(isset($errorAbmCine)&& !empty($errorAbmCine)) {?>
-                            <p class="alert alert-danger"><?=$errorAbmCine?></p>
+                        <?php if(isset($errorAbmShow)&& !empty($errorAbmShow)) {?>
+                            <p class="alert alert-danger"><?=$errorAbmShow?></p>
                         <?php }?>
                         <?php if(isset($successMsg) && !empty($successMsg)) {?>
                             <p class="alert alert-success"><?=$successMsg?></p>
@@ -34,14 +51,11 @@
                                 <!-- Ciudades -->
                                 <div class="form-group">
                                     <label class="cinema-input-label" for="cityId">Ciudad</label>
-                                    <select name="cityId" id="ciudad" class="form-control form-control-md cinema-input" placeholder="Ciudad">
+                                    <select name="cityId" id="comboCity" class="form-control form-control-md cinema-input" placeholder="Ciudad">
                                     <?php
                                     foreach ($cities as $city) {
-                                        //Selecciona la opcion que coincide con la ciudad del cine
-                                        $selected = (isset($cinema) && $cinema->getCityId() == $city->getId()) ? " selected" : "";
                                     ?>
-                                        <option value="<?= $city->getId() ?>" 
-                                        <?= $selected ?>>
+                                        <option value="<?= $city->getId() ?>">
                                             <?= $city->getName() ?>
                                         </option>
                                     <?php
@@ -52,44 +66,28 @@
                                 </div>
                                 <!-- Cines -->
                                 <div class="form-group">
-                                    <label class="cinema-input-label" for="cityId">Cine</label>
-                                    <select name="cityId" id="ciudad" class="form-control form-control-md cinema-input" placeholder="Ciudad">
+                                    <label class="cinema-input-label" for="cineId">Cine</label>
+                                    <select name="cinemaId" id="comboCinema" class="form-control form-control-md cinema-input" placeholder="Cine"> </select>
                                     
-                                    </select>
                                 </div>
                                 <!-- Salas -->
                                 <div class="form-group">
-                                    <label class="cinema-input-label" for="cityId">Sala</label>
-                                    <select name="cityId" id="ciudad" class="form-control form-control-md cinema-input" placeholder="Ciudad">
-                                    <?php
-                                    foreach ($cities as $city) {
-                                        //Selecciona la opcion que coincide con la ciudad del cine
-                                        $selected = (isset($cinema) && $cinema->getCityId() == $city->getId()) ? " selected" : "";
-                                    ?>
-                                        <option value="<?= $city->getId() ?>" 
-                                        <?= $selected ?>>
-                                            <?= $city->getName() ?>
-                                        </option>
-                                    <?php
-                                    }
-                                    ?>
-                                    
-                                    </select>
+                                    <label class="cinema-input-label" for="salaId">Sala</label>
+                                    <select name="roomId" id="comboRoom" class="form-control form-control-md cinema-input" placeholder="Sala"> </select>
                                 </div>                                
                                 
-                                <div class="form-group" style="display:none;">
-                                    <input type="number" name="active" class="form-control form-control-md cinema-input" placeholder="Active" value="<?php if(isset($cinema)) {echo $cinema->getActive();} ?>">
-                                </div>
-                                
+                                <!-- Fecha -->
                                 <div class="form-group">
-                                    <label class="cinema-input-label" for="name">Nombre</label>
-                                    <input type="text" name="name" class="form-control form-control-md cinema-input" maxlength="<?= MAX_LENGTH_255 ?>" placeholder="Nombre" value="<?php if(isset($cinema)) {echo $cinema->getName();}?>" required>
-                                </div>
+                                    <label class="cinema-input-label" for="date">Fecha</label>
+                                    <input name="date" id="dateSelector" type="date" class="form-control form-control-md cinema-input" placeholder="Fecha"/>
+                                </div>                                
                                 
+                                <!-- Fecha -->
                                 <div class="form-group">
-                                    <label class="cinema-input-label" for="address">Direccion</label>
-                                    <input type="text" name="address" class="form-control form-control-md cinema-input" maxlength="<?= MAX_LENGTH_255 ?>" placeholder="Direccion" value="<?php if(isset($cinema)) {echo $cinema->getAddress();}?>" required>
-                                </div>                                                                                        
+                                    <label class="cinema-input-label" for="time">Horario</label>
+                                    <input name="time" id="timeSelector" type="time" class="form-control form-control-md cinema-input" placeholder="Horario"/>
+                                </div>                                
+                                
                             </div>
                         <button class="btn btn-block cinema-btn" type="submit"> <?php if(isset($cinema)) {echo "Actualizar Funcion";} else { echo "Crear Funcion";}?></button>
                     </form>
@@ -99,4 +97,106 @@
     </div>
 </div>
 
-<script src="<?= JS_PATH ?>/addShow.js" ></script>
+<script type="text/javascript">
+    const disableItemById = (id) => $('#' + id).prop('disabled', true);
+                                
+    const validateNullResponse = (data) => data != '' && data != '[]';
+
+    $(function(){
+        disableItemById('comboCinema');
+        disableItemById('comboRoom');
+    });
+
+    const getCinemas = (frontRoot, cityId) => {
+        const url = frontRoot + "Show/LoadCinemas";
+        $.ajax({ 
+            url: url,
+            method: 'POST',
+            data: cityId,
+            context: 'document.body',
+            success:  function (r) 
+            {
+                
+                let cinemas = $('#comboCinema');
+
+                cinemas.prop('disabled', false);
+                // Limpiamos el select
+                cinemas.find('option').remove();
+
+                
+                let jsonText = r.substring(r.indexOf('$')+1 ,r.indexOf('%'));
+                if(validateNullResponse(jsonText)){
+                    
+                    cinemas.append("<option value=''>Elija uno...</option>");
+
+                    let json = JSON.parse(jsonText);
+                    $(json).each(function(i, v){ 
+                        cinemas.append('<option value="' + v.id + '">' + v.name + '</option>');
+                    })
+                }else{
+                    cinemas.append("<option value=''>No se encontraron resultados.</option>");
+                }
+                
+                
+            },
+            error: function(jqXHR, textStatus )
+            {
+                alert('Ocurrio un error en el servidor: ' + textStatus);
+                cinemas.prop('disabled', true);
+            }
+
+        });
+    }
+
+    const getRooms = (frontRoot, cinemaId) => {
+        const url = frontRoot + "Show/LoadRooms";
+        $.ajax({ 
+            url: url,
+            method: 'POST',
+            data: cinemaId,
+            context: 'document.body',
+            success:  function (r) 
+            {
+                
+                let rooms = $('#comboRoom');
+
+                rooms.prop('disabled', false);
+                // Limpiamos el select
+                rooms.find('option').remove();
+                
+                
+                let jsonText = r.substring(r.indexOf('$')+1 ,r.indexOf('%'));
+                if(validateNullResponse(jsonText)){
+                    rooms.append("<option value=''>Elija uno...</option>");
+
+                    let json = JSON.parse(jsonText);
+
+                    $(json).each(function(i, v){ 
+                        rooms.append('<option value="' + v.id + '">' + v.name + '</option>');
+                    })
+                }else{
+                    rooms.append("<option value=''>No se encontraron resultados.</option>");
+                }
+            },
+            error: function(jqXHR, textStatus )
+            {
+                alert('Ocurrio un error en el servidor: ' + textStatus);
+                rooms.prop('disabled', true);
+            }
+
+        });
+    }
+
+    $('#comboCity').change(() => {
+        let id = $('#comboCity').val();
+        let data = { cityId: id };
+        getCinemas(<?= FRONT_ROOT ?>, data);
+    });
+
+    $('#comboCinema').change(() => {
+        let id = $('#comboCinema').val();
+        let data = { cinemaId: id };
+        getRooms(<?= FRONT_ROOT ?>, data);
+    });
+
+</script>

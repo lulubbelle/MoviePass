@@ -13,7 +13,7 @@
     color: white;
 }
 
-.cinema-input, .cinema-input:focus, .cinema-input:active {
+.cinema-input, .cinema-input:focus, .cinema-input:active, .cinema-input:disabled {
     background-color: #242424; 
     color: white;
     outline: none;
@@ -33,4 +33,17 @@
     font-family: 'Bebas Neue', cursive;
     font-size: 22px;
     line-height: 30px;
+}
+
+.movie-header-row{
+    margin: 4% 4% 0% 4%;
+    
+    border-bottom: 2px solid gray; 
+    padding-bottom: 3%;
+}
+
+.movie-header{
+    color:white; 
+    font-size: 1.4rem; 
+    font-family: 'Bebas Neue', cursive;
 }

@@ -90,6 +90,7 @@ class MovieRepository{
             $movie->setTitle($value["title"]);
             $movie->setImgLink($value["poster_path"]);
             $movie->setGenres($value["genre_ids"]);
+            $movie->setDescription($value["overview"]);
 
             array_push($this->data, $movie);
         }
@@ -99,11 +100,12 @@ class MovieRepository{
 
         // foreach($this->data as $movie){
             
-        //     $query= "INSERT INTO " . $this->tableName . " (TITLE, POSTER_PATH, API_ID) VALUES(:title, :poster_path, :api_id)";
+        //     $query= "INSERT INTO " . $this->tableName . " (TITLE, POSTER_PATH, API_ID, DESCRIPTION) VALUES(:title, :poster_path, :api_id, :description)";
 
         //     $parameters['title'] = $movie->getTitle();
         //     $parameters['poster_path'] = $movie->getImgLink();
         //     $parameters['api_id'] = $movie->getIdApi();
+        //     $parameters['description'] = $movie->getDescription();
             
         //     $this->connection = Connection::getInstance();
         //     $this->connection->ExecuteNonQuery($query, $parameters);
@@ -120,6 +122,8 @@ class MovieRepository{
                 
         //     }
         // }
+        // echo "Peliculas agregadas ok";
+        // exit;
     }
     
     public function GetAllByGenreFromApi($genreId){
