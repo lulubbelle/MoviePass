@@ -11,7 +11,7 @@ use \Exception as Exception;
 class UserRepository {
 
     private $connection;
-    private $tableName = " user ";
+    private $tableName = " USER ";
 
     public function __construct()
     {
@@ -108,7 +108,7 @@ class UserRepository {
       $parameters['id'] = $id;
       $parameters['password'] = $password;
       
-        $this->connection = Connection::getInstance();
+        $this->connection = Connection::GetInstance();
         $this->connection->ExecuteNonQuery($query, $parameters);
         return "Registro modificado correctamente";
       }
@@ -116,6 +116,23 @@ class UserRepository {
       {
         return "Ha ocurrido un error :( " . $e->getMessage();
       }
+    }
+
+    public function updateUserName($id, $userName) {
+        try
+        {
+        $query = "UPDATE USER SET userName=:userName WHERE id=:id";
+        $parameters['id'] = $id;
+        $parameters['userName'] = $userName;
+  
+            $this->connection = Connection::GetInstance();
+            $this->connection->ExecuteNonQuery($query, $parameters);
+            return "Nombre modificado correctamente";
+        }
+        catch(Exception $e)
+        {
+            return "Ha ocurrido un error :( " . $e->getMessage();
+        }
     }
     
 
