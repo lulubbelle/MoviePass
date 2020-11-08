@@ -19,6 +19,18 @@
                         <label class="login-input-label" for="email">Email</label>
                         <input type="text" name="email" class="form-control form-control-md login-input" placeholder="Email" required>
                     </div>
+                    <div class="form-group">
+                        <label class="login-input-label" for="firstName">Nombre</label>
+                        <input type="text" name="first_name" class="form-control form-control-md login-input" placeholder="Nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="login-input-label" for="lastName">Apellido</label>
+                        <input type="text" name="last_name" class="form-control form-control-md login-input" placeholder="Apellido" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="login-input-label" for="dni">DNI</label>
+                        <input type="number" name="dni" class="form-control form-control-md login-input" placeholder="Dni" required>
+                    </div>
                     
                     <div class="form-group">
                         <label class="login-input-label" for="username">Nombre de Usuario</label>
