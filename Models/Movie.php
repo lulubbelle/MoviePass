@@ -9,6 +9,10 @@ class Movie{
     private $title;
     private $imgLink;
     private $genres;
+    private $description;
+    private $duration;
+    private $budget;
+
 
     public function getId()
     {
@@ -70,6 +74,42 @@ class Movie{
         return $this;
     }
 
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getDuration()
+    {
+        return $this->duration;
+    }
+
+    public function setDuration($duration)
+    {
+        $this->duration = $duration;
+
+        return $this;
+    }
+
+    public function getBudget()
+    {
+        return $this->budget;
+    }
+
+    public function setBudget($budget)
+    {
+        $this->budget = $budget;
+
+        return $this;
+    }
+
     
     public static function mapData($value) {
 
@@ -82,6 +122,8 @@ class Movie{
             $movie->setIdApi($p["API_ID"]);
             $movie->setTitle($p["TITLE"]);
             $movie->setImgLink($p["POSTER_PATH"]);
+            $movie->setDuration($p["DURATION"]);
+            $movie->setBudget($p["BUDGET"]);
     
             
             return $movie;
