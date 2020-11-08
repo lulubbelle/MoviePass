@@ -37,6 +37,9 @@
                         <div class="form-group col-md-6" style="display:none">
                             <input type="text" name="user_id" value="<?php echo ($profile->getUserId()) ?>" class="form-control" id="inputId" placeholder="Id" required>
                         </div>
+                        <div class="form-group col-md-6" style="display:none">
+                            <input type="text" name="user_profile_id" value="<?php echo ($profile->getId()) ?>" class="form-control" id="upId" placeholder="upId" required>
+                        </div>
                     </div>
     
                     

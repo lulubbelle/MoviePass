@@ -5,12 +5,25 @@ use Models\User as User;
 
 class UserProfile extends User{
     
+    private $id;
     private $userId;
     private $firstName;
     private $lastName;
     private $DNI;
    
     
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
     public function getUserId()
     {
         return $this->userId;
@@ -60,9 +73,6 @@ class UserProfile extends User{
         return $this;
     }
 
-
-  
-    
     public static function mapData($value) {
 
         $value = is_array($value) ? $value : [];
@@ -70,6 +80,7 @@ class UserProfile extends User{
         $resp = array_map(function($p){
             
             $userProfile = new UserProfile();
+            
             $userProfile->setUserId($p['user_id']);
             $userProfile->setFirstName($p['first_name']);
             $userProfile->setLastName($p['last_name']);
@@ -78,7 +89,8 @@ class UserProfile extends User{
             $userProfile->setUserName($p['userName']);
             $userProfile->setPassword($p['password']);
             $userProfile->setRolId($p['rolId']);
-            
+            $userProfile->setId($p['id']);
+
             return $userProfile;
         }, $value);
     

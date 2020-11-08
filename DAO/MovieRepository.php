@@ -131,6 +131,8 @@ class MovieRepository{
                 
         //     }
         // }
+        // echo "Peliculas agregadas ok";
+        // exit;
     }
     
     public function GetAllByGenreFromApi($genreId){
