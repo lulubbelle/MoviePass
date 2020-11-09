@@ -10,6 +10,7 @@ use DAO\CityRepository as CityRepository;
 use DAO\CinemaRepository as CinemaRepository;
 use DAO\RoomRepository as RoomRepository;
 use DAO\ShowRepository as ShowRepository;
+use DAO\GenreRepository as GenreRepository;
 
 class ShowController{
 
@@ -51,7 +52,29 @@ class ShowController{
         
         $shows = $this->GetShowsWithAllData();
 
+        $genreRepo = new GenreRepository();
+
+        $genres = $genreRepo->getAll();
+
         include_once(VIEWS_PATH."billboard.php");
+    }
+
+    public function MovieSearch(){
+        Utils::CheckAdmin();
+        if($_POST){
+            $movieRepo = new MovieRepository();
+
+            $genreId = Utils::CleanInput($_POST["genre"]);
+            //TO DO: fixear este metodo para que traiga los shows por genero
+            $shows = $movieRepo->GetAllByGenre($genreId);
+            
+            $genreRepo = new GenreRepository();
+
+            $genres = $genreRepo->getAll();
+
+            require_once(VIEWS_PATH."billboard.php");
+        }
+        
     }
 
     //Ajax Call
@@ -205,8 +228,6 @@ class ShowController{
         }else{
             $shows = $showRepo->GetByCinemaId($cinemaId);
         }
-        // var_dump($shows);
-        // exit;
 
         $movieRepo = new MovieRepository();
         $cityRepo = new CityRepository();
