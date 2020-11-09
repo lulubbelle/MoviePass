@@ -3,6 +3,7 @@
 namespace Interfaces;
 
 
+
 interface IUserRepository{
     function Add($user);
     function GetAll();
@@ -11,5 +12,6 @@ interface IUserRepository{
     function Update($id,$password);
     function updateUserName($id, $userName);
     function Delete($mail);
+}
 
 ?>
