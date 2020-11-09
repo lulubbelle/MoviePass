@@ -35,11 +35,6 @@ class ShowController{
         }
     }
 
-    public function TestAjax(){
-        var_dump($_POST);
-        exit;
-    }
-
     public function LoadCinemas()
     {   
         Utils::CheckAdmin();
