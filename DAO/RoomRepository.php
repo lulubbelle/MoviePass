@@ -6,7 +6,11 @@ use Models\Room as Room;
 use DAO\Connection as Connection;
 use \Exception as Exception;
 
+<<<<<<< .mine
 use Interfaces\IRoomRepository as IRoomRepository;
+=======
+class RoomRepository {
+>>>>>>> .theirs
 
 class RoomRepository implements IRoomRepository{
 
@@ -133,6 +137,18 @@ class RoomRepository implements IRoomRepository{
         }
     }
 
+    public function ValidateDeleteCinema($cinemaId){
+        $query = "SELECT * FROM " . $this->tableName . " WHERE cineId = :cinemaId AND ACTIVE = 1;";
+        
+        $parameters['cinemaId'] = $cinemaId;
+        
+        $this->connection = Connection::getInstance();
+        $queryResult = $this->connection->Execute($query, $parameters);
+        
+        $ret = Room::mapData($queryResult);
+            
+        return $ret;
+    }
 }
 
 

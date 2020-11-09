@@ -10,18 +10,22 @@ use DAO\CityRepository as CityRepository;
 use DAO\CinemaRepository as CinemaRepository;
 use DAO\RoomRepository as RoomRepository;
 use DAO\ShowRepository as ShowRepository;
+use DAO\GenreRepository as GenreRepository;
 
 class ShowController{
 
     public function Index($successMsg = ""){
         Utils::CheckAdmin();
-
+        
         if(isset($_GET['cinemaId'])){
+            if($successMsg == $_GET['cinemaId'])
+            {
+                $successMsg = "";
+            }
             $shows = $this->GetShowsWithAllData(Utils::CleanInput($_GET['cinemaId']));
         }else{
             $shows = $this->GetShowsWithAllData();
         }
-
         $cinemaRepo = new CinemaRepository();
         $cinemas = $cinemaRepo->GetAll();
 
@@ -48,7 +52,29 @@ class ShowController{
         
         $shows = $this->GetShowsWithAllData();
 
+        $genreRepo = new GenreRepository();
+
+        $genres = $genreRepo->getAll();
+
         include_once(VIEWS_PATH."billboard.php");
+    }
+
+    public function MovieSearch(){
+        Utils::CheckAdmin();
+        if($_POST){
+            $movieRepo = new MovieRepository();
+
+            $genreId = Utils::CleanInput($_POST["genre"]);
+            //TO DO: fixear este metodo para que traiga los shows por genero
+            $shows = $movieRepo->GetAllByGenre($genreId);
+            
+            $genreRepo = new GenreRepository();
+
+            $genres = $genreRepo->getAll();
+
+            require_once(VIEWS_PATH."billboard.php");
+        }
+        
     }
 
     //Ajax Call
@@ -160,7 +186,7 @@ class ShowController{
         
         if($result != null && count($result) > 0)
         {
-            array_push($validationErrors, "La pelicula indicada ya tiene funciones en la fecha seleccionada.");
+            array_push($validationErrors, "La pelicula indicada ya tiene funciones en otro cine en la fecha seleccionada.");
         }
 
         $result = null;
@@ -202,7 +228,7 @@ class ShowController{
         }else{
             $shows = $showRepo->GetByCinemaId($cinemaId);
         }
-        
+
         $movieRepo = new MovieRepository();
         $cityRepo = new CityRepository();
         $roomRepo = new RoomRepository();

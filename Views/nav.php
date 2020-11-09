@@ -36,7 +36,7 @@
         } else {
           echo '<ul class="navbar-nav mt-2 mt-lg-0 ml-auto mr-auto">
                     <li class="nav-item">
-                      <a class="nav-link" href="';echo FRONT_ROOT. 'Movies/ShowMovies">Cartelera</a>
+                      <a class="nav-link" href="';echo FRONT_ROOT. 'Show/ShowBillboardView">Cartelera</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="';echo FRONT_ROOT. 'Purchase" tabindex="-1" aria-disabled="true">Compras</a>

@@ -189,8 +189,8 @@ class ShowRepository implements IShowRepository{
         
         $query = "SELECT * FROM " . $this->tableName . " WHERE DATETIME_TO > date_add( :dateFrom , interval " . -$minutes . " minute) AND DATETIME_TO <= :anotherDateFrom AND ACTIVE = 1;";
         
-        $parameters['dateFrom'] = date('Y-m-d h:m:s', strtotime($dateFrom));
-        $parameters['anotherDateFrom'] = date('Y-m-d h:m:s', strtotime($dateFrom));
+        $parameters['dateFrom'] = $dateFrom;
+        $parameters['anotherDateFrom'] = $dateFrom;
         
         $this->connection = Connection::getInstance();
         $queryResult = $this->connection->Execute($query, $parameters);
@@ -203,7 +203,20 @@ class ShowRepository implements IShowRepository{
     public function GetShowIsPlayingInDateTime($dateFrom){
         $query = "SELECT * FROM " . $this->tableName . " WHERE :dateFrom BETWEEN DATETIME_FROM and DATETIME_TO AND ACTIVE = 1;";
         
-        $parameters['dateFrom'] = date('Y-m-d h:m:s', strtotime($dateFrom));
+        $parameters['dateFrom'] = date('Y-m-d H:m:s', strtotime($dateFrom));
+        
+        $this->connection = Connection::getInstance();
+        $queryResult = $this->connection->Execute($query, $parameters);
+        
+        $ret = Show::mapData($queryResult);
+            
+        return $ret;
+    }
+
+    public function ValidateDeleteRoom($roomId){
+        $query = "SELECT * FROM " . $this->tableName . " WHERE ROOM_ID = :roomId AND ACTIVE = 1;";
+        
+        $parameters['roomId'] = $roomId;
         
         $this->connection = Connection::getInstance();
         $queryResult = $this->connection->Execute($query, $parameters);
