@@ -1,11 +1,16 @@
 <?php
 
 namespace Interfaces;
-use Interfaces\IReadable as IReadable;
-use Interfaces\IWritable as IWritable;
 
-interface ICinemaRepository extends IReadable, IWritable{
-    
+
+interface ICinemaRepository{
+    function GetAll();
+    function GetById($id);
+    function AddOne($cinema);
+    function DeleteCinema($id);
+    function Update($cinema);
+    function GetByCity($cityId);
+    function getAllRoomsByCinemaId($id);
 }
 
 ?>

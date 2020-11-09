@@ -5,9 +5,9 @@ namespace DAO;
 use Models\Room as Room;
 use DAO\Connection as Connection;
 use \Exception as Exception;
-use Interfaces\ICinemaRepository as ICinemaRepository;
+use Interfaces\IRoomRepository as IRoomRepository;
 
-class RoomRepository{
+class RoomRepository implements IRoomRepository{
 
     private $connection;
     private $tableName = " ROOM ";

@@ -2,9 +2,11 @@
 
 namespace Interfaces;
 
-interface IReadable{
+
+interface ICityRepository{
     function GetAll();
     function GetById($id);
+    function GetCityByRoomId($id);
 }
 
 ?>

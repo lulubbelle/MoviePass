@@ -1,10 +1,16 @@
 <?php
 
 namespace Interfaces;
-use Interfaces\IReadable as IReadable;
 
-interface IMovieRepository extends IReadable{
 
+interface IMovieRepository{
+    function GetAll();
+    function GetById($id);
+    function GetByApiId($id);
+    function GetAllFromApi();
+    function RetrieveDataFromApi();
+    function GetAllByGenreFromApi($genreId);
+    function GetAllByGenre($genreId);
 }
 
 ?>

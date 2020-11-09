@@ -5,8 +5,9 @@ namespace DAO;
 use Models\Show as Show;
 use DAO\Connection as Connection;
 use \Exception as Exception;
+use Interfaces\IShowepository as IShowRepository;
 
-class ShowRepository {
+class ShowRepository implements IShowRepository{
 
     private $connection;
     private $tableName = " SHOWS ";
