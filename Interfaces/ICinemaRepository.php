@@ -2,7 +2,6 @@
 
 namespace Interfaces;
 
-<<<<<<< .mine
 
 interface ICinemaRepository{
     function GetAll();
@@ -12,17 +11,6 @@ interface ICinemaRepository{
     function Update($cinema);
     function GetByCity($cityId);
     function getAllRoomsByCinemaId($id);
-=======
-interface ICinemaRepository extends IReadable, IWritable{
-    function GetAll();
-    function GetById($id);
-    
-
-
-
-
-
->>>>>>> .theirs
 }
 
 ?>

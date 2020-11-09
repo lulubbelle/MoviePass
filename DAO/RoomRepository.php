@@ -6,11 +6,7 @@ use Models\Room as Room;
 use DAO\Connection as Connection;
 use \Exception as Exception;
 
-<<<<<<< .mine
 use Interfaces\IRoomRepository as IRoomRepository;
-=======
-class RoomRepository {
->>>>>>> .theirs
 
 class RoomRepository implements IRoomRepository{
 
