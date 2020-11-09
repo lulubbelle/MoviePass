@@ -5,8 +5,8 @@ class Utils{
 
 
     public static function CheckAdmin(){
-        $esAdmin = $_SESSION["esAdmin"];
-        if (isset($_SESSION["esAdmin"]) && !$esAdmin) {
+        $esAdmin = isset($_SESSION["esAdmin"]) ? $_SESSION["esAdmin"] : false;
+        if (!$esAdmin) {
             //redirect to homepage
             header("location:".FRONT_ROOT);
         

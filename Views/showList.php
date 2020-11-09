@@ -39,13 +39,23 @@
                             </div>
                         </div>
 
-                        <div class="col-md-5">
+                        <div class="col-md-3">
                             <div class="form-content">
-                                <div class="form-group">
-                                <button id="searchMovie" class="btn btn-primary" type="submit">Buscar</button>
+                                <div class="form-group"  style="padding-top:5px;">
+                                    <button id="searchMovie" class="btn btn-primary" type="submit">Buscar</button>
                                 </div>
                             </div>
                         </div>
+                        
+
+                        <div class="col-md-4">
+                            <div class="form-content">
+                                <div class="form-group">
+                                <a href="<?= FRONT_ROOT ?>Show" class="btn btn-primary" type="submit">Limpiar Filtros</a>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </form>
 
@@ -98,9 +108,8 @@
                                     <p>Sala: <?= $key->getRoom()->getName() ?> </p>
                                     <p>Precio: <?= $key->getRoom()->getPrice() ?></p>
                                     <p>Capacidad: <?= $key->getRoom()->getCapacity() ?> </p>
-                                    <p>Fecha Desde: <?= date('Y-m-d h:m:s', strtotime($key->getDateTimeFrom())) ?> </p>
-                                    <p>Fecha Hasta: <?= date('Y-m-d h:m:s', strtotime($key->getDateTimeTo())) ?> </p>
-                                    
+                                    <p>Fecha Desde: <?= $key->getDateTimeFrom() ?> </p>
+                                    <p>Fecha Hasta: <?= $key->getDateTimeTo() ?> </p>
                                     
                                     <a type="button" class="btn btn-danger purchase-btn-danger" title="Eliminar Show" href="<?= FRONT_ROOT ?>Show/DeleteShow?id=<?=$key->getId()?>">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
