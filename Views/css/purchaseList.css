@@ -86,6 +86,14 @@
     font-size: 22px;
 }
 
-.purchase-img {
-
+.purchase-btn-danger {
+    display: block;
+    margin: 5% 0 5% 0;
+    padding: 1% 5%;
+    width: 60%;
+    border: none;
+    background-color: #dc3545;
+    color: black;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 22px;
 }

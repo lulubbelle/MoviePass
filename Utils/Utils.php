@@ -39,6 +39,12 @@ class Utils{
         return $number > 0;
     }
 
+    public static function AddMinutesToDateTime($date, $minutes){
+        
+        $result = strtotime($date . ' + ' . $minutes . ' minute');
+        
+        return date('Y-m-d H:i:s', $result);
+    }
 }
 
 

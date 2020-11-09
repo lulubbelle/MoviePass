@@ -37,21 +37,26 @@
                     ?>
                     <form action="<?= FRONT_ROOT.$action ?> " method="POST" class="cinema-form">
                         <?php if(isset($errorAbmShow)&& !empty($errorAbmShow)) {?>
-                            <p class="alert alert-danger"><?=$errorAbmShow?></p>
+                            <p class="alert alert-danger" style="margin-top: 15px;"><?=$errorAbmShow?></p>
                         <?php }?>
                         <?php if(isset($successMsg) && !empty($successMsg)) {?>
                             <p class="alert alert-success"><?=$successMsg?></p>
                         <?php }?>
                         
                             <div class="form-content">
-                                <!-- Solo para vista de modificacion -->
+                                
                                 <div class="form-group" style="display:none;">
-                                    <input type="number" name="id" class="form-control form-control-md cinema-input" placeholder="Id" value="<?php if(isset($cinema)) {echo $cinema->getId();} ?>">
-                                </div>                                
+                                    <input type="number" name="movieId" class="form-control form-control-md cinema-input" placeholder="movieId" value="<?php if(isset($movie)) {echo $movie->getId();} ?>">
+                                </div>         
+                                
+                                <div class="form-group" style="display:none;">
+                                    <input type="number" name="movieDuration" class="form-control form-control-md cinema-input" placeholder="movieDuration" value="<?php if(isset($movie)) {echo $movie->getDuration();} ?>">
+                                </div>                            
                                 <!-- Ciudades -->
                                 <div class="form-group">
                                     <label class="cinema-input-label" for="cityId">Ciudad</label>
-                                    <select name="cityId" id="comboCity" class="form-control form-control-md cinema-input" placeholder="Ciudad">
+                                    <select name="cityId" id="comboCity" class="form-control form-control-md cinema-input" placeholder="Ciudad" required>
+                                    <option value="" selected> Seleccione uno... </option>
                                     <?php
                                     foreach ($cities as $city) {
                                     ?>
@@ -67,25 +72,19 @@
                                 <!-- Cines -->
                                 <div class="form-group">
                                     <label class="cinema-input-label" for="cineId">Cine</label>
-                                    <select name="cinemaId" id="comboCinema" class="form-control form-control-md cinema-input" placeholder="Cine"> </select>
+                                    <select name="cinemaId" id="comboCinema" class="form-control form-control-md cinema-input" placeholder="Cine" required> </select>
                                     
                                 </div>
                                 <!-- Salas -->
                                 <div class="form-group">
                                     <label class="cinema-input-label" for="salaId">Sala</label>
-                                    <select name="roomId" id="comboRoom" class="form-control form-control-md cinema-input" placeholder="Sala"> </select>
+                                    <select name="roomId" id="comboRoom" class="form-control form-control-md cinema-input" placeholder="Sala" required> </select>
                                 </div>                                
                                 
                                 <!-- Fecha -->
                                 <div class="form-group">
-                                    <label class="cinema-input-label" for="date">Fecha</label>
-                                    <input name="date" id="dateSelector" type="date" class="form-control form-control-md cinema-input" placeholder="Fecha"/>
-                                </div>                                
-                                
-                                <!-- Fecha -->
-                                <div class="form-group">
-                                    <label class="cinema-input-label" for="time">Horario</label>
-                                    <input name="time" id="timeSelector" type="time" class="form-control form-control-md cinema-input" placeholder="Horario"/>
+                                    <label class="cinema-input-label" for="dateTimeFrom">Fecha / Hora</label>
+                                    <input name="dateTimeFrom" id="timeSelector" type="datetime-local" class="form-control form-control-md cinema-input" placeholder="Fecha / Hora" required />
                                 </div>                                
                                 
                             </div>
