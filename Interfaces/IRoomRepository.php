@@ -2,6 +2,7 @@
 
 namespace Interfaces;
 
+use Models\Room as Room;
 
 interface IRoomRepository{
     function GetAll();

@@ -3,7 +3,7 @@
 namespace Interfaces;
 
 
-interface IMovieRepository{
+interface IShowRepository{
     function GetAll();
     function GetByCinemaId($cinemaId);
     function GetById($id);

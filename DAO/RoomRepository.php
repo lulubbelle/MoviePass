@@ -5,6 +5,7 @@ namespace DAO;
 use Models\Room as Room;
 use DAO\Connection as Connection;
 use \Exception as Exception;
+
 use Interfaces\IRoomRepository as IRoomRepository;
 
 class RoomRepository implements IRoomRepository{
