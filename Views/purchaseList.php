@@ -33,13 +33,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="form-content">
-                            <div class="form-group">
-                                <a href="<?= FRONT_ROOT ?>purchase/purchaseAddView" class="btn btn-success">Agregar Cine</a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </form>
             <?php
@@ -63,11 +56,11 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <!--Listado de Cines-->
+                    <!--Listado de Compras-->
                     <div class="row">
                         <div class="purchase-list">
                            
-                                    <!--Items de Cines-->
+                                    <!--Items de Compras-->
                                     <div class="purchase-item">
                                         <div class="column-1">
                                             <h3>Titulo Pelicula</h3>

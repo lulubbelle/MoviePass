@@ -22,7 +22,7 @@ class ShowRepository {
         try
         {
             $ret = array();
-            $query = "SELECT * FROM " . $this->tableName . " WHERE ACTIVE = 1";
+            $query = "SELECT * FROM " . $this->tableName . " WHERE ACTIVE = 1 ORDER BY ID DESC, MOVIE_ID";
             $this->connection = Connection::GetInstance();
             $queryResult = $this->connection->Execute($query);
             
@@ -33,7 +33,32 @@ class ShowRepository {
             throw $ex;
         }
     }
+    
+    function GetByCinemaId($cinemaId)
+    {
+        try
+        {
+            $ret = array();
+            $query = "SELECT SH.* FROM SHOWS SH
+                INNER JOIN ROOM ON ROOM.ID = SH.ROOM_ID
+                INNER JOIN CINEMA CIN ON CIN.ID = ROOM.cineId
+                WHERE CIN.ID = :cinemaId
+                AND SH.ACTIVE = 1
+                ORDER BY SH.ID DESC, SH.MOVIE_ID";
+            
+            $parameters['cinemaId'] = $cinemaId;
 
+            $this->connection = Connection::GetInstance();
+            $queryResult = $this->connection->Execute($query, $parameters);
+            
+            $ret = Show::mapData($queryResult);
+
+            return $ret;
+        }catch(Exception $ex){
+            throw $ex;
+        }
+    }
+    
     function GetById($id)
     {
         try
@@ -114,7 +139,7 @@ class ShowRepository {
     public function GetByDateAndMovieId($dateFrom, $movieId){
         try
         {
-            $query = "SELECT * FROM " . $this->tableName . " WHERE DATE(DATETIME_FROM) = :showDate AND MOVIE_ID = :movieId;";
+            $query = "SELECT * FROM " . $this->tableName . " WHERE DATE(DATETIME_FROM) = :showDate AND MOVIE_ID = :movieId AND ACTIVE = 1 ORDER BY ID DESC, MOVIE_ID;";
              
             $parameters['showDate'] = date('Y-m-d', strtotime($dateFrom));
             $parameters['movieId'] = $movieId;
@@ -139,7 +164,8 @@ class ShowRepository {
                     INNER JOIN ROOM ON ROOM.ID = SH.ROOM_ID
                     INNER JOIN CINEMA CIN ON CIN.ID = ROOM.cineId
                     WHERE MOVIE_ID = :movieId 
-                    AND CIN.ID = (select cineId from room where id = :roomId)";
+                    AND CIN.ID = (select cineId from room where id = :roomId)
+                    AND SH.ACTIVE = 1";
 
             $parameters['roomId'] = $roomId;
             $parameters['movieId'] = $movieId;
@@ -160,7 +186,7 @@ class ShowRepository {
     
     public function GetShowByDatePlusMinutes($dateFrom, $minutes){
         
-        $query = "SELECT * FROM " . $this->tableName . " WHERE DATETIME_FROM > date_add( :dateFrom , interval " . -$minutes . " minute) AND DATETIME_FROM <= :anotherDateFrom ;";
+        $query = "SELECT * FROM " . $this->tableName . " WHERE DATETIME_TO > date_add( :dateFrom , interval " . -$minutes . " minute) AND DATETIME_TO <= :anotherDateFrom AND ACTIVE = 1;";
         
         $parameters['dateFrom'] = date('Y-m-d h:m:s', strtotime($dateFrom));
         $parameters['anotherDateFrom'] = date('Y-m-d h:m:s', strtotime($dateFrom));
@@ -174,7 +200,7 @@ class ShowRepository {
     }
 
     public function GetShowIsPlayingInDateTime($dateFrom){
-        $query = "SELECT * FROM " . $this->tableName . " WHERE :dateFrom BETWEEN DATETIME_FROM and DATETIME_TO;";
+        $query = "SELECT * FROM " . $this->tableName . " WHERE :dateFrom BETWEEN DATETIME_FROM and DATETIME_TO AND ACTIVE = 1;";
         
         $parameters['dateFrom'] = date('Y-m-d h:m:s', strtotime($dateFrom));
         

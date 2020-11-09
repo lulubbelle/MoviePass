@@ -15,30 +15,15 @@ class ShowController{
 
     public function Index($successMsg = ""){
         Utils::CheckAdmin();
-        $showRepo = new ShowRepository();
-        $shows = $showRepo->GetAll();
 
-        $movieRepo = new MovieRepository();
-        $cityRepo = new CityRepository();
-        $roomRepo = new RoomRepository();
-        $cinemaRepo = new CinemaRepository();
-
-        foreach($shows as $value){
-            $movie = $movieRepo->GetById($value->getMovieId());
-            $value->setMovie($movie);
-
-            $city = $cityRepo->GetCityByRoomId($value->getRoomId());
-            $value->setCity($city);
-            
-            $room = $roomRepo->GetById($value->getRoomId());
-
-            $value->setRoom($room);
-            
-            $cinema = $cinemaRepo->GetById($value->getRoom()->getCinemaId());
-
-            $value->setCinema($cinema);
-            
+        if(isset($_GET['cinemaId'])){
+            $shows = $this->GetShowsWithAllData(Utils::CleanInput($_GET['cinemaId']));
+        }else{
+            $shows = $this->GetShowsWithAllData();
         }
+
+        $cinemaRepo = new CinemaRepository();
+        $cinemas = $cinemaRepo->GetAll();
 
         include_once(VIEWS_PATH."showList.php");
     }
@@ -55,10 +40,18 @@ class ShowController{
             $cities = $cityRepo->GetAll();
 
             include_once(VIEWS_PATH."addShow.php");
-    
         }
     }
 
+    public function ShowBillboardView(){
+        Utils::CheckAdmin();
+        
+        $shows = $this->GetShowsWithAllData();
+
+        include_once(VIEWS_PATH."billboard.php");
+    }
+
+    //Ajax Call
     public function LoadCinemas()
     {   
         Utils::CheckAdmin();
@@ -85,7 +78,7 @@ class ShowController{
         }
         
     }
-
+    //Ajax Call
     public function LoadRooms()
     {   
         Utils::CheckAdmin();
@@ -149,8 +142,11 @@ class ShowController{
     public function DeleteShow(){
         if($_GET){
             $showId = Utils::CleanInput($_GET['id']);
-            var_dump($showId);
-            exit;
+            
+            $showRepo = new ShowRepository();
+            $result = $showRepo->DeleteShow($showId);
+            
+            return $this->Index($result);
         }
     }
     
@@ -185,11 +181,8 @@ class ShowController{
             array_push($validationErrors, "El horario de comienzo de la funcion debe ser posterior a 15 minutos desde la ultima funcion en esta sala.");
         }
         
-        //Validar que no haya una en la que coincida el horario de esta
-        //TODO
-
         $result = null;
-        //Que si hay otra funcion en esa sala esta comience 15 minutos despues
+        //Validar que no haya una en la que coincida el horario de esta
         $result = $showRepo->GetShowIsPlayingInDateTime($show->getDateTimeFrom());
         
         if($result != null && count($result) > 0)
@@ -198,6 +191,40 @@ class ShowController{
         }
         
         return join(" <br>", $validationErrors);
+    }
+
+    private function GetShowsWithAllData($cinemaId = null){
+
+        $showRepo = new ShowRepository();
+
+        if($cinemaId == null){
+            $shows = $showRepo->GetAll();
+        }else{
+            $shows = $showRepo->GetByCinemaId($cinemaId);
+        }
+        
+        $movieRepo = new MovieRepository();
+        $cityRepo = new CityRepository();
+        $roomRepo = new RoomRepository();
+        $cinemaRepo = new CinemaRepository();
+
+        foreach($shows as $value){
+            $movie = $movieRepo->GetById($value->getMovieId());
+            $value->setMovie($movie);
+
+            $city = $cityRepo->GetCityByRoomId($value->getRoomId());
+            $value->setCity($city);
+            
+            $room = $roomRepo->GetById($value->getRoomId());
+
+            $value->setRoom($room);
+            
+            $cinema = $cinemaRepo->GetById($value->getRoom()->getCinemaId());
+
+            $value->setCinema($cinema);
+            
+        }
+        return $shows;
     }
 
 }
