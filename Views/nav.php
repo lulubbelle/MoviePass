@@ -17,13 +17,16 @@
         if(isset($_SESSION['esAdmin']) && $_SESSION["esAdmin"]){
           echo '<ul class="navbar-nav mt-2 mt-lg-0 ml-auto mr-auto">
                     <li class="nav-item">
-                      <a class="nav-link" href="';echo FRONT_ROOT. 'Movies/ShowMovies">Cartelera</a>
+                      <a class="nav-link" href="';echo FRONT_ROOT. 'Show/ShowBillboardView">Cartelera</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="';echo FRONT_ROOT. 'Movie" tabindex="-1" aria-disabled="true">Agregar Pelicula</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="';echo FRONT_ROOT. 'Cinema" tabindex="-1" aria-disabled="true">Cines</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="';echo FRONT_ROOT. 'Show" tabindex="-1" aria-disabled="true">Funciones</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="';echo FRONT_ROOT. 'Purchase" tabindex="-1" aria-disabled="true">Compras</a>

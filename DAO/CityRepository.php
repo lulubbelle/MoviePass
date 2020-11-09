@@ -46,6 +46,31 @@ class CityRepository{
             throw $ex;
         }
     }
+    
+    function GetCityByRoomId($id)
+    {
+        try
+        {
+            $ret = array();
+            $query = "SELECT CITY.* FROM CITY 
+                        INNER JOIN CINEMA CIN
+                        ON CIN.CITY_ID = CITY.ID
+                        INNER JOIN ROOM 
+                        ON ROOM.CINEID = CIN.ID
+                        WHERE ROOM.ID = :id;";
 
+            $parameters['id'] = $id;
+
+            $this->connection = Connection::GetInstance();
+            $queryResult = $this->connection->Execute($query, $parameters);
+
+            $ret = City::mapData($queryResult);
+
+            return $ret[0];
+        }catch(Exception $ex){
+            throw $ex;
+        }
+    }
+    
 }
 ?>

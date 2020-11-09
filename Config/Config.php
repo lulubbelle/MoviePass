@@ -31,8 +31,11 @@ define("MAX_LENGTH_255", "255");
 define("MIN_PRICE_ROOM", "200");
 define("MAX_PRICE_ROOM", "1500");
 
+
 define("MIN_CAPACITY_ROOM", "10");
 define("MAX_CAPACITY_ROOM", "200");
+
+define("MIN_TIME_BETWEEN_SHOWS", 15);
 
 define("CINEMA_UNIQUE_ADDRESS_IX", "CINEMA_UNIQUE_IX1");
 define("USER_UNIQUE_MAIL_IX", "MAIL_UNIQUE_IX");
