@@ -2,13 +2,12 @@
 
 namespace DAO;
 
-//use Interfaces\IUserRepository as IUserRepository;
 use Models\UserProfile as UserProfile;
 use DAO\Connection as Connection;
 use \Exception as Exception;
+use Interfaces\IUserProfileRepository as IUserProfileRepository;
 
-//class UserRepository extends IUserRepository{
-class UserProfileRepository {
+class UserProfileRepository implements IUserProfileRepository {
 
     private $connection;
     private $tableName = " user_profile ";

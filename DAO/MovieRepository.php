@@ -5,9 +5,10 @@ namespace DAO;
 use Models\Movie as Movie;
 use DAO\Connection as Connection;
 use \Exception as Exception;
+use Interfaces\IMovieRepository as IMovieRepository;
 
 
-class MovieRepository{
+class MovieRepository implements IMovieRepository{
 
     //BBDD
     private $connection;

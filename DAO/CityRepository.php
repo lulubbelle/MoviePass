@@ -5,9 +5,9 @@ namespace DAO;
 use Models\City as City;
 use DAO\Connection as Connection;
 use \Exception as Exception;
-use Interfaces\ICinemaRepository as ICinemaRepository;
+use Interfaces\ICityRepository as ICityRepository;
 
-class CityRepository{
+class CityRepository implements ICityRepository{
 
     private $connection;
     private $tableName = " CITY ";

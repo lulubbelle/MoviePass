@@ -14,7 +14,8 @@
                     <div class="col-md-3">
                         <div class="form-content">
                             <div class="form-group">
-                                <select name="city" id="ciudad" class="form-control form-control-md cinema-input" placeholder="Ciudad">
+                                <select name="city" id="ciudad" class="form-control form-control-md cinema-input" placeholder="Ciudad" required>
+                                    <option value="" selected> Elija uno... </option>
                                     <?php
                                     foreach ($cities as $city) {
                                     ?>

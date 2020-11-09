@@ -3,8 +3,9 @@
 namespace DAO;
 
 use Models\Genre as Genre;
+use Interfaces\IGenreRepository as IGenreRepository;
 
-class GenreRepository{
+class GenreRepository implements IGenreRepository{
     private $connection;
     private $tableName = " GENRE ";
 

@@ -6,7 +6,9 @@ use Models\Room as Room;
 use DAO\Connection as Connection;
 use \Exception as Exception;
 
-class RoomRepository {
+use Interfaces\IRoomRepository as IRoomRepository;
+
+class RoomRepository implements IRoomRepository{
 
     private $connection;
     private $tableName = " ROOM ";
