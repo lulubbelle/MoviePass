@@ -26,7 +26,7 @@
                       <a class="nav-link" href="';echo FRONT_ROOT. 'Cinema" tabindex="-1" aria-disabled="true">Cines</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="';echo FRONT_ROOT. 'Compras" tabindex="-1" aria-disabled="true">Compras</a>
+                      <a class="nav-link" href="';echo FRONT_ROOT. 'Purchase" tabindex="-1" aria-disabled="true">Compras</a>
                     </li>
                 </ul>';
 
@@ -36,7 +36,7 @@
                       <a class="nav-link" href="';echo FRONT_ROOT. 'Movies/ShowMovies">Cartelera</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="';echo FRONT_ROOT. 'Compras" tabindex="-1" aria-disabled="true">Compras</a>
+                      <a class="nav-link" href="';echo FRONT_ROOT. 'Purchase" tabindex="-1" aria-disabled="true">Compras</a>
                     </li>
                 </ul>';
         }
