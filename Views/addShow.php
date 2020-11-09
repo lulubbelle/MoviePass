@@ -84,7 +84,7 @@
                                 <!-- Fecha -->
                                 <div class="form-group">
                                     <label class="cinema-input-label" for="dateTimeFrom">Fecha / Hora</label>
-                                    <input name="dateTimeFrom" id="timeSelector" type="datetime-local" class="form-control form-control-md cinema-input" placeholder="Fecha / Hora" required />
+                                    <input name="dateTimeFrom" id="timeSelector" type="datetime-local" min="<?php echo date("Y-m-d")?>T00:00" class="form-control form-control-md cinema-input" placeholder="Fecha / Hora" required />
                                 </div>                                
                                 
                             </div>

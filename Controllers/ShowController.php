@@ -15,13 +15,16 @@ class ShowController{
 
     public function Index($successMsg = ""){
         Utils::CheckAdmin();
-
+        
         if(isset($_GET['cinemaId'])){
+            if($successMsg == $_GET['cinemaId'])
+            {
+                $successMsg = "";
+            }
             $shows = $this->GetShowsWithAllData(Utils::CleanInput($_GET['cinemaId']));
         }else{
             $shows = $this->GetShowsWithAllData();
         }
-
         $cinemaRepo = new CinemaRepository();
         $cinemas = $cinemaRepo->GetAll();
 
@@ -160,7 +163,7 @@ class ShowController{
         
         if($result != null && count($result) > 0)
         {
-            array_push($validationErrors, "La pelicula indicada ya tiene funciones en la fecha seleccionada.");
+            array_push($validationErrors, "La pelicula indicada ya tiene funciones en otro cine en la fecha seleccionada.");
         }
 
         $result = null;
@@ -202,7 +205,9 @@ class ShowController{
         }else{
             $shows = $showRepo->GetByCinemaId($cinemaId);
         }
-        
+        // var_dump($shows);
+        // exit;
+
         $movieRepo = new MovieRepository();
         $cityRepo = new CityRepository();
         $roomRepo = new RoomRepository();

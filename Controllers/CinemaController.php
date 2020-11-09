@@ -4,8 +4,8 @@
     use DAO\CinemaRepository as CinemaRepository;
     use DAO\CityRepository as CityRepository;
     use DAO\RoomRepository as RoomRepository;
-    
-    use Models\Cinema as Cinema;
+use DAO\ShowRepository;
+use Models\Cinema as Cinema;
     use Models\Room as Room;
     use Utils\Utils as Utils;
 
@@ -95,10 +95,15 @@
                 $cineId = $_GET["id"];
                 
                 $cineRepo = new CinemaRepository();
+                $deleteMsg = $this->ValidateDeleteCinema($cineId);
+                if($deleteMsg != null){
+                    
+                    $this->Index($deleteMsg);
+                }else{
+                    $deleteMsg = $cineRepo->DeleteCinema($cineId);
 
-                $deleteMsg = $cineRepo->DeleteCinema($cineId);
-
-                $this->Index($deleteMsg);
+                    $this->Index($deleteMsg);
+                }
             }
         }
 
@@ -150,7 +155,7 @@
             Utils::CheckAdmin();
 
             $parameterCall = (isset($cinemaId) && !empty($cinemaId));
-
+            $successMsg = $message;
             if($_GET || $parameterCall){
 
                 $cineId = $parameterCall ? $cinemaId : $_GET["cineId"];
@@ -255,11 +260,44 @@
                 
                 $roomRepo = new RoomRepository();
                 $room = $roomRepo->GetById($id);
-                $deleteMsg = $roomRepo->DeleteRoom($id);
+                
+                $deleteMsg = $this->ValidateDeleteRoom($id);
+                
+                if($deleteMsg != null){
+                    $this->RoomListShowView($room->getCinemaId(), $deleteMsg);    
+                }else{
+                    $deleteMsg = $roomRepo->DeleteRoom($id);
 
-                $this->RoomListShowView($room->getCinemaId(), $deleteMsg);
+                    $this->RoomListShowView($room->getCinemaId(), $deleteMsg);
+                }
             }
         }
 
+        public function ValidateDeleteRoom($id){
+            
+            $showRepo = new ShowRepository();
+            $hasShows = $showRepo->ValidateDeleteRoom($id);
+           
+            if(count($hasShows) > 0)
+            {
+                return "No se permite eliminar la sala ya que tiene funciones asociadas";
+            }else{
+                return null;
+            }
+        }
+        
+        public function ValidateDeleteCinema($id){
+            
+            $roomRepo = new RoomRepository();
+            $hasRooms = $roomRepo->ValidateDeleteCinema($id);
+            
+            if(count($hasRooms) > 0)
+            {
+                return "No se permite eliminar el cine ya que tiene salas asociadas.";
+            }else{
+                return null;
+            }
+        }
+        
     }
 ?>
