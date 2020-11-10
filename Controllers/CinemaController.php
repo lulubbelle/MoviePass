@@ -4,8 +4,8 @@
     use DAO\CinemaRepository as CinemaRepository;
     use DAO\CityRepository as CityRepository;
     use DAO\RoomRepository as RoomRepository;
-use DAO\ShowRepository;
-use Models\Cinema as Cinema;
+    use DAO\ShowRepository;
+    use Models\Cinema as Cinema;
     use Models\Room as Room;
     use Utils\Utils as Utils;
 

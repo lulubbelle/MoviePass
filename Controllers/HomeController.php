@@ -1,14 +1,12 @@
 <?php
-    namespace Controllers;
 
-use Models\Show as Show;
+namespace Controllers;
 
 use DAO\MovieRepository as MovieRepository;
 use DAO\CityRepository as CityRepository;
 use DAO\CinemaRepository as CinemaRepository;
 use DAO\RoomRepository as RoomRepository;
 use DAO\ShowRepository as ShowRepository;
-use DAO\GenreRepository as GenreRepository;
 
 class HomeController
 {

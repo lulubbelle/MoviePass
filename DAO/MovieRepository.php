@@ -172,7 +172,8 @@ class MovieRepository implements IMovieRepository{
                         " INNER JOIN MOVIE_GENRE MG ON MG.MOVIE_ID = MO.ID" . 
                         " WHERE MG.GENRE_ID = :genreId";
             $parameters['genreId'] = $genreId;
-
+            // var_dump($genreId);
+            // exit;
             $this->connection = Connection::GetInstance();
             $queryResult = $this->connection->Execute($query, $parameters);
             
