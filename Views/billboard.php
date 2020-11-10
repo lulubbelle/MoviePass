@@ -48,7 +48,17 @@
                                         </div>
                                         <div class="flip-card-back">
                                             <h1 class="titleMovie"> <?php echo $show->getMovie()->getTitle(); ?> </h1> 
-                                            <a id="add" class="button" data-toggle="modal" data-target="#purchaseModal">Reservar</a>
+                                            <a 
+                                                id="add" 
+                                                class="button" 
+                                                data-toggle="modal" 
+                                                data-target="#purchaseModal" 
+                                                data-title="<?php echo $show->getMovie()->getTitle(); ?>" 
+                                                data-desc="<?php echo $show->getMovie()->getDescription(); ?>" 
+                                                data-img="<?= IMG_LINK_W500 . $show->getMovie()->getImgLink()?>" 
+                                            >
+                                                Reservar
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -67,14 +77,15 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="purchaseModalLabel">Comprar entradas</h5>
+        <h5 class="modal-title" id="purchaseModalLabel"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Work in Progress
-      </div>
+            <img class="modal-img" src="" width="195" height="275">
+            <p class="modal-desc"></p>
+      </div>    
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
         <button type="button" class="btn btn-success">Confirmar compra</button>
@@ -84,7 +95,17 @@
 </div>
 
 <script>
-    $('#purchaseModal').on('shown.bs.modal', function () {
-    $('#myInput').trigger('focus')
+    $('#purchaseModal').on('shown.bs.modal', function (e) {
+        $('#myInput').trigger('focus');
+        debugger;
+        let button = $(e.relatedTarget)
+        let title = button.data('title')
+        let description = button.data('desc')
+        let img = button.data('img')
+        let modal = $(this)
+
+        modal.find(".modal-title").text(title)
+        modal.find(".modal-desc").text(description)
+        modal.find(".modal-img").attr("src", img);
     });
 </script>
