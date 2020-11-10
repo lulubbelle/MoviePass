@@ -122,6 +122,16 @@
     line-height: 1.2rem;
 }
 
-/* .modal-body .modal-content .modal-dialog {
-	background-color: #242424 !important;
-} */
+#purchaseModal .modal-header  {
+  background: #242424 !important;
+  color: white;
+}
+
+#purchaseModal .modal-content  {
+  background: #242424 !important;
+  color: white;
+}
+
+#purchaseModal .close {
+  color: white;
+}
