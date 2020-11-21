@@ -1,20 +1,18 @@
 <?php
-    namespace Controllers;
 
-use Models\Show as Show;
+namespace Controllers;
 
 use DAO\MovieRepository as MovieRepository;
 use DAO\CityRepository as CityRepository;
 use DAO\CinemaRepository as CinemaRepository;
 use DAO\RoomRepository as RoomRepository;
 use DAO\ShowRepository as ShowRepository;
-use DAO\GenreRepository as GenreRepository;
 
 class HomeController
 {
     public function Index($message = "")
     {
-            
+       
         $shows = $this->GetShowsForHome();
 
         require_once(VIEWS_PATH."main.php");
@@ -25,11 +23,12 @@ class HomeController
         $showRepo = new ShowRepository();
 
         if($cinemaId == null){
+            
             $shows = $showRepo->GetAll();
         }else{
             $shows = $showRepo->GetByCinemaId($cinemaId);
         }
-
+        
         $movieRepo = new MovieRepository();
         $cityRepo = new CityRepository();
         $roomRepo = new RoomRepository();

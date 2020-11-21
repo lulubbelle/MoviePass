@@ -97,7 +97,7 @@
 <script>
     $('#purchaseModal').on('shown.bs.modal', function (e) {
         $('#myInput').trigger('focus');
-        debugger;
+        
         let button = $(e.relatedTarget)
         let title = button.data('title')
         let description = button.data('desc')
