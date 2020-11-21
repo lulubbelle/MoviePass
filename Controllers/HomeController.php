@@ -29,8 +29,6 @@ class HomeController
             $shows = $showRepo->GetByCinemaId($cinemaId);
         }
         
-        var_dump($shows);
-        exit;
         $movieRepo = new MovieRepository();
         $cityRepo = new CityRepository();
         $roomRepo = new RoomRepository();

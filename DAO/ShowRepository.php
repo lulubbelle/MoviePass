@@ -27,8 +27,7 @@ class ShowRepository implements IShowRepository{
             
             $this->connection = Connection::GetInstance();
             $queryResult = $this->connection->Execute($query);
-            var_dump($queryResult);
-            exit;
+
             $ret = Show::mapData($queryResult);
 
             return $ret;
