@@ -20,8 +20,7 @@
 
                 $userRepo = new UserRepository();
                 $user = $userRepo->GetUserByMail($username);
-                var_dump($user);
-                exit;
+
                 if(empty($user) || !isset($user)){
                     $errorLogin = "Los datos ingresados no son validos.";
                     require_once(VIEWS_PATH."login.php");
