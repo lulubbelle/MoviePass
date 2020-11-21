@@ -24,9 +24,11 @@ class ShowRepository implements IShowRepository{
         {
             $ret = array();
             $query = "SELECT * FROM " . $this->tableName . " WHERE ACTIVE = 1 ORDER BY ID DESC, MOVIE_ID";
+            
             $this->connection = Connection::GetInstance();
             $queryResult = $this->connection->Execute($query);
-            
+            var_dump($queryResult);
+            exit;
             $ret = Show::mapData($queryResult);
 
             return $ret;
@@ -196,7 +198,7 @@ class ShowRepository implements IShowRepository{
         $queryResult = $this->connection->Execute($query, $parameters);
         
         $ret = Show::mapData($queryResult);
-            
+        
         return $ret;
     }
 

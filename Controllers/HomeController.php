@@ -12,7 +12,7 @@ class HomeController
 {
     public function Index($message = "")
     {
-            
+       
         $shows = $this->GetShowsForHome();
 
         require_once(VIEWS_PATH."main.php");
@@ -23,11 +23,14 @@ class HomeController
         $showRepo = new ShowRepository();
 
         if($cinemaId == null){
+            
             $shows = $showRepo->GetAll();
         }else{
             $shows = $showRepo->GetByCinemaId($cinemaId);
         }
-
+        
+        var_dump($shows);
+        exit;
         $movieRepo = new MovieRepository();
         $cityRepo = new CityRepository();
         $roomRepo = new RoomRepository();
