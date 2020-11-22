@@ -47,7 +47,7 @@ class ShowController{
         }
     }
 
-    public function ShowBillboardView(){
+    public function ShowBillboardView($errorMsg = ""){
         Utils::CheckAdmin();
         
         $shows = $this->GetShowsWithAllData();
@@ -58,6 +58,99 @@ class ShowController{
 
         include_once(VIEWS_PATH."billboard.php");
     }
+
+    public function GetShowsByCinemaIdAndDateRange(){
+        Utils::CheckSession();
+        if($_GET){
+            $dateFrom = $_GET['dateTimeFrom'];
+            $dateTo = $_GET['dateTimeTo'];
+            $cinemaId = $_GET['cinemaId'];
+
+            if($dateTo < $dateFrom){
+                $this->Index("Debe ingresar una 'Fecha Hasta' mayor a la 'Fecha Desde'");
+            }
+
+            $showsRepo = new ShowRepository();
+            $shows = $showsRepo->GetShowsByCinemaIdAndDateRange($dateFrom, $dateTo, $cinemaId);
+
+            $movieRepo = new MovieRepository();
+            $cityRepo = new CityRepository();
+            $roomRepo = new RoomRepository();
+            $cinemaRepo = new CinemaRepository();
+    
+            foreach($shows as $value){
+                $movie = $movieRepo->GetById($value->getMovieId());
+                $value->setMovie($movie);
+    
+                $city = $cityRepo->GetCityByRoomId($value->getRoomId());
+                $value->setCity($city);
+                
+                $room = $roomRepo->GetById($value->getRoomId());
+    
+                $value->setRoom($room);
+                
+                $cinema = $cinemaRepo->GetById($value->getRoom()->getCinemaId());
+    
+                $value->setCinema($cinema);
+                
+            }
+            
+            $genreRepo = new GenreRepository();
+            $genres = $genreRepo->getAll();
+
+            $cinemaRepo = new CinemaRepository();
+            $cinemas = $cinemaRepo->GetAll();
+    
+            include_once(VIEWS_PATH."showList.php");
+        }
+        
+    }
+
+    public function GetShowsByGenreAndDateRange(){
+
+        Utils::CheckSession();
+        if($_GET){
+            $dateFrom = $_GET['dateTimeFrom'];
+            $dateTo = $_GET['dateTimeTo'];
+            $genreId = $_GET['genreId'];
+            
+            if($dateTo < $dateFrom){
+                $this->ShowBillboardView("Debe ingresar una 'Fecha Hasta' mayor a la 'Fecha Desde'");
+            }
+
+            $showsRepo = new ShowRepository();
+            $shows = $showsRepo->GetShowsByGenreAndDateRange($dateFrom, $dateTo, $genreId);
+            
+            $movieRepo = new MovieRepository();
+            $cityRepo = new CityRepository();
+            $roomRepo = new RoomRepository();
+            $cinemaRepo = new CinemaRepository();
+    
+            foreach($shows as $value){
+                $movie = $movieRepo->GetById($value->getMovieId());
+                $value->setMovie($movie);
+    
+                $city = $cityRepo->GetCityByRoomId($value->getRoomId());
+                $value->setCity($city);
+                
+                $room = $roomRepo->GetById($value->getRoomId());
+    
+                $value->setRoom($room);
+                
+                $cinema = $cinemaRepo->GetById($value->getRoom()->getCinemaId());
+    
+                $value->setCinema($cinema);
+                
+            }
+            
+            $genreRepo = new GenreRepository();
+            $genres = $genreRepo->getAll();
+
+            include_once(VIEWS_PATH."billboard.php");
+        }
+
+    }
+
 
     public function MovieSearch(){
         Utils::CheckAdmin();
@@ -179,14 +272,31 @@ class ShowController{
     private function ValidateNewShow($show){
 
         $validationErrors = array();
-
+        // <ul>
+        //     <li>
+        //         hola
+        //         <ul>
+        //             <li>hola</li>
+        //         </ul>
+        //     </li>
+        // </ul>
         //Unica pelicula en todos los cines ese dia
         $showRepo = new ShowRepository();
         $result = $showRepo->GetByDateAndMovieId($show->getDateTimeFrom(), $show->getMovieId());
         
         if($result != null && count($result) > 0)
-        {
-            array_push($validationErrors, "La pelicula indicada ya tiene funciones en otro cine en la fecha seleccionada.");
+        {   
+            $message = "<ul> <li>La pelicula indicada ya tiene funciones en otro cine en la fecha seleccionada.";
+            
+            $message = $message . "<ul>";
+
+            foreach($result as $show){
+                $show = $this->GetShowDetails($show);
+                $message = $message . "<li> Cine: " . $show->getCinema()->getName() . "</li>";    
+            }
+            $message = $message . "</ul></li></ul>";
+
+            array_push($validationErrors, $message);
         }
 
         $result = null;
@@ -195,7 +305,17 @@ class ShowController{
         
         if($result != null && count($result) > 0)
         {
-            array_push($validationErrors, "La pelicula indicada ya tiene funciones asignadas en otras salas de este cine.");
+            $message = "<ul><li>La pelicula indicada ya tiene funciones asignadas en otras salas de este cine.";
+            
+            $message = $message . "<ul>";
+
+            foreach($result as $show){
+                $show = $this->GetShowDetails($show);
+                $message = $message . "<li> Sala: " . $show->getRoom()->getName() . "</li>";    
+            }
+            $message = $message . "</ul></li></ul>";
+            
+            array_push($validationErrors, $message);
         }
 
         $result = null;
@@ -204,7 +324,8 @@ class ShowController{
         
         if($result != null && count($result) > 0)
         {
-            array_push($validationErrors, "El horario de comienzo de la funcion debe ser posterior a 15 minutos desde la ultima funcion en esta sala.");
+            //
+            array_push($validationErrors, "<ul><li>El horario de comienzo de la funcion debe ser posterior a 15 minutos desde la ultima funcion en esta sala (" . $show->getDateTimeTo() . " + 15 mins).</li></ul>");
         }
         
         $result = null;
@@ -213,7 +334,7 @@ class ShowController{
         
         if($result != null && count($result) > 0)
         {
-            array_push($validationErrors, "Ya existe otra funcion para este horario en esta sala.");
+            array_push($validationErrors, "<ul><li>Ya existe otra funcion para este horario en esta sala (" . $show->getDateTimeFrom() . ").</li></ul>");
         }
         
         return join(" <br>", $validationErrors);
@@ -251,6 +372,30 @@ class ShowController{
             
         }
         return $shows;
+    }
+
+    private function GetShowDetails(Show $show){
+        
+        $movieRepo = new MovieRepository();
+        $cityRepo = new CityRepository();
+        $roomRepo = new RoomRepository();
+        $cinemaRepo = new CinemaRepository();
+
+        $movie = $movieRepo->GetById($show->getMovieId());
+        $show->setMovie($movie);
+
+        $city = $cityRepo->GetCityByRoomId($show->getRoomId());
+        $show->setCity($city);
+        
+        $room = $roomRepo->GetById($show->getRoomId());
+
+        $show->setRoom($room);
+        
+        $cinema = $cinemaRepo->GetById($show->getRoom()->getCinemaId());
+
+        $show->setCinema($cinema);
+        
+        return $show;
     }
 
 }

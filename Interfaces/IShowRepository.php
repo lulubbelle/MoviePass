@@ -14,6 +14,8 @@ interface IShowRepository{
     function GetByRoomIdAndMovieId($roomId, $movieId);
     function GetShowByDatePlusMinutes($dateFrom, $minutes);
     function GetShowIsPlayingInDateTime($dateFrom);
+    function GetShowsByGenreAndDateRange($dateFrom, $dateTo, $genreId);
+    public function GetShowsByCinemaIdAndDateRange($dateFrom, $dateTo, $cinemaId);
 }
 
 ?>
