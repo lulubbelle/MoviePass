@@ -7,6 +7,11 @@
     <div id="box" class="row justify-content-center" style="background-color: #242424;">
         <!-- Inicio Listado de Estrenos -->
         <div class="col-md-12">
+        
+            <?php if(isset($errorMsg)&& !empty($errorMsg)) {?>
+                <p class="alert alert-danger" style="margin-top: 15px;"><?=$errorMsg?></p>
+            <?php }?>
+            
             <div class="row align-items-center">
                 <div class="col-md-3">
                     <h1 class="basic-font cinema-view-title">Funciones</h1>                
@@ -19,7 +24,31 @@
                     Filtrar Funciones
                 </div>
 
-                <form action="<?= FRONT_ROOT ?>Show" method="GET" class="col-md-6">
+                <form action="<?= FRONT_ROOT ?>Show/GetShowsByCinemaIdAndDateRange" method="GET" class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-content">
+                                <div class="form-group">
+                                    <!-- Fecha Desde -->
+                                    <div class="form-group">
+                                        <label class="cinema-input-label" for="dateTimeFrom">Fecha Desde</label>
+                                        <input name="dateTimeFrom" id="dateTimeFrom" type="datetime-local" min="<?php echo date("Y-m-d")?>T00:00" class="form-control form-control-md cinema-input" placeholder="Fecha / Hora" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-content">
+                                <div class="form-group">
+                                    <!-- Fecha Hasta -->
+                                    <div class="form-group">
+                                        <label class="cinema-input-label" for="dateTimeFrom">Fecha Hasta</label>
+                                        <input name="dateTimeTo" id="dateTimeTo" type="datetime-local" min="<?php echo date("Y-m-d")?>T00:00" class="form-control form-control-md cinema-input" placeholder="Fecha / Hora" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-5">
                             <div class="form-content">

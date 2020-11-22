@@ -188,7 +188,7 @@ class ShowRepository implements IShowRepository{
     
     public function GetShowByDatePlusMinutes($dateFrom, $minutes){
         
-        $query = "SELECT * FROM " . $this->tableName . " WHERE DATETIME_TO > date_add( :dateFrom , interval " . -$minutes . " minute) AND DATETIME_TO <= :anotherDateFrom AND ACTIVE = 1;";
+        $query = "SELECT * FROM " . $this->tableName . " WHERE DATETIME_TO >= date_add( :dateFrom , interval " . -$minutes . " minute) AND DATETIME_TO <= :anotherDateFrom AND ACTIVE = 1;";
         
         $parameters['dateFrom'] = $dateFrom;
         $parameters['anotherDateFrom'] = $dateFrom;
@@ -218,6 +218,42 @@ class ShowRepository implements IShowRepository{
         $query = "SELECT * FROM " . $this->tableName . " WHERE ROOM_ID = :roomId AND ACTIVE = 1;";
         
         $parameters['roomId'] = $roomId;
+        
+        $this->connection = Connection::getInstance();
+        $queryResult = $this->connection->Execute($query, $parameters);
+        
+        $ret = Show::mapData($queryResult);
+            
+        return $ret;
+    }
+    
+    public function GetShowsByGenreAndDateRange($dateFrom, $dateTo, $genreId){
+
+        $query = "SELECT * FROM " . $this->tableName . " WHERE DATETIME_FROM >= :dateFrom AND DATETIME_TO <= :dateTo AND ACTIVE = 1 ";
+        
+        if($genreId != 0){
+            $query = $query . " AND MOVIE_ID IN (SELECT MOVIE_ID FROM MOVIE_GENRE WHERE GENRE_ID = :genreId)";
+            $parameters['genreId'] = $genreId;
+        }
+        
+        $parameters['dateFrom'] = $dateFrom;
+        $parameters['dateTo'] = $dateTo;
+        
+        
+        $this->connection = Connection::getInstance();
+        $queryResult = $this->connection->Execute($query, $parameters);
+        
+        $ret = Show::mapData($queryResult);
+            
+        return $ret;
+    }
+
+    public function GetShowsByCinemaIdAndDateRange($dateFrom, $dateTo, $cinemaId){
+        $query = "SELECT * FROM " . $this->tableName . " WHERE DATETIME_FROM >= :dateFrom AND DATETIME_TO <= :dateTo AND ACTIVE = 1 AND ROOM_ID IN (SELECT ID FROM ROOM WHERE CINEID = :cinemaId)";
+
+        $parameters['dateFrom'] = $dateFrom;
+        $parameters['dateTo'] = $dateTo;
+        $parameters['cinemaId'] = $cinemaId;
         
         $this->connection = Connection::getInstance();
         $queryResult = $this->connection->Execute($query, $parameters);

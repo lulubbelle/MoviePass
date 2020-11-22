@@ -40,6 +40,10 @@ define("MIN_TIME_BETWEEN_SHOWS", 15);
 define("CINEMA_UNIQUE_ADDRESS_IX", "CINEMA_UNIQUE_IX1");
 define("USER_UNIQUE_MAIL_IX", "MAIL_UNIQUE_IX");
 
+//QR Generation
+define("QR_LIB_PATH", "Config/phpqrcode/qrlib.php");
+define("QR_FOLDER_PATH", "QrCodes/");
+
 ?>
 
 

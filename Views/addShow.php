@@ -37,7 +37,7 @@
                     ?>
                     <form action="<?= FRONT_ROOT.$action ?> " method="POST" class="cinema-form">
                         <?php if(isset($errorAbmShow)&& !empty($errorAbmShow)) {?>
-                            <p class="alert alert-danger" style="margin-top: 15px;"><?=$errorAbmShow?></p>
+                            <div class="alert alert-danger" style="margin-top: 15px;"><?=$errorAbmShow?></div>
                         <?php }?>
                         <?php if(isset($successMsg) && !empty($successMsg)) {?>
                             <p class="alert alert-success"><?=$successMsg?></p>
