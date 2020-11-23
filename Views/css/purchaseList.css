@@ -9,9 +9,18 @@
 
 .purchase-header-row{
     margin: 4% 4% 0% 4%;
-    
     border-bottom: 2px solid gray; 
     padding-bottom: 3%;
+}
+
+.show-header-row{
+    margin: 4% 4% 0% 4%;
+    padding-bottom: 1%;
+}
+
+.purchase-item:first-child {
+    border-top: 2px solid gray;
+    padding-top: 3%;
 }
 
 .purchase-header{
@@ -96,4 +105,8 @@
     color: black;
     font-family: 'Bebas Neue', cursive;
     font-size: 22px;
+}
+
+.filter-container {
+    flex: 0 0 98%
 }
