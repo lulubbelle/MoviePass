@@ -7,101 +7,21 @@
     <div id="box" class="row justify-content-center" style="background-color: #242424;">
         <!-- Inicio Listado de Estrenos -->
         <div class="col-md-12">
-        
-            <?php if(isset($errorMsg)&& !empty($errorMsg)) {?>
-                <p class="alert alert-danger" style="margin-top: 15px;"><?=$errorMsg?></p>
-            <?php }?>
-            
             <div class="row align-items-center">
                 <div class="col-md-3">
                     <h1 class="basic-font cinema-view-title">Funciones</h1>                
                 </div>
-                
             </div>
-            
-            <div class="row cinema-header-row">
-                <div class="col-md-3 cinema-header ">
-                    Filtrar Funciones
-                </div>
-
-                <form action="<?= FRONT_ROOT ?>Show/GetShowsByCinemaIdAndDateRange" method="GET" class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-content">
-                                <div class="form-group">
-                                    <!-- Fecha Desde -->
-                                    <div class="form-group">
-                                        <label class="cinema-input-label" for="dateTimeFrom">Fecha Desde</label>
-                                        <input name="dateTimeFrom" id="dateTimeFrom" type="datetime-local" min="<?php echo date("Y-m-d")?>T00:00" class="form-control form-control-md cinema-input" placeholder="Fecha / Hora" required />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-content">
-                                <div class="form-group">
-                                    <!-- Fecha Hasta -->
-                                    <div class="form-group">
-                                        <label class="cinema-input-label" for="dateTimeFrom">Fecha Hasta</label>
-                                        <input name="dateTimeTo" id="dateTimeTo" type="datetime-local" min="<?php echo date("Y-m-d")?>T00:00" class="form-control form-control-md cinema-input" placeholder="Fecha / Hora" required />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="form-content">
-                                <div class="form-group">
-                                    <select name="cinemaId" id="cinemaSearchInput" class="form-control form-control-md cinema-input" placeholder="Cines" required>
-                                        <option value="" selected> Seleccione... </option>
-                                        <?php 
-                                                foreach($cinemas as $cinema){
-                                            ?>
-                                                    <option value="<?=$cinema->getId()?>"><?=$cinema->getName()?></option>
-                                            <?php 
-                                                }
-                                            ?>    
-                                        
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-content">
-                                <div class="form-group"  style="padding-top:5px;">
-                                    <button id="searchMovie" class="btn btn-primary" type="submit">Buscar</button>
-                                </div>
-                            </div>
-                        </div>
-                        
-
-                        <div class="col-md-4">
-                            <div class="form-content">
-                                <div class="form-group">
-                                <a href="<?= FRONT_ROOT ?>Show" class="btn btn-primary" type="submit">Limpiar Filtros</a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </form>
-
-                <div class="col-md-3">
-                    <div class="form-content">
-                        <div class="form-group">
-                            <a href="<?= FRONT_ROOT?>Movie" class="btn  btn-success">Agregar Funcion</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-             
             <?php 
             if(!empty($deleteMsg)){
             ?>
                 <div class="row text-center">
-                    <p class="alert alert-danger ml-5 mr-5"><?=$deleteMsg?></p>
+                    <div class="alert alert-danger ml-5 mr-5 alert-dismissible fade show" role="alert">
+                        <span><?=$deleteMsg?></span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 </div>
             <?php 
             }
@@ -110,11 +30,100 @@
             if(!empty($successMsg)){
             ?>
                 <div class="row text-center">
-                    <p class="alert alert-success ml-5 mr-5"><?=$successMsg?></p>
+                    <div class="alert alert-danger ml-5 mr-5 alert-dismissible fade show" role="alert">
+                        <span><?=$successMsg?></span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 </div>
             <?php 
             }
             ?>
+
+            <div class="row ">
+                <div class="show-header-row">
+                    <h1 class="cinema-header ">
+                        Filtrar Funciones
+                    </h1>
+                </div>
+                
+
+                <div class="col-md-12 filter-container">
+                    <form action="<?= FRONT_ROOT ?>Show/GetShowsByCinemaIdAndDateRange" method="GET" class="col-md-12">
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-content">
+                                    <!-- Fecha Desde -->
+                                    <div class="form-group">
+                                        <label class="cinema-input-label" for="dateTimeFrom">Fecha Desde</label>
+                                        <input name="dateTimeFrom" id="dateTimeFrom" type="datetime-local" min="<?php echo date("Y-m-d")?>T00:00" class="form-control form-control-md cinema-input" placeholder="Fecha / Hora" required />
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="col-md-4">
+                                <div class="form-content">
+                                    <!-- Fecha Hasta -->
+                                    <div class="form-group">                                    
+                                        <label class="cinema-input-label" for="dateTimeTo">Fecha Hasta</label>
+                                        <input name="dateTimeTo" id="dateTimeTo" type="datetime-local" min="<?php echo date("Y-m-d")?>T00:00" class="form-control form-control-md cinema-input" placeholder="Fecha / Hora" required />                                    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-content">
+                                    <!-- Cines -->
+                                    <div class="form-group">
+                                        <label class="cinema-input-label" for="cinemaId">Cines</label>
+                                        <select name="cinemaId" id="cinemaSearchInput" class="form-control form-control-md cinema-input" placeholder="Cines" required>
+                                            <option value="" selected> Seleccione... </option>
+                                            <?php 
+                                                    foreach($cinemas as $cinema){
+                                                ?>
+                                                        <option value="<?=$cinema->getId()?>"><?=$cinema->getName()?></option>
+                                                <?php 
+                                                    }
+                                                ?>    
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                        
+                            <div class="col-md-4">
+                                <div class="form-content">
+                                    <div class="form-group">
+                                        <button id="searchMovie" class="btn btn-block btn-primary" type="submit">Buscar</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-content">
+                                    <div class="form-group">
+                                        <a href="<?= FRONT_ROOT ?>Show" class="btn btn-block btn-secondary" type="submit">Limpiar Filtros</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-content">
+                                    <div class="form-group">
+                                        <a href="<?= FRONT_ROOT?>Movie" class="btn btn-block btn-success">Agregar Funcion</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+                
+
+            </div>
             
             <div class="row">
                 <div class="col-md-12">
