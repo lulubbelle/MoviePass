@@ -94,6 +94,7 @@
                                                 data-title="<?php echo $show->getMovie()->getTitle(); ?>" 
                                                 data-desc="<?php echo $show->getMovie()->getDescription(); ?>" 
                                                 data-img="<?= IMG_LINK_W500 . $show->getMovie()->getImgLink()?>" 
+                                                data-movieid="<?php echo $show->getMovie()->getId(); ?>"
                                             >
                                                 Reservar
                                             </a>
@@ -131,45 +132,58 @@
                         <div class="show-description-container">
                             <p class="modal-desc show-description"></p>
                         </div>
-                        <span class="show-info">Categoría: Aventura - Accion</span>
+                        <!-- <span class="show-info">Categoría: Aventura - Accion</span> -->
                         <div class="show-combo-container">
-                            <div class="form-content">
-                                <!-- Ciudades -->
-                                <div class="form-group">
-                                    <label class="cinema-input-label" for="cityId">Ciudad</label>
-                                    <select name="cityId" id="cinemaSearchInput" class="form-control form-control-md cinema-input" placeholder="Cines" required>
-                                        <option value="" selected> Seleccione... </option>
-                                        <!-- <?php 
-                                            foreach($cinemas as $cinema){
-                                                ?>
-                                                <option value="<?=$cinema->getId()?>"><?=$cinema->getName()?></option>
-                                                <?php 
-                                            }
-                                            ?>                                             -->
-                                    </select>
+                            <form action="<?= FRONT_ROOT ?>Purchase/PurchaseAction" method="POST">
+                                
+                                <!-- Hidden -->
+                                <div class="form-content">
+                                    <div class="form-group">
+                                        <input type="text" name="movieId" id="movieId" style="display:none;"/>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-content">
-                                <!-- Funciones -->
-                                <div class="form-group">
-                                    <label class="cinema-input-label" for="showId">Funcion</label>
-                                    <select name="showId" id="showSearchInput" class="form-control form-control-md cinema-input" placeholder="Funciones" required>
-                                        <option value="" selected> Seleccione... </option>
-                                        <!-- <?php 
-                                                foreach($cinemas as $cinema){
-                                                    ?>
-                                                    <option value="<?=$cinema->getId()?>"><?=$cinema->getName()?></option>
-                                                    <?php 
-                                                }
-                                                ?>                                             -->
-                                    </select>
+
+                                <div class="form-content">
+                                    <div class="form-group">
+                                        <input type="number" name="itemPrice" id="itemPrice" style="display:none;"/>
+                                    </div>
                                 </div>
-                            </div>
+
+                                <div class="form-content">
+                                    <!-- Ciudades -->
+                                    <div class="form-group">
+                                        <label class="cinema-input-label" for="cityId">Ciudad</label>
+                                        <select name="cityId" id="citySearchInput" class="form-control form-control-md cinema-input" placeholder="Cines" required>
+                                            <option value="" selected> Seleccione... </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-content">
+                                    <!-- Funciones -->
+                                    <div class="form-group">
+                                        <label class="cinema-input-label" for="showId">Funcion</label>
+                                        <select name="showId" id="showSearchInput" class="form-control form-control-md cinema-input" placeholder="Funciones" required>
+                                            <option value="" selected> Seleccione... </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-content">
+                                    <!-- Ciudades -->
+                                    <div class="form-group">
+                                        <label class="cinema-input-label" for="cantTickets">Cantidad Tickets</label>
+                                        <input name="cantTickets" type="number" id="cantTicketsInput" class="form-control form-control-md cinema-input" placeholder="Cantidad Tickets" required> </input>
+                                    </div>
+                                </div>
+                                <div class="form-content">
+                                    <!-- Ciudades -->
+                                    <div class="form-group">
+                                        <label class="cinema-input-label" for="totalPrice">Precio Total</label>
+                                        <input name="totalPrice" type="number" id="totalPriceInput" class="form-control form-control-md cinema-input" placeholder="Precio Total" required> </input>
+                                    </div>
+                                </div>
+                            
+                            </form>
                         </div>
-                        
-                        <span class="show-info">Cine: Ambassador</span>
-                        <br/>
-                        <span class="show-info">Sala: Sala Atmos</span>
                         
 
                         <button type="submit" class="purchase-btn">Comprar</button>
@@ -208,6 +222,7 @@
 </div>
 
 <script>
+
     $('#purchaseModal').on('shown.bs.modal', function (e) {
         $('#myInput').trigger('focus');
         
@@ -215,10 +230,116 @@
         let title = button.data('title')
         let description = button.data('desc')
         let img = button.data('img')
+        let movieId = button.data('movieid')
         let modal = $(this)
 
         modal.find(".modal-title").text(title)
         modal.find(".modal-desc").text(description)
         modal.find(".modal-img").attr("src", img);
+
+        //TODO: Review
+        $("#movieId").val(movieId)
+
+        getCitysForPurchase(movieId);
+    });
+    
+    const validateNullResponse = (data) => data != '' && data != '[]';
+
+    const getCitysForPurchase = (movieId) => {
+        const url = <?= FRONT_ROOT ?> + "Show/LoadCitysForPurchase";
+        $.ajax({ 
+            url: url,
+            method: 'POST',
+            data: { movieId },
+            context: 'document.body',
+            success:  function (r) 
+            {
+
+                let citys = $('#citySearchInput');
+
+                citys.prop('disabled', false);
+                // Limpiamos el select
+                citys.find('option').remove();
+                
+                
+                let jsonText = r.substring(r.indexOf('$')+1 ,r.indexOf('%'));
+                if(validateNullResponse(jsonText)){
+                    citys.append("<option value=''>Elija uno...</option>");
+
+                    let json = JSON.parse(jsonText);
+
+                    $(json).each(function(i, v){ 
+                        citys.append('<option value="' + v.id + '">' + v.cityDesc + '</option>');
+                    })
+                }else{
+                    citys.append("<option value=''>No se encontraron resultados.</option>");
+                }
+            },
+            error: function(jqXHR, textStatus )
+            {
+                alert('Ocurrio un error en el servidor: ' + textStatus);
+                rooms.prop('disabled', true);
+            }
+
+        });
+    }
+
+    const getShowsForPurchase = (data) => {
+        const url = <?= FRONT_ROOT ?> + "Show/LoadShowsForPurchase";
+        $.ajax({ 
+            url: url,
+            method: 'POST',
+            data: data,
+            context: 'document.body',
+            success:  function (r) 
+            {
+                let shows = $('#showSearchInput');
+
+                shows.prop('disabled', false);
+                // Limpiamos el select
+                shows.find('option').remove();
+                
+                
+                let jsonText = r.substring(r.indexOf('$')+1 ,r.indexOf('%'));
+                if(validateNullResponse(jsonText)){
+                    shows.append("<option value=''>Elija uno...</option>");
+
+                    let json = JSON.parse(jsonText);
+
+                    $(json).each(function(i, v){ 
+                        
+                        shows.append('<option data-price="' + v.price + '" value="' + v.id + '">'+ v.cinema + ' ' + v.date + '</option>');
+                    })
+                }else{
+                    shows.append("<option value=''>No se encontraron resultados.</option>");
+                }
+            },
+            error: function(jqXHR, textStatus )
+            {
+                alert('Ocurrio un error en el servidor: ' + textStatus);
+                rooms.prop('disabled', true);
+            }
+
+        });
+    }
+
+    $('#citySearchInput').change(() => {
+        let cityId = $('#citySearchInput').val();
+        let movieId = $("#movieId").val();
+        let data = { cityId: cityId, movieId: movieId };
+        getShowsForPurchase(data);
+    });
+
+    $('#showSearchInput').change(() => {
+        let selected = $('#showSearchInput').find('option:selected')[0];
+        let price = selected.dataset.price; 
+        //Actualizo precio individual para calcular precio total
+        $('#itemPrice').val(price);
+    });
+    
+    $('#cantTicketsInput').change(() => {
+        let totalPrice = $('#itemPrice').val() * $('#cantTicketsInput').val();
+        //Actualizo precio total
+        $('#totalPriceInput').val(totalPrice);
     });
 </script>
