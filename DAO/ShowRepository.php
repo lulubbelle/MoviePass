@@ -3,6 +3,7 @@
 namespace DAO;
 
 use Models\Show as Show;
+use Models\City as City;
 use DAO\Connection as Connection;
 use \Exception as Exception;
 use Interfaces\IShowRepository as IShowRepository;
@@ -263,6 +264,42 @@ class ShowRepository implements IShowRepository{
         return $ret;
     }
 
+    public function GetCitysForPurchase($movieId){
+        $query = "SELECT CIT.* FROM SHOWS SH
+        INNER JOIN ROOM RO ON RO.ID = SH.ROOM_ID
+        INNER JOIN CINEMA CIN ON CIN.ID = RO.CINEID
+        INNER JOIN CITY CIT ON CIT.ID = CIN.CITY_ID
+        WHERE SH.MOVIE_ID = :movieId AND SH.ACTIVE = 1 AND CIT.ACTIVE = 1;";
+
+        $parameters['movieId'] = $movieId;
+
+        $this->connection = Connection::getInstance();
+        $queryResult = $this->connection->Execute($query, $parameters);
+
+        $ret = City::mapData($queryResult);
+
+        return $ret;
+    }
+    
+    public function GetShowsForPurchaseByCityIdAndMovieId($cityId, $movieId){
+        $query = "SELECT SH.* FROM SHOWS SH
+        INNER JOIN ROOM RO ON RO.ID = SH.ROOM_ID
+        INNER JOIN CINEMA CIN ON CIN.ID = RO.CINEID
+        INNER JOIN CITY CIT ON CIT.ID = CIN.CITY_ID
+        WHERE CIT.ID = :cityId AND SH.MOVIE_ID = :movieId
+        AND SH.ACTIVE = 1 AND CIT.ACTIVE = 1;
+        #AND RO.CAPACITY > COUNT TICKETS!;";
+
+        $parameters['cityId'] = $cityId;
+        $parameters['movieId'] = $movieId;
+
+        $this->connection = Connection::getInstance();
+        $queryResult = $this->connection->Execute($query, $parameters);
+
+        $ret = Show::mapData($queryResult);
+
+        return $ret;
+    }
 }
 
 ?>

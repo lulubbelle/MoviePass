@@ -51,7 +51,8 @@ class ShowController{
         Utils::CheckAdmin();
         
         $shows = $this->GetShowsWithAllData();
-
+        // var_dump($shows);
+        // exit;
         $genreRepo = new GenreRepository();
 
         $genres = $genreRepo->getAll();
@@ -218,6 +219,57 @@ class ShowController{
                 array_push($arrayToEncode, $values);
             }
     
+            $json = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
+            
+            echo "$" . $json . "%";
+        }
+    }
+    //Ajax Call
+    public function LoadCitysForPurchase(){
+        Utils::CheckSession();
+        if(isset($_POST["movieId"])){
+            $movieId = Utils::CleanInput($_POST["movieId"]);
+
+            $showRepo = new ShowRepository();
+            $citys = $showRepo->GetCitysForPurchase($movieId);
+            
+            $arrayToEncode = array();
+            foreach($citys as $city){
+            
+                $values["id"] = $city->getId();
+                $values["cityDesc"] = $city->getName();
+                
+                array_push($arrayToEncode, $values);
+            }
+    
+            $json = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
+            
+            echo "$" . $json . "%";
+        }
+    }
+    //Ajax Call
+    public function LoadShowsForPurchase(){
+        Utils::CheckSession();
+        if(isset($_POST["cityId"]) && isset($_POST["movieId"])){
+            $cityId = Utils::CleanInput($_POST["cityId"]);
+            $movieId = Utils::CleanInput($_POST["movieId"]);
+
+            $showRepo = new ShowRepository();
+            $shows = $showRepo->GetShowsForPurchaseByCityIdAndMovieId($cityId, $movieId);
+            
+            $arrayToEncode = array();
+            foreach($shows as $show){
+                $show = $this->GetShowDetails($show);
+
+                $values["id"] = $show->getId();
+                //Agregar datos segun txt
+                $values["cinema"] = $show->getCinema()->getName();
+                $values["date"] = $show->getDateTimeFrom() . " | " . $show->getDateTimeTo();
+                $values["price"] = $show->getRoom()->getPrice();
+
+                array_push($arrayToEncode, $values);
+            }
+
             $json = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
             
             echo "$" . $json . "%";
