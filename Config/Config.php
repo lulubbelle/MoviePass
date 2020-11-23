@@ -44,6 +44,10 @@ define("USER_UNIQUE_MAIL_IX", "MAIL_UNIQUE_IX");
 define("QR_LIB_PATH", "Config/phpqrcode/qrlib.php");
 define("QR_FOLDER_PATH", "QrCodes/");
 
+
+define("MAIL_MP", "InfoMoviePass@gmail.com" );
+define("MAIL_PASS", "MoviePassThe1");
+
 ?>
 
 

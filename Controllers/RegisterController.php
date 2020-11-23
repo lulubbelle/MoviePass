@@ -6,6 +6,7 @@
     use Models\User as User;
     use Models\UserProfile as UserProfile;
     use Utils\Utils as Utils;
+    use PHPMailer\Mail as Mail;
 
     class RegisterController
     {
@@ -63,14 +64,10 @@
                 $userProfile->setFirstName($first_name);
                 $userProfile->setLastName($last_name);
                 $userProfile->setDNI($dni);
-
-
-               
-                
-                
-               
                 
                 $registerProfile = $userProfileRepo->Add($userProfile);
+
+                Mail::SendRegisterMail($user, $userProfile);
 
                 if(empty($registerErrors)){
                     require_once(VIEWS_PATH."login.php");
