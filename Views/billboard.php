@@ -170,22 +170,16 @@
                                     <!-- Cant tickets -->
                                     <div class="form-group">
                                         <label class="cinema-input-label" for="cantTickets">Cantidad Tickets</label>
-                                        <input name="cantTickets" type="number" id="cantTicketsInput" class="form-control form-control-md cinema-input" placeholder="Cantidad Tickets" required> </input>
+                                        <input name="cantTickets" type="number" id="cantTicketsInput" class="form-control form-control-md cinema-input" placeholder="Cantidad Tickets" min=1 required> </input>
                                     </div>
                                 </div>
-                                <div class="form-content-billboard" style="display: none;">
-                                    <!-- total -->
-                                    <div class="form-group">
-                                        <label class="cinema-input-label" for="totalPrice">Precio Total</label>
-                                        <input name="totalPrice" type="number" id="totalPriceInput" class="form-control form-control-md cinema-input" placeholder="Precio Total" required> </input>
-                                    </div>
-                                </div>
-                            
+                                
+                                <button type="submit" class="purchase-btn">Comprar</button>
                             </form>
                         </div>
                         
 
-                        <button type="submit" class="purchase-btn">Comprar</button>
+                        
                     </div>
                 </div>
 
@@ -235,6 +229,13 @@
 
         //TODO: Review
         $("#movieId").val(movieId)
+        $('#showSearchInput').find('option').remove()
+        $('#showSearchInput').append("<option value=''>Elija uno...</option>")
+        $('#citySearchInput').find('option').remove()
+        $('#citySearchInput').append("<option value=''>Elija uno...</option>")
+        
+        $('#cantTicketsInput').val(1)
+        
 
         getCitysForPurchase(movieId);
     });
@@ -333,9 +334,4 @@
         $('#itemPrice').val(price);
     });
     
-    $('#cantTicketsInput').change(() => {
-        let totalPrice = $('#itemPrice').val() * $('#cantTicketsInput').val();
-        //Actualizo precio total
-        $('#totalPriceInput').val(totalPrice);
-    });
 </script>

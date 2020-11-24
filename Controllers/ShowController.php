@@ -324,14 +324,7 @@ class ShowController{
     private function ValidateNewShow($show){
 
         $validationErrors = array();
-        // <ul>
-        //     <li>
-        //         hola
-        //         <ul>
-        //             <li>hola</li>
-        //         </ul>
-        //     </li>
-        // </ul>
+      
         //Unica pelicula en todos los cines ese dia
         $showRepo = new ShowRepository();
         $result = $showRepo->GetByDateAndMovieId($show->getDateTimeFrom(), $show->getMovieId());

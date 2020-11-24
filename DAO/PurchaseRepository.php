@@ -12,7 +12,7 @@ class PurchaseRepository implements IPurchaseRepository{
     private $tableName = " PURCHASE ";
 
     
-    function GetAll()
+    public function GetAll()
     {
         try
         {
@@ -30,7 +30,7 @@ class PurchaseRepository implements IPurchaseRepository{
         }
     }
 
-    function GetById($id)
+    public function GetById($id)
     {
         try
         {
@@ -46,9 +46,32 @@ class PurchaseRepository implements IPurchaseRepository{
         }catch(Exception $ex){
             throw $ex;
         }
+    }   
+
+    public function AddOne(Purchase $purchase){
+        try
+        {
+            $query = 'INSERT INTO ' . $this->tableName . ' (SHOW_ID, USER_ID, DATE_PURCHASE) VALUES (:showId, :userId, :datePurchase);';
+           
+            $parameters['showId'] = $purchase->getShowId();
+            $parameters['userId'] = $purchase->getUserId();
+            $parameters['datePurchase'] = $purchase->getDatePurchase();
+
+            $this->connection = Connection::GetInstance();
+            
+            $this->connection->ExecuteNonQuery($query, $parameters);
+
+            $query = 'SELECT LAST_INSERT_ID();';
+            
+            $ret = $this->connection->Execute($query);
+            
+            return $ret[0]['LAST_INSERT_ID()'];
+
+        }catch(Exception $ex){
+            return "Ha ocurrido un error :( " . $ex->getMessage();
+        }
+
     }
-
-
 }
 
 

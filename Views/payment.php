@@ -17,9 +17,9 @@
                             Detalles de la pelicula
                         </div>
                         <ul class="list-group list-group-flush">                            
-                            <li class="basic-font list-group-item" style="background-color: #242424;">Ciudad: dsdsa</li>
-                            <li class="basic-font list-group-item" style="background-color: #242424;">Cine: dsdsa</li>
-                            <li class="basic-font list-group-item" style="background-color: #242424;">Sala: dsdsa</li>                            
+                            <li class="basic-font list-group-item purchase-info-item " style="background-color: #242424;">Ciudad: <?= $show->getCity()->getName()?></li>
+                            <li class="basic-font list-group-item purchase-info-item" style="background-color: #242424;">Cine: <?= $show->getCinema()->getName()?></li>
+                            <li class="basic-font list-group-item purchase-info-item" style="background-color: #242424;">Sala: <?= $show->getRoom()->getName()?></li>                            
                         </ul>
                     </div>
                 </div>
@@ -29,9 +29,9 @@
                             Detalles de la función
                         </div>
                         <ul class="list-group list-group-flush">
-                        <li class="basic-font list-group-item" style="background-color: #242424;">Pelicula: dsdsa</li>
-                            <li class="basic-font list-group-item" style="background-color: #242424;">Fecha: dsdsa</li>
-                            <li class="basic-font list-group-item" style="background-color: #242424;">Horario: dsdsa</li>
+                        <li class="basic-font list-group-item purchase-info-item" style="background-color: #242424;">Pelicula: <?= $show->getMovie()->getTitle()?></li>
+                            <li class="basic-font list-group-item purchase-info-item" style="background-color: #242424;">Inicio: <?= $show->getDateTimeFrom()?></li>
+                            <li class="basic-font list-group-item purchase-info-item" style="background-color: #242424;">Finalización: <?= $show->getDateTimeTo() ?></li>
                         </ul>
                     </div>
                 </div>
@@ -41,9 +41,9 @@
                             Detalles de la compra
                         </div>
                         <ul class="list-group list-group-flush">                        
-                            <li class="basic-font list-group-item" style="background-color: #242424;">Precio por entrada: $200</li>
-                            <li class="basic-font list-group-item" style="background-color: #242424;">Cantidad de entradas: 2</li>
-                            <li class="basic-font list-group-item" style="background-color: #242424;">Total: $400</li>
+                            <li class="basic-font list-group-item purchase-info-item" style="background-color: #242424;">Precio por entrada: $<?= $itemPrice ?></li>
+                            <li class="basic-font list-group-item purchase-info-item" style="background-color: #242424;">Cantidad de entradas: <?= $cantTickets ?></li>
+                            <li class="basic-font list-group-item purchase-info-item" style="background-color: #242424;">Total: $<?= $totalPrice ?></li>
                         </ul>
                     </div>
                 </div>                
@@ -101,27 +101,28 @@
                 </div>
 
                 <!-- Formulario -->
-                <form action="" id="formulario-tarjeta" class="formulario-tarjeta active">
+                <form action="<?= FRONT_ROOT ?>Purchase/DoPurchase" id="formulario-tarjeta" class="formulario-tarjeta active" method="POST">
+                    <span class="text-danger" id="errorMessage" style="font-size: 1.4rem"></span>
                     <div class="grupo">
                         <label for="inputNumero">Número Tarjeta</label>
-                        <input type="text" id="inputNumero" maxlength="19" autocomplete="off">
+                        <input type="text" id="inputNumero" maxlength="19" autocomplete="off" required>
                     </div>
                     <div class="grupo">
                         <label for="inputNombre">Nombre</label>
-                        <input type="text" id="inputNombre" maxlength="19" autocomplete="off">
+                        <input type="text" id="inputNombre" maxlength="19" autocomplete="off" required>
                     </div>
                     <div class="flexbox">
                         <div class="grupo expira">
                             <label for="selectMes">Expiracion</label>
                             <div class="flexbox">
                                 <div class="grupo-select">
-                                    <select name="mes" id="selectMes">
+                                    <select name="mes" id="selectMes" required>
                                         <option disabled selected>Mes</option>
                                     </select>
                                     <i class="fas fa-angle-down"></i>
                                 </div>
                                 <div class="grupo-select">
-                                    <select name="year" id="selectYear">
+                                    <select name="year" id="selectYear" required>
                                         <option disabled selected>Año</option>
                                     </select>
                                     <i class="fas fa-angle-down"></i>
@@ -131,10 +132,17 @@
 
                         <div class="grupo ccv">
                             <label for="inputCCV">CCV</label>
-                            <input type="text" id="inputCCV" maxlength="3">
+                            <input type="text" id="inputCCV" maxlength="3" required>
                         </div>
                     </div>
-                    <button type="submit" class="btn-enviar">Enviar</button>
+
+                    <!-- Purchase data -->
+
+                    <input type="text" name="showId" value="<?= $show->getId()?>" style="display:none;">
+                    <input type="text" name="itemPrice" value="<?= $itemPrice?>" style="display:none;">
+                    <input type="text" name="cantTickets" value="<?= $cantTickets?>" style="display:none;">
+
+                    <button onclick="confirmarCompra()" class="btn-enviar">Confirmar Compra😁</button>
                 </form>
             </div>
             </div>
@@ -267,6 +275,45 @@ formulario.inputCCV.addEventListener('keyup', () => {
 
 	ccv.textContent = formulario.inputCCV.value;
 });
+
+const confirmarCompra = () => {
+    event.preventDefault()
+    
+    document.getElementById('errorMessage').innerHTML = ''
+    
+    let isValid = false;
+    let errorMsg = '';
+
+    let inputNumber = formulario.inputNumero.value
+    
+    let visaExpression =  /\b4(?:\d[ -]*?){15}\b/;
+    let masterExpression = /\b5(?:\d[ -]*?){15}\b/;
+    
+    //Numero Tarjeta
+    isValid = visaExpression.test(inputNumber) || masterExpression.test(inputNumber)
+    if(!isValid)
+        errorMsg += 'Debe ingresar un numero de tarjeta valido.  (╯°□°）╯︵ ┻━┻ <br>'
+    
+    //Fechas Correctas
+    isValid = Number.isInteger(parseInt(mesExpiracion.textContent)) && Number.isInteger(parseInt(yearExpiracion.textContent))
+    if(!isValid)
+        errorMsg += 'Debe ingresar una fecha de vencimiento <br>'
+    
+    //Codigo de seguridad correcto
+    isValid = formulario.inputCCV.value.length == 3 && Number.isInteger(parseInt(yearExpiracion.textContent))
+    if(!isValid)
+        errorMsg += 'Debe ingresar un codigo de seguridad valido <br>'
+
+    //Nombre Valido
+    isValid = formulario.inputNombre.value.length != 0;
+    if(!isValid)
+        errorMsg += 'Debe ingresar un nombre valido <br>'
+
+    if(errorMsg == '')
+        $('form').submit()
+    else
+        document.getElementById('errorMessage').innerHTML = errorMsg;
+}
 </script>
 
 <style>
