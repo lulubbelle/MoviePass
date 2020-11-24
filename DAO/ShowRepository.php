@@ -288,7 +288,7 @@ class ShowRepository implements IShowRepository{
         INNER JOIN CITY CIT ON CIT.ID = CIN.CITY_ID
         WHERE CIT.ID = :cityId AND SH.MOVIE_ID = :movieId
         AND SH.ACTIVE = 1 AND CIT.ACTIVE = 1;
-        #AND RO.CAPACITY > COUNT TICKETS!;";
+        AND RO.CAPACITY > (SELECT COUNT(*) FROM TICKET WHERE SHOW_ID = SH.ID);";
 
         $parameters['cityId'] = $cityId;
         $parameters['movieId'] = $movieId;

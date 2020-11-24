@@ -12,7 +12,7 @@ class TicketRepository implements ITicketRepository{
     private $tableName = " TICKET ";
 
     
-    function GetAll()
+    public function GetAll()
     {
         try
         {
@@ -30,7 +30,7 @@ class TicketRepository implements ITicketRepository{
         }
     }
 
-    function GetById($id)
+    public function GetById($id)
     {
         try
         {
@@ -47,7 +47,48 @@ class TicketRepository implements ITicketRepository{
             throw $ex;
         }
     }
+    
+    public function AddOne(Ticket $ticket){
+        try
+        {
+            $query = 'INSERT INTO ' . $this->tableName . ' (PURCHASE_ID, QR_FILE_NAME) VALUES (:purchaseId, :qrFileName);';
+           
+            $parameters['purchaseId'] = $ticket->getPurchaseId();
+            $parameters['qrFileName'] = $ticket->getQrFileName();
 
+            $this->connection = Connection::GetInstance();
+            
+            $this->connection->ExecuteNonQuery($query, $parameters);
+
+            $query = 'SELECT LAST_INSERT_ID();';
+            
+            $ret = $this->connection->Execute($query);
+            
+            return $ret[0]['LAST_INSERT_ID()'];
+
+        }catch(Exception $ex){
+            return "Ha ocurrido un error :( " . $ex->getMessage();
+        }
+
+    }
+
+    function UpdateQrFileName($ticketId, $qrFileName){
+        try
+        {
+            $query = 'UPDATE ' . $this->tableName . ' SET QR_FILE_NAME = :qrFileName WHERE ID = :ticketId;';
+           
+            $parameters['qrFileName'] = $qrFileName;
+            $parameters['ticketId'] = $ticketId;
+
+            $this->connection = Connection::GetInstance();
+            
+            $this->connection->ExecuteNonQuery($query, $parameters);
+
+        }catch(Exception $ex){
+            return "Ha ocurrido un error :( " . $ex->getMessage();
+        }
+ 
+    }
 
 }
 
