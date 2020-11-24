@@ -132,7 +132,6 @@
                         <div class="show-description-container">
                             <p class="modal-desc show-description"></p>
                         </div>
-                        <!-- <span class="show-info">Categoría: Aventura - Accion</span> -->
                         <div class="show-combo-container">
                             <form action="<?= FRONT_ROOT ?>Purchase/PurchaseAction" method="POST">
                                 
@@ -148,8 +147,8 @@
                                         <input type="number" name="itemPrice" id="itemPrice" style="display:none;"/>
                                     </div>
                                 </div>
-
-                                <div class="form-content">
+                                
+                                <div class="form-content-billboard">
                                     <!-- Ciudades -->
                                     <div class="form-group">
                                         <label class="cinema-input-label" for="cityId">Ciudad</label>
@@ -158,7 +157,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-content">
+                                <div class="form-content-billboard">
                                     <!-- Funciones -->
                                     <div class="form-group">
                                         <label class="cinema-input-label" for="showId">Funcion</label>
@@ -167,15 +166,15 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-content">
-                                    <!-- Ciudades -->
+                                <div class="form-content-billboard">
+                                    <!-- Cant tickets -->
                                     <div class="form-group">
                                         <label class="cinema-input-label" for="cantTickets">Cantidad Tickets</label>
                                         <input name="cantTickets" type="number" id="cantTicketsInput" class="form-control form-control-md cinema-input" placeholder="Cantidad Tickets" required> </input>
                                     </div>
                                 </div>
-                                <div class="form-content">
-                                    <!-- Ciudades -->
+                                <div class="form-content-billboard" style="display: none;">
+                                    <!-- total -->
                                     <div class="form-group">
                                         <label class="cinema-input-label" for="totalPrice">Precio Total</label>
                                         <input name="totalPrice" type="number" id="totalPriceInput" class="form-control form-control-md cinema-input" placeholder="Precio Total" required> </input>
@@ -195,13 +194,10 @@
                 <!-- 
                 POPUP Billboard Cascadear:
 
-                Ciudad->¿fecha?->Funciones->Cantidad Tickets (mostrar precio total)
-                Compra 1 -> N Tickets
                 Validar capacidad de sala antes de traer las salas (solo las que tienen capacidad)
                 Cada ticket tiene su QR propio
                 y el mail que se manda
-
-                esto te lleva a la pantalla "Realizar pago" 
+ 
                 Si es martes o miercoles aplicar descuento (si compra 2 o + entradas)
                 dsp de pagar la guardamos en base y mandamos mail y la entrada tiene QR con un hash del ticket que guardamos en base (entidad ticket)
 

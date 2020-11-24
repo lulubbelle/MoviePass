@@ -38,7 +38,7 @@
                 $cantTickets = Utils::CleanInput($_POST['cantTickets']);
                 $totalPrice = Utils::CleanInput($_POST['totalPrice']);
            
-                //include_once("da view");
+                include_once(VIEWS_PATH."payment.php");
             }
         }        
 

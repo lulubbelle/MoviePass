@@ -11,28 +11,6 @@
                     <div class="col-md-3">
                         <h1 class="basic-font purchase-view-title">Compras</h1>
                     </div>
-                    <div class="col-md-3">
-                        <div class="form-content">
-                            <div class="form-group">
-                                <select name="city" id="ciudad" class="form-control form-control-md purchase-input" placeholder="Ciudad">
-                                    <?php
-                                    foreach ($cities as $city) {
-                                    ?>
-                                        <option value="<?= $city->getId() ?>"><?= $city->getName() ?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-content">
-                            <div class="form-group">
-                                <button class="btn btn-primary" type="submit">Buscar</button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </form>
             <?php

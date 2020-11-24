@@ -160,7 +160,7 @@
 
 .purchase-btn {
     display: block;
-    margin: 5% auto;
+    margin: 5% 0;
     padding: 1% 5%;
     width: 60%;
     border: none;
@@ -189,5 +189,9 @@
 }
 
 .show-combo-container {
-	
+	width: 50%;
+}
+
+.form-content-billboard {
+  color: white;
 }
