@@ -48,7 +48,7 @@ class ShowController{
     }
 
     public function ShowBillboardView($errorMsg = ""){
-        Utils::CheckAdmin();
+        Utils::CheckSession();
         
         $shows = $this->GetShowsWithAllData();
         // var_dump($shows);

@@ -82,15 +82,17 @@ class UserProfileRepository implements IUserProfileRepository {
         try
         {
             $ret = array();
-            $query = "SELECT up.id, up.user_id, up.first_name, up.last_name, up.dni, u.mail, u.userName, u.password, u.rolId FROM " . $this->tableName . " as up join " . $this->userTable . " as u on (up.user_id = u.id) WHERE  user_id = " . $id . ";";
-            
-            $this->connection = Connection::GetInstance();
-            $queryResult = $this->connection->Execute($query);
+            $query = "SELECT up.id, up.user_id, up.first_name, up.last_name, up.dni, u.mail, u.userName, u.password, u.rolId FROM " . $this->tableName . " as up join " . $this->userTable . " as u on (up.user_id = u.id) WHERE  user_id = :user_id;";
+            $parameters['user_id'] = $id;
 
+            $this->connection = Connection::GetInstance();
+            $queryResult = $this->connection->Execute($query, $parameters);
+        
         
             $ret = UserProfile::mapData($queryResult);
             
             return $ret[0];
+            
         }catch(Exception $e){
             return "Ha ocurrido un error :( " . $e->getMessage();
         }

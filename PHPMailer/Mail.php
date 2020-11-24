@@ -4,7 +4,7 @@ require_once 'PHPMailer.php';
 require_once 'SMTP.php';
 require_once 'Exception.php';
 
-use Util\Random as Random;
+
 use PHPMailer\PHPMailer\PHPMailer;
 
 class Mail
@@ -36,6 +36,20 @@ class Mail
         $mail->Subject = 'Bienvenido a MoviePass !!';
         $mail->Body = 'Estimado ' . $userProfile->getFirstName(). ' ' . $userProfile->getLastName() . ', bienvenido a MoviePass!';
 
+        if ($mail->send())
+            return true;
+        else
+            return false;
+    }
+
+    public static function SendPurchaseMail($userName, $email)
+    {
+    
+        $mail = Mail::InitMail($email);
+                
+        $mail->Subject = 'Gracias por su compra !!';
+        $mail->Body = 'Estimado ' . $userName . ' , usted adquirió tickets para una función en MoviePass. Si desea verificar su entrada, ingrese al sitio web!';
+      
         if ($mail->send())
             return true;
         else

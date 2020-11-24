@@ -8,13 +8,18 @@
     use DAO\PurchaseRepository as PurchaseRepository;
     use DAO\ShowRepository as ShowRepository;
     use DAO\TicketRepository as TicketRepository;
-
+    use DAO\UserRepository as UserRepository;
+    use DAO\UserProfileRepository as UserProfileRepository;
+    
+    use PHPMailer\Mail as Mail;
     use Utils\Utils as Utils;
     use Utils\QrCodeGenerator as QrCodeGenerator;
 
     use Models\Purchase as Purchase;
     use Models\Show as Show;
     use Models\Ticket as Ticket;
+    use Models\User as User;
+    use Models\UserProfile as UserProfile;
 
     class PurchaseController
     {
@@ -112,7 +117,10 @@
                     
                 }
                 
-                //mandar mail
+                $userProfileRepo = new UserProfileRepository();
+                $user = $userProfileRepo->getUserById($_SESSION['userId']);
+                
+                Mail::SendPurchaseMail($user->getFirstName() . ' ' . $user->getLastName(), $user->getMail());
 
                 $this->Index(null, "Felicitaciones por su compra");
                 
